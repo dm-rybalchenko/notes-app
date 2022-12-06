@@ -1,3 +1,35 @@
+# Notes app
+
+* Creating/removing/editing notes with tags
+
+* Adding/removing tags for a note in edit mode via "#"
+
+* Highlighting tags in edit mode by default and by clicking on a tag below
+
+* Filter notes by tags on the main page
+
+* Adding/removing tags for the filter from the main page
+
+* Viewing notes from the main page by clicking on the note title
+
+* Saving notes privately in localStorage individually for every user
+
+* Adaptive markup (layout)
+
+[Link to deployed application](https://resplendent-axolotl-6ea452.netlify.app/)
+
+## Screenshots
+
+![Screenshot-app-notes](/public/Screenshot-app-notes.jpg)
+
+![Screenshot-app-notes-edit](/public/Screenshot-app-notes-edit.jpg)
+
+![Screenshot-app-notes-filter](/public/Screenshot-app-notes-filter.jpg)
+
+![Screenshot-app-notes-tags](/public/Screenshot-app-notes-tags.jpg)
+
+*PC and mobile versions have been implemented.*
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

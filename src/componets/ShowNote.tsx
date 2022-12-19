@@ -23,7 +23,7 @@ function ShowNote({ note, close }: IShowNoteProps) {
         {note.tags && (
           <TagList
             icon={true}
-            head={false}
+			modClass="edit-note__save"
             tags={note.tags}
             choose={() => {}}
           />

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Header } from './componets/Header';
 import { NoteList } from './componets/NoteList';
 import { EditNote } from './componets/EditNote';
-import { ShowNote } from './componets/ShowNote';
 
 
 function App() {
@@ -11,15 +10,8 @@ function App() {
   const [tags, setTags] = useState<string[]>([]);
 
   const [noteForEdit, setNoteForEdit] = useState<INote | null>(null);
-  const [noteForShow, setNoteForShow] = useState<INote | null>(null);
-
   const [currentNotes, setCurrentNotes] = useState<INote[]>([]);
   const [currentTags, setCurrentTags] = useState<string[]>([]);
-
-  const showNote = (id: string) => {
-    const noteToShow = { ...notes.find((item) => item.id === id) } as INote;
-    setNoteForShow(noteToShow);
-  };
 
   const editNote = (id: string) => {
     const noteToEdit = { ...notes.find((item) => item.id === id) } as INote;
@@ -114,13 +106,13 @@ function App() {
   }, [notes]);
 
   useEffect(() => {
-    if (noteForEdit || noteForShow) {
+    if (noteForEdit) {
       document.body.classList.add('block');
 	  
     } else {
       document.body.classList.remove('block');
     }
-  }, [noteForEdit, noteForShow]);
+  }, [noteForEdit]);
 
   return (
     <div className="wrapper">
@@ -135,13 +127,11 @@ function App() {
       <NoteList
         remove={removeNote}
         edit={editNote}
-        show={showNote}
         notes={currentTags.length ? currentNotes : notes}
       />
       {noteForEdit && (
         <EditNote add={addNote} current={noteForEdit} close={setNoteForEdit} />
       )}
-      {noteForShow && <ShowNote note={noteForShow} close={setNoteForShow} />}
     </div>
   );
 }

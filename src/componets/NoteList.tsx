@@ -1,7 +1,7 @@
 import Note from './UI/Note';
 
 
-function NoteList({ notes, remove, edit, show }: INoteListProps) {
+function NoteList({ notes, remove, edit }: INoteListProps) {
 
   return (
     <main className="main">
@@ -10,7 +10,6 @@ function NoteList({ notes, remove, edit, show }: INoteListProps) {
           <Note
             remove={remove}
             edit={edit}
-            show={show}
             id={note.id}
             key={note.id}
             title={note.title}

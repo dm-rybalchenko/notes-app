@@ -4,13 +4,13 @@ import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 import { Button } from './UI/Button';
 import { TagList } from './TagList';
 
-
 function EditNote({ current, close, add }: IEditNoteProps) {
   const [hide, setHide] = useState(1);
   const [note, setNote] = useState(current);
 
   const [content, setContent] = useState(current.body);
   const contentRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLInputElement>(null);
 
   const [currentTags, setCurrentTags] = useState<string[]>([]);
 
@@ -30,7 +30,6 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   };
 
   const hightLightTag = (tag: string) => {
-	
     if (currentTags.includes(tag)) {
       setCurrentTags([...currentTags.filter((item) => item !== tag)]);
 
@@ -40,7 +39,6 @@ function EditNote({ current, close, add }: IEditNoteProps) {
           `<span class="tag">${tag}</span>`
         )
       );
-
     } else {
       setCurrentTags([...currentTags, tag]);
 
@@ -68,7 +66,6 @@ function EditNote({ current, close, add }: IEditNoteProps) {
       setContent(
         content.replaceAll(`<span class="chosen">${tag}</span>`, tag.slice(1))
       );
-
     } else {
       setContent(
         content.replaceAll(`<span class="tag">${tag}</span>`, tag.slice(1))
@@ -77,7 +74,7 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   };
 
   const addTag = (str: string, p: string) => {
-    const newTag = p.slice(0, -1).replace('&nbsp;', '');
+    let newTag = p.slice(0, -1).replace('&nbsp;', '');
 
     !note.tags.includes(newTag) &&
       setNote({ ...note, tags: [...note.tags, newTag] });
@@ -89,21 +86,32 @@ function EditNote({ current, close, add }: IEditNoteProps) {
     setContent(content.replace(/((?<!>)#\S+\s(?<!>\s))/gm, addTag));
   }, [content]);
 
+  useEffect(() => {
+    if (note.title) {
+      contentRef.current?.focus();
+    } else {
+      titleRef.current?.focus();
+    }
+  }, []);
+
   return (
-    <div style={{ opacity: hide }} className="edit-note__wrapper">
-      <div className="edit-note">
+    <div
+      style={{ opacity: hide }}
+      onClick={closePopup}
+      className="edit-note__wrapper"
+    >
+      <div className="edit-note" onClick={(e) => e.stopPropagation()}>
         <div className="edit-note__up">
           <div className="edit-note__title">
             <input
               value={note.title}
               onChange={(e) => setNote({ ...note, title: e.target.value })}
               type="text"
+              ref={titleRef}
               placeholder="Введите заголовок..."
             />
           </div>
-          <button onClick={closePopup} className="edit-note__close">
-            Закрыть
-          </button>
+          <div onClick={closePopup} className="edit-note__close-up"></div>
         </div>
         <ContentEditable
           innerRef={contentRef}
@@ -116,12 +124,17 @@ function EditNote({ current, close, add }: IEditNoteProps) {
           choose={hightLightTag}
           remove={removeTag}
           current={currentTags}
-          head={false}
           tags={note.tags}
+          modClass="edit-note__tags"
         />
-        <Button onClick={() => addNote(note.id)} head={false}>
-          Сохранить
-        </Button>
+        <div className="edit-note__down">
+          <Button onClick={closePopup} modClass="edit-note__close-down">
+            Выйти без сохранения
+          </Button>
+          <Button onClick={() => addNote(note.id)} modClass="edit-note__save">
+            Сохранить
+          </Button>
+        </div>
       </div>
     </div>
   );

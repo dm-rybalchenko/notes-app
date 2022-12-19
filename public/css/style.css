@@ -124,13 +124,16 @@ body.block {
   font-weight: 700;
   color: #fff;
   background-color: #2266eb;
-  border-radius: 0.625rem;
+  border-radius: 6.25rem;
 }
 @media (max-width: 849px) {
   .button {
     height: 2.75rem;
     font-size: 1rem;
   }
+}
+.button:hover {
+  background-color: #0940ab;
 }
 
 .tags {
@@ -216,15 +219,12 @@ body.block {
 }
 @media (max-width: 649px) {
   .header__upper {
-    align-items: flex-end;
-    justify-content: flex-end;
+    flex-wrap: wrap;
     height: 5.625rem;
   }
 }
-@media (max-width: 499px) {
-  .header__upper {
-    height: 4.75rem;
-  }
+.header__add {
+  margin-left: auto;
 }
 .header__lower {
   display: flex;
@@ -253,7 +253,7 @@ body.block {
 }
 @media (max-width: 649px) {
   .header__title {
-    display: none;
+    font-size: 2.375rem;
   }
 }
 .header__btn {
@@ -313,6 +313,9 @@ body.block {
   font-weight: 700;
   color: #9eafc4;
 }
+.header__tag-btn:hover {
+  color: #2266eb;
+}
 
 .main {
   padding: 2.125rem 3.75rem 3.75rem;
@@ -334,25 +337,70 @@ body.block {
 }
 .main__note {
   display: flex;
-  flex: 1 1 31%;
+  flex: 0 0 31%;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 18.125rem;
+  min-width: 21.875rem;
   min-height: 8.125rem;
   padding: 1.125rem 1.875rem 1.25rem;
   background-color: #fff;
   border-radius: 0.625rem;
+  cursor: pointer;
+}
+.main__note:hover .main__note-title {
+  color: #2266eb;
 }
 .main__note-title {
   font-size: 1.25rem;
-  cursor: pointer;
 }
 .main__note-edit, .main__note-remove {
+  position: relative;
+  padding-left: 1.125rem;
   font-size: 0.75rem;
+  font-weight: 700;
   color: #9eafc4;
 }
+.main__note-edit::before, .main__note-remove::before {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  content: "";
+}
 .main__note-remove {
-  margin-left: 0.25rem;
+  margin-left: 1.5rem;
+}
+.main__note-remove::before {
+  background: url("../img/trash.svg") center no-repeat;
+}
+.main__note-remove:hover {
+  color: #ff3232;
+}
+.main__note-remove:hover::before {
+  background: url("../img/trash-hover.svg") center no-repeat;
+}
+.main__note-edit::before {
+  background: url("../img/edit.svg") center no-repeat;
+}
+.main__note-edit:hover {
+  color: #2266eb;
+}
+.main__note-edit:hover::before {
+  background: url("../img/edit-hover.svg") center no-repeat;
+}
+.main__note-edit::after {
+  display: block;
+  position: absolute;
+  right: -0.75rem;
+  bottom: 50%;
+  width: 0.25rem;
+  height: 0.25rem;
+  content: "";
+  border-radius: 50%;
+  background-color: #9eafc4;
+  transform: translate(50%, 50%);
 }
 
 .edit-note {
@@ -380,7 +428,7 @@ body.block {
   padding: 8.5rem 3.75rem;
   overflow: auto;
   background: rgba(21, 25, 33, 0.9);
-  transition: 0.3s;
+  transition: 0.2s;
   -webkit-animation: fade 0.3s linear 1;
           animation: fade 0.3s linear 1;
 }
@@ -424,6 +472,8 @@ body.block {
   font-weight: 700;
 }
 .edit-note__title input {
+  color: #5e5e5e;
+  font-weight: 700;
   width: 100%;
 }
 @media (max-width: 849px) {
@@ -441,27 +491,30 @@ body.block {
     font-size: 1.375rem;
   }
 }
-.edit-note__close {
-  display: block;
-  padding: 0.5rem 1.625rem;
-  margin-bottom: auto;
+.edit-note__close-up {
+  position: relative;
+  width: 2.25rem;
+  height: 2.25rem;
   margin-left: auto;
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #2266eb;
-  border: 1px solid #c4d8ff;
-  border-radius: 4.375rem;
+  margin-right: 0.25rem;
+  cursor: pointer;
 }
-@media (max-width: 849px) {
-  .edit-note__close {
-    padding: 0.25rem 1.25rem;
-    font-size: 1rem;
-  }
+.edit-note__close-up::after, .edit-note__close-up::before {
+  position: absolute;
+  top: 50%;
+  width: 3rem;
+  height: 0.25rem;
+  content: "";
+  background-color: #9eafc4;
 }
-@media (max-width: 499px) {
-  .edit-note__close {
-    padding: 0.25rem 0.625rem;
-  }
+.edit-note__close-up::after {
+  transform: rotate(45deg);
+}
+.edit-note__close-up::before {
+  transform: rotate(-45deg);
+}
+.edit-note__close-up:hover::after, .edit-note__close-up:hover::before {
+  background-color: #2266eb;
 }
 .edit-note__text {
   width: 100%;
@@ -492,23 +545,36 @@ body.block {
 .edit-note__down {
   display: flex;
   justify-content: flex-end;
+  align-items: flex-end;
+  gap: 1.25rem;
+}
+.edit-note__close-down {
+  color: #2266eb;
+  border: 0.175rem solid rgba(34, 102, 235, 0.15);
+  background-color: #fff;
+}
+.edit-note__close-down:hover {
+  border: 0.175rem solid #2266eb;
+  background-color: #fff;
 }
 .edit-note__save {
-  width: 16.25rem;
   margin-top: 1.25rem;
 }
+.edit-note__close-down, .edit-note__save {
+  width: 16.25rem;
+}
 @media (max-width: 849px) {
-  .edit-note__save {
+  .edit-note__close-down, .edit-note__save {
     width: 12.5rem;
   }
 }
 @media (max-width: 499px) {
-  .edit-note__save {
+  .edit-note__close-down, .edit-note__save {
     width: 7.5rem;
   }
 }
 
-[contenteditable=true]:empty:not(:focus)::before {
+[contenteditable=true]:empty::before {
   font-size: 1.375rem;
   font-weight: 400;
   line-height: 1.3;
@@ -516,7 +582,19 @@ body.block {
   content: attr(data-ph);
 }
 @media (max-width: 499px) {
-  [contenteditable=true]:empty:not(:focus)::before {
+  [contenteditable=true]:empty::before {
     font-size: 1rem;
   }
+}
+
+input:focus::-moz-placeholder, input::-moz-placeholder {
+  color: #5e5e5e;
+}
+
+input:focus:-ms-input-placeholder, input:-ms-input-placeholder {
+  color: #5e5e5e;
+}
+
+input:focus::placeholder, input::placeholder {
+  color: #5e5e5e;
 }

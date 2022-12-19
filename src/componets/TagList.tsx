@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import IConCloseTag from './UI/IconCloseTag';
 
 
-function TagList({ head, tags, icon, current, choose, remove }: ITagListProps) {
+function TagList({ modClass, tags, icon, current, choose, remove }: ITagListProps) {
   const [chosenTags, setChosenTags] = useState(current);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function TagList({ head, tags, icon, current, choose, remove }: ITagListProps) {
   }, [current]);
 
   return (
-    <div className={head ? 'header__tags tags' : 'edit-note__tags tags'}>
+    <div className={'tags ' + modClass}>
       {tags.map((tag) => (
         <div
           key={tag}

@@ -20,8 +20,8 @@ interface IShowNoteProps {
 }
 
 interface IHeaderProps {
+  newNote: React.Dispatch<React.SetStateAction<INote | null>>
   tags: string[];
-  addNote: () => void;
   add: TTagFunc;
   current: string[];
   choose: TTagFunc;
@@ -44,14 +44,18 @@ interface ITagListProps {
 }
 
 interface INotePorps {
-  id: string;
-  title: string;
+  note: INote;
   remove: TNoteFunc;
   edit: TNoteFunc;
 }
 
 interface IButtonProps {
-  modClass: string;
   children: string;
-  onClick: (e: MouseEventHandler<HTMLButtonElement>) => void | (() => void);
+  modClass: string;
+  onClick: (e: MouseEventHandler<HTMLButtonElement>) => void;
+}
+
+interface ITagFormProps {
+  add: (tag: string) => void;
+  show: (value: React.SetStateAction<boolean>) => void;
 }

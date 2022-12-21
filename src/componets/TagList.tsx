@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import IConCloseTag from './UI/IconCloseTag';
 
 
-function TagList({ modClass, tags, icon, current, choose, remove }: ITagListProps) {
+function TagList({ modClass, tags, current, choose, remove }: ITagListProps) {
   const [chosenTags, setChosenTags] = useState(current);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function TagList({ modClass, tags, icon, current, choose, remove }: ITagListProp
             }}
             className="tags__item-close"
           >
-            {!icon && <IConCloseTag />}
+            <IConCloseTag />
           </button>
         </div>
       ))}

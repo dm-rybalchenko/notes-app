@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 
-import { Button } from './UI/Button';
+import { wrapTag } from '../utils/utils';
 import { TagList } from './TagList';
+import { Button } from './UI/Button';
 
 function EditNote({ current, close, add }: IEditNoteProps) {
   const [hide, setHide] = useState(1);
@@ -73,17 +74,17 @@ function EditNote({ current, close, add }: IEditNoteProps) {
     }
   };
 
-  const addTag = (str: string, p: string) => {
-    let newTag = p.slice(0, -1).replace('&nbsp;', '');
-
+  const addTag = (newTag: string) => {
     !note.tags.includes(newTag) &&
+      newTag &&
       setNote({ ...note, tags: [...note.tags, newTag] });
-
-    return `<span class="tag">${newTag}</span> `;
   };
 
   useEffect(() => {
-    setContent(content.replace(/((?<!>)#\S+\s(?<!>\s))/gm, addTag));
+    let newContent = wrapTag(content);
+
+    addTag(newContent[0]);
+    setContent(newContent[1]);
   }, [content]);
 
   useEffect(() => {

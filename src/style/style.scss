@@ -470,7 +470,7 @@ body.block {
     font-weight: $fw-bold;
 
     input {
-      color: $color-secondary-400;
+      color: $color-secondary-500;
       font-weight: $fw-bold;
       width: 100%;
     }
@@ -564,8 +564,8 @@ body.block {
   &__down {
     display: flex;
     justify-content: flex-end;
-	align-items: flex-end;
-	gap: $base * 5;
+    align-items: flex-end;
+    gap: $base * 5;
   }
 
   &__close-down {
@@ -610,7 +610,8 @@ body.block {
   }
 }
 
-input:focus::placeholder, input::placeholder {
+input:focus::placeholder,
+input::placeholder {
   color: $color-secondary-400;
 }
 

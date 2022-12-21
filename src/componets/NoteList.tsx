@@ -1,4 +1,4 @@
-import Note from './UI/Note';
+import Note from './Note';
 
 
 function NoteList({ notes, remove, edit }: INoteListProps) {
@@ -10,9 +10,8 @@ function NoteList({ notes, remove, edit }: INoteListProps) {
           <Note
             remove={remove}
             edit={edit}
-            id={note.id}
             key={note.id}
-            title={note.title}
+            note={note}
           />
         ))}
       </div>

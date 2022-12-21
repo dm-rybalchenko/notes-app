@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { saveData, getData } from './API/localStorageService';
+import { toggleBlockBody } from './utils/utils';
 import { Header } from './componets/Header';
 import { NoteList } from './componets/NoteList';
 import { EditNote } from './componets/EditNote';
-
 
 function App() {
   const [notes, setNotes] = useState<INote[]>([]);
@@ -36,21 +37,9 @@ function App() {
     note.tags.forEach((item) => addTag(item));
   };
 
-  const createNewNote = () => {
-    const newNote = {
-      id: Math.random().toString(36).substring(2, 6),
-      title: '',
-      body: '',
-      tags: [],
-    };
-
-    setNoteForEdit(newNote);
-  };
-
   const chooseTag = (tag: string) => {
     if (currentTags.includes(tag)) {
       setCurrentTags([...currentTags.filter((item) => item !== tag)]);
-
     } else {
       setCurrentTags((currentTags) => [...currentTags, tag]);
     }
@@ -82,45 +71,33 @@ function App() {
     ]);
   };
 
-  const downloadData = () => {
-    localStorage.getItem('notes') !== null &&
-      setNotes(JSON.parse(localStorage.getItem('notes') || '[]'));
-
-    localStorage.getItem('tags') !== null &&
-      setTags(JSON.parse(localStorage.getItem('tags') || '[]'));
-
-    filterNotes();
-  };
-
   useEffect(() => {
     filterNotes();
   }, [currentTags]);
 
   useEffect(() => {
-    downloadData();
+	const storedData = getData();
+
+    setNotes(storedData.notes);
+	setTags(storedData.tags);
+    filterNotes();
   }, []);
 
   useEffect(() => {
-    notes.length && localStorage.setItem('notes', JSON.stringify(notes));
-    tags.length && localStorage.setItem('tags', JSON.stringify(tags));
-  }, [notes]);
+    saveData(notes, tags);
+  }, [notes, tags]);
 
   useEffect(() => {
-    if (noteForEdit) {
-      document.body.classList.add('block');
-	  
-    } else {
-      document.body.classList.remove('block');
-    }
+    toggleBlockBody(noteForEdit);
   }, [noteForEdit]);
 
   return (
     <div className="wrapper">
       <Header
+        newNote={setNoteForEdit}
         add={addTag}
         choose={chooseTag}
         remove={removeTag}
-        addNote={createNewNote}
         tags={tags}
         current={currentTags}
       />

@@ -1,12 +1,14 @@
-function Button({ children, onClick, modClass }: IButtonProps) {
-	
+function Button({ children, modClass, ...props }: any) {
+  const rootClasses = ['button'];
+
+  if (modClass) {
+    rootClasses.push(modClass);
+  }
+
   return (
-      <button
-        onClick={onClick}
-        className={'button ' + modClass}
-      >
-        {children}
-      </button>
+    <button {...props} className={rootClasses.join(' ')}>
+      {children}
+    </button>
   );
 }
 

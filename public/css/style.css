@@ -472,7 +472,7 @@ body.block {
   font-weight: 700;
 }
 .edit-note__title input {
-  color: #5e5e5e;
+  color: #000;
   font-weight: 700;
   width: 100%;
 }
@@ -595,6 +595,7 @@ input:focus:-ms-input-placeholder, input:-ms-input-placeholder {
   color: #5e5e5e;
 }
 
-input:focus::placeholder, input::placeholder {
+input:focus::placeholder,
+input::placeholder {
   color: #5e5e5e;
 }

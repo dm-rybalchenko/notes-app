@@ -1,11 +1,19 @@
 type TNoteFunc = (id: string) => void;
 type TTagFunc = (tag: string) => void;
+type TuseTags = [string[], React.Dispatch<React.SetStateAction<string[]>>];
 
 interface INote {
   id: string;
   title: string;
   body: string;
   tags: string[];
+  date: Dayjs | string;
+}
+
+interface IFilter {
+  tags: string[];
+  query: string;
+  sort: string;
 }
 
 interface IEditNoteProps {
@@ -20,12 +28,16 @@ interface IShowNoteProps {
 }
 
 interface IHeaderProps {
-  newNote: React.Dispatch<React.SetStateAction<INote | null>>
-  tags: string[];
-  add: TTagFunc;
-  current: string[];
-  choose: TTagFunc;
-  remove: TTagFunc;
+  newNote: React.Dispatch<React.SetStateAction<INote | null>>;
+  notes: INote[];
+  filter: IFilter;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
+  setNotes: React.Dispatch<React.SetStateAction<INote[]>>;
+}
+
+interface ISearchFormProps {
+  filter: IFilter;
+  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
 }
 
 interface INoteListProps {
@@ -53,6 +65,16 @@ interface IButtonProps {
   children: string;
   modClass: string;
   onClick: (e: MouseEventHandler<HTMLButtonElement>) => void;
+}
+
+interface ISelectProps {
+  value: string;
+  onChange: (value: string) => void;
+  defaultValue: string;
+  options: {
+    value: string;
+    name: string;
+  }[];
 }
 
 interface ITagFormProps {

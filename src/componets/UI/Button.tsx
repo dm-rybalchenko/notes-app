@@ -1,4 +1,4 @@
-function Button({ children, modClass, ...props }: any) {
+function Button({ children, modClass, ...props }: IButtonProps) {
   const rootClasses = ['button'];
 
   if (modClass) {

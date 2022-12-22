@@ -207,6 +207,28 @@ body.block {
     margin-left: auto;
   }
 
+  &__add-tag {
+    display: flex;
+    align-items: center;
+    gap: $base * 3;
+  }
+
+  &__filter {
+    display: flex;
+    align-items: center;
+    gap: $base * 3;
+
+    select {
+      min-width: $base * 43;
+      cursor: pointer;
+      color: $color-secondary-400;
+
+      &:hover {
+        color: $color-primary-500;
+      }
+    }
+  }
+
   &__lower {
     display: flex;
     gap: $base * 7.5;
@@ -337,13 +359,22 @@ body.block {
     font-size: $fz-l;
   }
 
+  &__note-btns {
+    font-size: $fz-xxs;
+    font-weight: $fw-bold;
+    color: $color-secondary-300;
+  }
+
+  &__note-date {
+	text-align: right;
+	padding-left: $base * 5;
+	line-height: 1.5;
+  }
+
   &__note-edit,
   &__note-remove {
     position: relative;
     padding-left: $base * 4.5;
-    font-size: $fz-xxs;
-    font-weight: $fw-bold;
-    color: $color-secondary-300;
 
     &::before {
       display: block;

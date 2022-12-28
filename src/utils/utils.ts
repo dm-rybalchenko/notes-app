@@ -1,4 +1,4 @@
-export function toggleBlockBody(status: any) {
+export function toggleBlockBody(status: INote | null) {
   if (status) {
     document.body.classList.add('block');
   } else {
@@ -6,12 +6,14 @@ export function toggleBlockBody(status: any) {
   }
 }
 
-export function createNewNote() {
+export function createNewNote(): INote {
+
   return {
     id: Math.random().toString(36).substring(2, 6),
     title: '',
     body: '',
     tags: [],
+	date: ''
   };
 }
 
@@ -19,15 +21,15 @@ export function createNewNote() {
 const RegExpTag =
   /((\s#[0-9а-яА-Яa-zA-Z_-]+\s)|(\s#[0-9а-яА-Яa-zA-Z_-]+&nbsp;\s))/gm;
 
-export function wrapTag(str: string): string[] {
+export function wrapTag(str: string): {tag: string, content: string} {
   let tag = '';
 
-  const string = str.replace(RegExpTag, (str: string, p: string) => {
+  const content = str.replace(RegExpTag, (str: string, p: string) => {
     let newTag = p.slice(0, -1).replace('&nbsp;', '');
     tag = newTag;
 
     return `<span class="tag">${newTag}</span> `;
   });
 
-  return [tag, string];
+  return {tag, content};
 }

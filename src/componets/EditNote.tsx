@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useEffect, useRef, useState } from 'react';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 
@@ -21,7 +22,7 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   };
 
   const addNote = (id: string) => {
-    add(id, note);
+    add(id, {...note, date: dayjs()});
     closePopup();
   };
 
@@ -55,21 +56,21 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   const removeTag = (tag: string) => {
     const newNote = {
       ...note,
-      body: note.body.replaceAll(tag, tag.slice(1)),
+      body: note.body.replaceAll(tag, ' ' + tag.slice(2)),
       tags: [...note.tags.filter((item) => item !== tag)],
     };
 
-    setNote(newNote);
+	setNote(newNote);
 
     if (currentTags.includes(tag)) {
       setCurrentTags([...currentTags.filter((item) => item !== tag)]);
 
       setContent(
-        content.replaceAll(`<span class="chosen">${tag}</span>`, tag.slice(1))
+        content.replaceAll(`<span class="chosen">${tag}</span>`, ' ' + tag.slice(2))
       );
     } else {
       setContent(
-        content.replaceAll(`<span class="tag">${tag}</span>`, tag.slice(1))
+        content.replaceAll(`<span class="tag">${tag}</span>`, ' ' + tag.slice(2))
       );
     }
   };
@@ -83,8 +84,8 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   useEffect(() => {
     let newContent = wrapTag(content);
 
-    addTag(newContent[0]);
-    setContent(newContent[1]);
+    addTag(newContent.tag);
+    setContent(newContent.content);
   }, [content]);
 
   useEffect(() => {

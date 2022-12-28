@@ -13,12 +13,15 @@ export default function Note({ remove, edit, note }: INotePorps) {
   return (
     <div id={note.id} onClick={() => edit(note.id)} className="main__note">
       <div className="main__note-title">{note.title}</div>
-      <div className="main__note-btns">
+      <div className="main__note-body">
+        <div className="main__note-content">{note.body}</div>
         <div className="main__note-date">
           Изменено:
           <br />
           {editDate(note)}
         </div>
+      </div>
+      <div className="main__note-btns">
         <button className="main__note-edit">Редактировать</button>
         <button
           onClick={(e) => {

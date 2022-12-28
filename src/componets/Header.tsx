@@ -12,7 +12,7 @@ function Header({ notes, newNote, filter, setFilter, setNotes }: IHeaderProps) {
   const [showTagForm, setShowTagForm] = useState(false);
   const [tags, setTags] = useTags(notes);
 
-  const openInput = () => {
+  const openTagForm = () => {
     setShowTagForm(true);
   };
 
@@ -76,7 +76,7 @@ function Header({ notes, newNote, filter, setFilter, setNotes }: IHeaderProps) {
         />
         <div className="header__add-tag">
           {showTagForm && <TagForm add={addTag} show={setShowTagForm} />}
-          <button onClick={openInput} className="header__tag-btn">
+          <button onClick={openTagForm} className="header__tag-btn">
             + Добавить тег
           </button>
         </div>

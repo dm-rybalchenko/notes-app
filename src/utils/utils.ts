@@ -21,15 +21,15 @@ export function createNewNote(): INote {
 const RegExpTag =
   /((\s#[0-9а-яА-Яa-zA-Z_-]+\s)|(\s#[0-9а-яА-Яa-zA-Z_-]+&nbsp;\s))/gm;
 
-export function wrapTag(str: string): string[] {
+export function wrapTag(str: string): {tag: string, content: string} {
   let tag = '';
 
-  const string = str.replace(RegExpTag, (str: string, p: string) => {
+  const content = str.replace(RegExpTag, (str: string, p: string) => {
     let newTag = p.slice(0, -1).replace('&nbsp;', '');
     tag = newTag;
 
     return `<span class="tag">${newTag}</span> `;
   });
 
-  return [tag, string];
+  return {tag, content};
 }

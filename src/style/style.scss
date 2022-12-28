@@ -1,5 +1,5 @@
 @import 'nullstyle.style.scss';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 // === MIXINS ===
 @mixin animate($animation, $duration, $method, $times) {
@@ -42,6 +42,7 @@ $base: rem(4px);
 
 // font waights
 $fw-regular: 400;
+$fw-medium: 500;
 $fw-bold: 700;
 
 // font sizes
@@ -349,6 +350,8 @@ body.block {
     cursor: pointer;
 
     &:hover {
+      box-shadow: 2px 8px 45px rgba(20, 44, 89, 0.2);
+
       .main__note-title {
         color: $color-primary-500;
       }
@@ -359,16 +362,53 @@ body.block {
     font-size: $fz-l;
   }
 
+  &__note-body {
+    display: flex;
+    justify-content: space-between;
+    font-size: $fz-xs;
+    font-weight: $fw-medium;
+    color: $color-secondary-300;
+  }
+
   &__note-btns {
     font-size: $fz-xxs;
     font-weight: $fw-bold;
     color: $color-secondary-300;
   }
 
+  &__note-content {
+    position: relative;
+    max-height: $base * 13;
+    margin: $base * 1.5 0;
+	line-height: 1.2;
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      #7a8899 0%,
+      rgba(122, 136, 153, 0.29) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    // &::after {
+    //   position: absolute;
+    //   bottom: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   height: 100%;
+    //   content: '';
+    //   box-shadow: inset 0 -140px 60px -80px rgba(255, 255, 255, 0.94);
+    // }
+  }
+
   &__note-date {
-	text-align: right;
-	padding-left: $base * 5;
-	line-height: 1.5;
+    min-width: fit-content;
+    padding-left: $base * 5;
+    font-weight: $fw-bold;
+    text-align: right;
+    line-height: 1.5;
   }
 
   &__note-edit,

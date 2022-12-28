@@ -84,8 +84,8 @@ function EditNote({ current, close, add }: IEditNoteProps) {
   useEffect(() => {
     let newContent = wrapTag(content);
 
-    addTag(newContent[0]);
-    setContent(newContent[1]);
+    addTag(newContent.tag);
+    setContent(newContent.content);
   }, [content]);
 
   useEffect(() => {

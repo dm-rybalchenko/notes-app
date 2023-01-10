@@ -1,8 +1,14 @@
 import dayjs from 'dayjs';
 import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { removeNote } from '../store/notesReducer';
 
 
-export default function Note({ remove, edit, note }: INotePorps) {
+export default function Note({ note }: INotePorps) {
+	const dispatch = useDispatch();
+	const router = useNavigate();
 	
   const editDate = useCallback(
     (note: INote) =>
@@ -11,7 +17,7 @@ export default function Note({ remove, edit, note }: INotePorps) {
   );
 
   return (
-    <div id={note.id} onClick={() => edit(note.id)} className="main__note">
+    <div id={note.id} onClick={() => router(`/notes/${note.id}`)} className="main__note">
       <div className="main__note-title">{note.title}</div>
       <div className="main__note-body">
         <div className="main__note-content">{note.body}</div>
@@ -26,7 +32,7 @@ export default function Note({ remove, edit, note }: INotePorps) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            remove(note.id);
+            dispatch(removeNote(note.id))
           }}
           className="main__note-remove"
         >

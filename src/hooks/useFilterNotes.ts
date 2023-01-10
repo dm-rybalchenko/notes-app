@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import dayjs from 'dayjs';
 
 
-function useFilterNotes(notes: INote[], filter: IFilter) {
+function useFilterNotes(notes: INote[], filter: IFilter): INote[] {
   let filteredNotes = useSortNotes(notes, filter.sort);
 
   filteredNotes = useFilterNotesByTags(filteredNotes, filter.tags);
@@ -12,7 +12,7 @@ function useFilterNotes(notes: INote[], filter: IFilter) {
   return filteredNotes;
 }
 
-function useSortNotes(notes: INote[], param: string) {
+function useSortNotes(notes: INote[], param: string): INote[] {
 
   return useMemo(() => {
     if (param === 'title') {
@@ -21,13 +21,13 @@ function useSortNotes(notes: INote[], param: string) {
 
     if (param === 'old') {
       return [...notes].sort((a, b) =>
-        dayjs(a.title).isBefore(dayjs(b.title)) ? 1 : -1
+        dayjs(a.title).isBefore(dayjs(b.title)) ? -1 : 1
       );
     }
 
     if (param === 'new') {
       return [...notes].sort((a, b) =>
-        dayjs(a.title).isBefore(dayjs(b.title)) ? -1 : 1
+        dayjs(a.title).isBefore(dayjs(b.title)) ? 1 : -1
       );
 
     } else {
@@ -36,7 +36,7 @@ function useSortNotes(notes: INote[], param: string) {
   }, [param, notes]);
 }
 
-function useFilterNotesByTags(notes: INote[], filterTags: string[]) {
+function useFilterNotesByTags(notes: INote[], filterTags: string[]): INote[] {
 
   return useMemo(() => {
     if (!filterTags.length) {
@@ -59,7 +59,7 @@ function useFilterNotesByTags(notes: INote[], filterTags: string[]) {
   }, [filterTags, notes]);
 }
 
-function useFilterNotesBySearch(notes: INote[], searchString: string) {
+function useFilterNotesBySearch(notes: INote[], searchString: string): INote[] {
 
   return useMemo(() => {
     if (!searchString) {

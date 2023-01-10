@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-
+// TODO ненужная компонента, удалить в следующей версии
 function TagForm({ show, add }: ITagFormProps) {
   const [newTag, setNewTag] = useState<string>('#');
   const inputRef = useRef<HTMLInputElement>(null);

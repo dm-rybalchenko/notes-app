@@ -1,13 +1,19 @@
 type TNoteFunc = (id: string) => void;
 type TTagFunc = (tag: string) => void;
+type TPageFunc = (page: number) => void
 type TuseTags = [string[], React.Dispatch<React.SetStateAction<string[]>>];
+type TFetchAllNotes = () => Promise<void>;
+type TFetchOneNote = (arg: INote) => Promise<void>;
+type TFetchCallback = TFetchOneNote | TTFetchAllNotes;
 
+// TODO везде переписать id на _id
 interface INote {
-  id: string;
+  id?: string;
   title: string;
   body: string;
   tags: string[];
   date: Dayjs | string;
+  file: string;
 }
 
 interface IFilter {
@@ -16,23 +22,20 @@ interface IFilter {
   sort: string;
 }
 
-interface IEditNoteProps {
-  current: INote;
-  close: React.Dispatch<React.SetStateAction<INote | null>>;
-  add: (id: string, note: INote) => void;
+interface IMainState {
+	notes: {
+        notes: INote[];
+    };
+    filter: IFilter;
+    pagination: {
+        page: number;
+        limit: number;
+    }
 }
 
 interface IShowNoteProps {
   note: INote;
   close: React.Dispatch<React.SetStateAction<INote | null>>;
-}
-
-interface IHeaderProps {
-  newNote: React.Dispatch<React.SetStateAction<INote | null>>;
-  notes: INote[];
-  filter: IFilter;
-  setFilter: React.Dispatch<React.SetStateAction<IFilter>>;
-  setNotes: React.Dispatch<React.SetStateAction<INote[]>>;
 }
 
 interface ISearchFormProps {
@@ -57,26 +60,31 @@ interface ITagListProps {
 
 interface INotePorps {
   note: INote;
-  remove: TNoteFunc;
-  edit: TNoteFunc;
 }
 
 interface IButtonProps {
   children: string;
   modClass: string;
-  onClick: (e: MouseEventHandler<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEventHandler<HTMLButtonElement>) => void;
 }
 
 interface ISelectProps {
-  value: string;
-  onChange: (value: string) => void;
+  value: string | number;
+  onChange: (value: string | string) => void;
   defaultValue: string;
   options: {
-    value: string;
+    value: string | number;
     name: string;
   }[];
 }
 
+interface IPaginationProps {
+	current: number;
+	totalPages: number[];
+	changePage: TPageFunc;
+}
+
+// TODO интерфейс для ненужной компоненты, удалить в следующей версии
 interface ITagFormProps {
   add: (tag: string) => void;
   show: (value: React.SetStateAction<boolean>) => void;

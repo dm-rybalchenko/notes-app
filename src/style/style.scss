@@ -334,6 +334,7 @@ body.block {
   &__notes {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: $base * 4;
   }
 
@@ -360,6 +361,9 @@ body.block {
 
   &__note-title {
     font-size: $fz-l;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__note-body {
@@ -380,7 +384,7 @@ body.block {
     position: relative;
     max-height: $base * 13;
     margin: $base * 1.5 0;
-	line-height: 1.2;
+    line-height: 1.2;
     overflow: hidden;
     background: linear-gradient(
       180deg,
@@ -687,3 +691,23 @@ input::placeholder {
 }
 
 // === EDIT ===
+
+// === PAGINATION ===
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: $base * 3;
+  padding-top: $base * 15;
+
+  &__item {
+    width: $base * 10;
+    height: $base * 10;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.active {
+      background-color: $color-primary-600;
+    }
+  }
+}
+// === / PAGINATION ===

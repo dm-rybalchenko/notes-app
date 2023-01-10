@@ -36,4 +36,4 @@ function TagList({ modClass, tags, current, choose, remove }: ITagListProps) {
   );
 }
 
-export { TagList };
+export default TagList;

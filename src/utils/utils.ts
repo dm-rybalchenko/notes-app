@@ -1,35 +1,42 @@
-export function toggleBlockBody(status: INote | null) {
-  if (status) {
-    document.body.classList.add('block');
-  } else {
-    document.body.classList.remove('block');
-  }
-}
-
 export function createNewNote(): INote {
-
   return {
-    id: Math.random().toString(36).substring(2, 6),
     title: '',
     body: '',
     tags: [],
-	date: ''
+    date: '',
+    file: '',
   };
 }
 
-// Doesn't work in Safary /((?<!>)#\S+\s(?<!>\s))/gm
-const RegExpTag =
-  /((\s#[0-9а-яА-Яa-zA-Z_-]+\s)|(\s#[0-9а-яА-Яa-zA-Z_-]+&nbsp;\s))/gm;
+const tagReg = /\s#[\wа-яА-Я-]+\s/gm;
+const newLineReg =
+  /(\s#[\wа-яА-Я-]+)(<div><br><\/div>|<\/div><div><br><\/div>)/gm;
 
-export function wrapTag(str: string): {tag: string, content: string} {
+export function tagController(str: string): { tag: string; content: string } {
   let tag = '';
 
-  const content = str.replace(RegExpTag, (str: string, p: string) => {
-    let newTag = p.slice(0, -1).replace('&nbsp;', '');
-    tag = newTag;
+  let content = str
+    .replaceAll('&nbsp;', ' ')
+    .replace(/(^|<div>)(#)/gm, '$1 $2')
+    .replace(newLineReg, '$1 $2')
+    .replace(tagReg, (str: string) => {
+      let newTag = str.slice(1, -1);
+      tag = newTag;
 
-    return `<span class="tag">${newTag}</span> `;
-  });
+      return ` ${wrapTag(newTag)}&nbsp;`;
+    });
 
-  return {tag, content};
+  if (tag) {
+    content = content.replace(/<div><br><\/div>$/gm, '');
+  }
+
+  return { tag, content };
+}
+
+export function wrapTag(tag: string): string {
+  return `<span class="tag">${tag}</span>`;
+}
+
+export function wrapChosenTag(tag: string): string {
+  return `<span class="chosen">${tag}</span>`;
 }

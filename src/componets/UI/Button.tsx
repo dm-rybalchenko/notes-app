@@ -12,4 +12,4 @@ function Button({ children, modClass, ...props }: IButtonProps) {
   );
 }
 
-export { Button };
+export default Button;

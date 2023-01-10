@@ -9,10 +9,10 @@ function useTags(notes: INote[]): TuseTags {
   return [tags, setTags];
 }
 
-function getTags(notes: INote[]) {
+function getTags(notes: INote[]): string[] {
   const tagsArr: string[] = [];
 
-  notes?.length && notes.forEach((note) => tagsArr.push(...note.tags));
+  notes?.length && notes.forEach((note) => note.tags.forEach(tag => !tagsArr.includes(tag) && tagsArr.push(tag)));
 
   return tagsArr;
 }

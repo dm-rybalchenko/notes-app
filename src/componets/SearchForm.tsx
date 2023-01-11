@@ -6,6 +6,7 @@ import { searchNotes, sortNotes } from '../store/filterReducer';
 import { setLimit } from '../store/paginationReducer';
 import Select from './UI/Select';
 
+
 export default function SearchForm() {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
   const filter = useSelector((state: IMainState) => state.filter);

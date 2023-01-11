@@ -1,13 +1,20 @@
-import { useState } from 'react';
-import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
-
-import { routes } from './router';
-import { LoadingContext } from './context';
+import { useEffect, useState } from 'react';
+import AppRouter from './componets/AppRouter';
+import { AuthContext, LoadingContext } from './context';
 
 
 function App() {
   const [lazyLoading, setLazyLoading] = useState<boolean>(false);
-  
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true);
+    }
+    setIsLoading(false);
+  }, []);
+
   return (
     <div className="wrapper">
       <LoadingContext.Provider
@@ -16,19 +23,15 @@ function App() {
           setLazyLoading,
         }}
       >
-        <BrowserRouter>
-          <Routes>
-            {routes.map((route) => (
-              <Route
-                path={route.path}
-                element={route.component}
-                key={route.path}
-              />
-            ))}
-            <Route path="/" element={<Navigate to="/notes" />} />
-            <Route path="*" element={<Navigate to="/error" />} />
-          </Routes>
-        </BrowserRouter>
+        <AuthContext.Provider
+          value={{
+            isAuth,
+            setIsAuth,
+            isLoading,
+          }}
+        >
+          <AppRouter />
+        </AuthContext.Provider>
       </LoadingContext.Provider>
     </div>
   );

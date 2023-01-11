@@ -216,6 +216,7 @@ body.block {
 
   &__filter {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: $base * 3;
 
@@ -232,8 +233,8 @@ body.block {
 
   &__lower {
     display: flex;
+    flex-direction: column;
     gap: $base * 7.5;
-    align-items: center;
 
     @media (max-width: $breakpoint-lg-max) {
       flex-wrap: wrap-reverse;

@@ -39,6 +39,12 @@ interface ILoadingType {
   setLazyLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface IisAuth {
+  isAuth: boolean;
+  isLoading: boolean;
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 interface IShowNoteProps {
   note: INote;
   close: React.Dispatch<React.SetStateAction<INote | null>>;

@@ -17,7 +17,7 @@ export default function Note({ note }: INotePorps) {
   );
 
   return (
-    <div id={note.id} onClick={() => router(`/notes/${note.id}`)} className="main__note">
+    <div id={note.id} onClick={() => router(`/edit/${note.id}`)} className="main__note">
       <div className="main__note-title">{note.title}</div>
       <div className="main__note-body">
         <div className="main__note-content">{note.body}</div>

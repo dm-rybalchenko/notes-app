@@ -8,10 +8,10 @@ import useObserver from '../hooks/useObserver';
 import usePaginationNotes from '../hooks/usePaginationNotes';
 import { addAllNotes } from '../store/notesReducer';
 import { setPage } from '../store/paginationReducer';
-import Note from './Note';
-import Loader from './UI/Loader';
-import { Pagination } from './UI/Pagination';
-
+import Note from '../componets/Note';
+import Loader from '../componets/UI/Loader';
+import { Pagination } from '../componets/UI/Pagination';
+import Header from '../componets/Header';
 
 function NoteList() {
   const { lazyLoading } = useContext(LoadingContext);
@@ -57,26 +57,29 @@ function NoteList() {
   );
 
   return (
-    <main className="main">
-      <div className="main__notes">
-        {noteError && <h1>{noteError}</h1>}
-        {isLoading ? (
-          <Loader />
+    <>
+      <Header />
+      <main className="main">
+        <div className="main__notes">
+          {noteError && <h1>{noteError}</h1>}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            paginatedNotes.map((note) => <Note key={note.id} note={note} />)
+          )}
+        </div>
+        {lazyLoading ? (
+          <div ref={lastElement} />
         ) : (
-          paginatedNotes.map((note) => <Note key={note.id} note={note} />)
+          <Pagination
+            current={page}
+            totalPages={totalPages}
+            changePage={setCurrentPage}
+          />
         )}
-      </div>
-      {lazyLoading ? (
-        <div ref={lastElement} />
-      ) : (
-        <Pagination
-          current={page}
-          totalPages={totalPages}
-          changePage={setCurrentPage}
-        />
-      )}
-    </main>
+      </main>
+    </>
   );
 }
 
-export { NoteList };
+export default NoteList;

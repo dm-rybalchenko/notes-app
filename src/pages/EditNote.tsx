@@ -17,35 +17,30 @@ import useFetching from '../hooks/useFetching';
 import Loader from '../componets/UI/Loader';
 import { addNote, updateNote } from '../store/notesReducer';
 
-
 function EditNote() {
   const notes = useSelector((state: IMainState) => state.notes.notes);
   const dispatch = useDispatch();
   const params = useParams();
   const router = useNavigate();
 
+  const [note, setNote] = useState<INote>(createNewNote());
   const [currentTags, setCurrentTags] = useState<string[]>([]);
+
   const [content, setContent] = useState('');
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const [note, setNote] = useState<INote>((): INote => {
-    if (params.id === 'new') {
-      return createNewNote();
-    }
-
-    const currentNote = notes.find((note: INote) => note.id === params.id);
-    if (currentNote) {
-      setContent(currentNote.body);
-      return currentNote;
-    }
-
-    router('/error');
-    return createNewNote();
-  });
-
   const [saveNote, isLoading, error] = useFetching(async (note: INote) => {
+    if (!note.title && !note.body) {
+      router('/notes');
+      return;
+    }
+
     const preparedNote = { ...note, date: dayjs().format() };
+    if (!note.title && note.body) {
+      preparedNote.title =
+        note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
+    }
 
     if (preparedNote.id) {
       const response = await NoteService.updateNote(preparedNote);
@@ -104,6 +99,19 @@ function EditNote() {
       contentRef.current?.focus();
     } else {
       titleRef.current?.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (params.id) {
+      const currentNote = notes.find((note: INote) => note.id === params.id);
+
+      if (currentNote) {
+        setNote(currentNote);
+        setContent(currentNote.body);
+      } else {
+        router('/error');
+      }
     }
   }, []);
 

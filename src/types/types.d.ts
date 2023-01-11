@@ -1,10 +1,11 @@
 type TNoteFunc = (id: string) => void;
 type TTagFunc = (tag: string) => void;
-type TPageFunc = (page: number) => void
+type TPageFunc = (page: number) => void;
 type TuseTags = [string[], React.Dispatch<React.SetStateAction<string[]>>];
 type TFetchAllNotes = () => Promise<void>;
 type TFetchOneNote = (arg: INote) => Promise<void>;
 type TFetchCallback = TFetchOneNote | TTFetchAllNotes;
+type TRefDiv = React.MutableRefObject<HTMLDivElement | null>;
 
 // TODO везде переписать id на _id
 interface INote {
@@ -23,14 +24,19 @@ interface IFilter {
 }
 
 interface IMainState {
-	notes: {
-        notes: INote[];
-    };
-    filter: IFilter;
-    pagination: {
-        page: number;
-        limit: number;
-    }
+  notes: {
+    notes: INote[];
+  };
+  filter: IFilter;
+  pagination: {
+    page: number;
+    limit: number;
+  };
+}
+
+interface ILoadingType {
+  lazyLoading: boolean;
+  setLazyLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IShowNoteProps {
@@ -79,9 +85,9 @@ interface ISelectProps {
 }
 
 interface IPaginationProps {
-	current: number;
-	totalPages: number[];
-	changePage: TPageFunc;
+  current: number;
+  totalPages: number[];
+  changePage: TPageFunc;
 }
 
 // TODO интерфейс для ненужной компоненты, удалить в следующей версии

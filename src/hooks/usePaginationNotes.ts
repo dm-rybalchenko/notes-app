@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-
 function usePaginationNotes(
+  lazy: boolean,
   page: number,
   limit: number,
   notes: INote[]
@@ -14,7 +14,11 @@ function usePaginationNotes(
     let start = (page - 1) * limit;
     let end = start + limit > notes.length ? notes.length : start + limit;
 
-    return notes.slice(start, end);
+	if(lazy){
+		start = 0;
+	}
+
+	return notes.slice(start, end);
   }, [page, limit, notes]);
 
   const totalPages = useMemo(

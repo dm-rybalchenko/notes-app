@@ -2,14 +2,21 @@ import dayjs from 'dayjs';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import NoteService from '../API/NoteService';
+import useFetching from '../hooks/useFetching';
 
 import { removeNote } from '../store/notesReducer';
 
 
 export default function Note({ note }: INotePorps) {
-	const dispatch = useDispatch();
-	const router = useNavigate();
-	
+  const dispatch = useDispatch();
+  const router = useNavigate();
+  
+  const [remove, isLoading, err] = useFetching(async (note: INote) => {
+    note._id && (await NoteService.delete(note._id));
+    !err && dispatch(removeNote(note._id));
+  });
+
   const editDate = useCallback(
     (note: INote) =>
       note.date ? dayjs(note.date).format('DD.MM.YY HH:mm') : 'unknown',
@@ -17,7 +24,11 @@ export default function Note({ note }: INotePorps) {
   );
 
   return (
-    <div id={note.id} onClick={() => router(`/edit/${note.id}`)} className="main__note">
+    <div
+      id={note._id}
+      onClick={() => router(`/edit/${note._id}`)}
+      className="main__note"
+    >
       <div className="main__note-title">{note.title}</div>
       <div className="main__note-body">
         <div className="main__note-content">{note.body}</div>
@@ -32,12 +43,13 @@ export default function Note({ note }: INotePorps) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            dispatch(removeNote(note.id))
+            remove(note);
           }}
           className="main__note-remove"
         >
-          Удалить
+          {isLoading ? 'Удаляется...' : 'Удалить'}
         </button>
+        {err && <h1>{err}</h1>}
       </div>
     </div>
   );

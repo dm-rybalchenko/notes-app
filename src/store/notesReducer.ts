@@ -17,11 +17,11 @@ const notesSlice = createSlice({
     },
     updateNote(state, action) {
       state.notes = state.notes.map((note) =>
-        note.id === action.payload.id ? action.payload : note
+        note._id === action.payload._id ? action.payload : note
       );
     },
     removeNote(state, action) {
-      state.notes = state.notes.filter((note) => note.id !== action.payload);
+      state.notes = state.notes.filter((note) => note._id !== action.payload);
     },
     removeTag(state, action) {
       state.notes = state.notes.map((note) => ({

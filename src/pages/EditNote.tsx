@@ -16,6 +16,8 @@ import NoteService from '../API/NoteService';
 import useFetching from '../hooks/useFetching';
 import Loader from '../componets/UI/Loader';
 import { addNote, updateNote } from '../store/notesReducer';
+import FileForm from '../componets/FileForm';
+
 
 function EditNote() {
   const notes = useSelector((state: IMainState) => state.notes.notes);
@@ -42,15 +44,15 @@ function EditNote() {
         note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
     }
 
-    if (preparedNote.id) {
-      const response = await NoteService.updateNote(preparedNote);
+    if (preparedNote._id) {
+      const response = await NoteService.update(preparedNote);
       dispatch(updateNote(response));
     } else {
-      const response = await NoteService.createNote(preparedNote);
+      const response = await NoteService.create(preparedNote);
       dispatch(addNote(response));
     }
 
-    router('/notes');
+    !error && router('/notes');
   });
 
   const hightLightTag = (tag: string) => {
@@ -104,7 +106,7 @@ function EditNote() {
 
   useEffect(() => {
     if (params.id) {
-      const currentNote = notes.find((note: INote) => note.id === params.id);
+      const currentNote = notes.find((note: INote) => note._id === params.id);
 
       if (currentNote) {
         setNote(currentNote);
@@ -116,12 +118,11 @@ function EditNote() {
   }, []);
 
   return (
-    <>
-      {error && <h1>{error}</h1>}
+    <div className="edit-note" onClick={(e) => e.stopPropagation()}>
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="edit-note" onClick={(e) => e.stopPropagation()}>
+        <div>
           <div className="edit-note__up">
             <div className="edit-note__title">
               <input
@@ -144,6 +145,14 @@ function EditNote() {
             data-ph="Введите текст заметки..."
             className="edit-note__text"
           />
+          {note.file && (
+            <img
+              src={note.file.url}
+              alt={note.file.name}
+              style={{ width: 100, height: 100, objectFit: 'contain' }}
+            />
+          )}
+          <FileForm note={note} setNote={setNote} />
           <TagList
             choose={hightLightTag}
             remove={removeTag}
@@ -158,7 +167,8 @@ function EditNote() {
           </div>
         </div>
       )}
-    </>
+      {error && <h1>{error}</h1>}
+    </div>
   );
 }
 

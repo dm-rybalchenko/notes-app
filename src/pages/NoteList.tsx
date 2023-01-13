@@ -30,7 +30,7 @@ function NoteList() {
   );
 
   const [fetchNotes, isLoading, noteError] = useFetching(async () => {
-    const response = await NoteService.getAllNotes();
+    const response = await NoteService.getAll();
     dispatch(addAllNotes(response));
   });
 
@@ -65,7 +65,7 @@ function NoteList() {
           {isLoading ? (
             <Loader />
           ) : (
-            paginatedNotes.map((note) => <Note key={note.id} note={note} />)
+            paginatedNotes.map((note) => <Note key={note._id} note={note} />)
           )}
         </div>
         {lazyLoading ? (

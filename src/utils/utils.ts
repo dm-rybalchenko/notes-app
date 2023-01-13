@@ -4,7 +4,6 @@ export function createNewNote(): INote {
     body: '',
     tags: [],
     date: '',
-    file: '',
   };
 }
 

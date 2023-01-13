@@ -9,12 +9,18 @@ type TRefDiv = React.MutableRefObject<HTMLDivElement | null>;
 
 // TODO везде переписать id на _id
 interface INote {
-  id?: string;
+  _id?: string;
   title: string;
   body: string;
   tags: string[];
   date: Dayjs | string;
-  file: string;
+  file?: IFile;
+}
+
+interface IFile {
+	id: string,
+	url: string,
+	name: string,
 }
 
 interface IFilter {

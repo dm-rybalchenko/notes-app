@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AxiosError } from 'axios';
 
 
 const useFetching = (callback: TFetchCallback): [TFetchCallback, boolean, string] => {
@@ -10,7 +11,11 @@ const useFetching = (callback: TFetchCallback): [TFetchCallback, boolean, string
       setIsLoading(true);
       await callback(arg);
     } catch (e) {
-      if (e instanceof Error) {
+
+      if (e instanceof AxiosError && e.response) {
+        setError(e.response.data);
+		
+      } else if (e instanceof Error) {
         setError(e.message);
       }
     } finally {

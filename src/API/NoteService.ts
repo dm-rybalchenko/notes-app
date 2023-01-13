@@ -1,27 +1,32 @@
-import data from './data.json'
+import axios from 'axios';
 
+
+const SERVER_ENDPOINT = 'http://localhost:5000';
 export default class NoteService {
-
-  static async getAllNotes() {
-	await delay(1000);
-	return [...data]
+  static async getAll() {
+    const response = await axios.get(SERVER_ENDPOINT);
+    await delay(1000);
+    return response.data;
   }
 
-  static async createNote(note: INote) {
-	const newNote = {...note, id: Math.random().toString(36).substring(2,6)}
-	await delay(1000);
-	return newNote;
+  static async create(note: INote) {
+    const response = await axios.post(SERVER_ENDPOINT, note);
+    await delay(1000);
+    return response.data;
   }
 
-  static async updateNote(note: INote) {
-	await delay(1000);
-	return note;
+  static async update(note: INote) {
+    const response = await axios.put(SERVER_ENDPOINT, note);
+    await delay(1000);
+    return response.data;
   }
 
-  static async removeNote(id: string) {
-	await delay(1000);
-	return data.find(note => note.id === id);
+  static async delete(id: string) {
+    const response = await axios.delete(`${SERVER_ENDPOINT}/${id}`);
+    await delay(1000);
+    return response.data;
   }
 }
 
-const delay = async(ms: number) => await new Promise(res => setTimeout(res, ms))
+const delay = async (ms: number) =>
+  await new Promise((res) => setTimeout(res, ms));

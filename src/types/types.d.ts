@@ -2,34 +2,10 @@ type TNoteFunc = (id: string) => void;
 type TTagFunc = (tag: string) => void;
 type TPageFunc = (page: number) => void;
 type TuseTags = [string[], React.Dispatch<React.SetStateAction<string[]>>];
-type TFetchAllNotes = () => Promise<void>;
-type TFetchOneNote = (arg: INote) => Promise<void>;
-type TFetchCallback = TFetchOneNote | TTFetchAllNotes;
 type TRefDiv = React.MutableRefObject<HTMLDivElement | null>;
 
-// TODO везде переписать id на _id
-interface INote {
-  _id?: string;
-  title: string;
-  body: string;
-  tags: string[];
-  date: Dayjs | string;
-  file?: IFile;
-}
-
-interface IFile {
-	id: string,
-	url: string,
-	name: string,
-}
-
-interface IFilter {
-  tags: string[];
-  query: string;
-  sort: string;
-}
-
 interface IMainState {
+  auth: IAuth;
   notes: {
     notes: INote[];
   };
@@ -40,15 +16,60 @@ interface IMainState {
   };
 }
 
+interface IUser {
+  id: string;
+  email: string;
+  isActivated: boolean;
+}
+
+interface AuthResponce {
+  accessToken: string;
+  refreshToken: string;
+  user: IUser;
+}
+interface IAuth {
+  user: IUser;
+  isAuth: boolean;
+}
+
+interface INote {
+  id?: string;
+  title: string;
+  body: string;
+  tags: string[];
+  date: Dayjs | string;
+  file?: IFile;
+}
+
+interface IFile {
+  id: string;
+  url: string;
+  name: string;
+}
+
+interface IFilter {
+  tags: string[];
+  query: string;
+  sort: string;
+}
+
+interface ILoginForm {
+  email: string;
+  password: string;
+}
+
+interface IFileForm {
+  file: FileList;
+}
+
 interface ILoadingType {
   lazyLoading: boolean;
   setLazyLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface IisAuth {
-  isAuth: boolean;
-  isLoading: boolean;
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+interface IFileFormProps {
+  note: INote;
+  setNote: React.Dispatch<React.SetStateAction<INote>>;
 }
 
 interface IShowNoteProps {
@@ -100,10 +121,4 @@ interface IPaginationProps {
   current: number;
   totalPages: number[];
   changePage: TPageFunc;
-}
-
-// TODO интерфейс для ненужной компоненты, удалить в следующей версии
-interface ITagFormProps {
-  add: (tag: string) => void;
-  show: (value: React.SetStateAction<boolean>) => void;
 }

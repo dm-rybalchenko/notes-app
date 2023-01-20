@@ -2,19 +2,19 @@ import dayjs from 'dayjs';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import NoteService from '../API/NoteService';
 import useFetching from '../hooks/useFetching';
-
 import { removeNote } from '../store/notesReducer';
 
 
 export default function Note({ note }: INotePorps) {
   const dispatch = useDispatch();
   const router = useNavigate();
-  
-  const [remove, isLoading, err] = useFetching(async (note: INote) => {
-    note._id && (await NoteService.delete(note._id));
-    !err && dispatch(removeNote(note._id));
+
+  const [remove, isLoading, err] = useFetching<INote>(async (note: INote) => {
+    note.id && (await NoteService.delete(note.id));
+    !err && dispatch(removeNote(note.id));
   });
 
   const editDate = useCallback(
@@ -25,8 +25,8 @@ export default function Note({ note }: INotePorps) {
 
   return (
     <div
-      id={note._id}
-      onClick={() => router(`/edit/${note._id}`)}
+      id={note.id}
+      onClick={() => router(`/edit/${note.id}`)}
       className="main__note"
     >
       <div className="main__note-title">{note.title}</div>

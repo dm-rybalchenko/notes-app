@@ -10,6 +10,10 @@ const paginationSlice = createSlice({
   name: 'pagination',
   initialState,
   reducers: {
+    setDefaultPages(state) {
+      state.page = 1;
+      state.limit = 10;
+    },
     setPage(state, action) {
       state.page = action.payload;
     },
@@ -20,4 +24,4 @@ const paginationSlice = createSlice({
 });
 
 export default paginationSlice.reducer;
-export const { setPage, setLimit } = paginationSlice.actions;
+export const { setDefaultPages, setPage, setLimit } = paginationSlice.actions;

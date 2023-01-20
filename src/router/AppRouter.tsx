@@ -1,20 +1,15 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
 
-import { AuthContext } from '../context';
-import { publicRoutes, privateRoutes } from '../router';
-import Loader from './UI/Loader';
+import { publicRoutes, privateRoutes } from './index';
+
 
 function AppRouter() {
-  const { isAuth, isLoading } = useContext(AuthContext);
-
-  if (isLoading) {
-    return <Loader />;
-  }
+  const auth = useSelector((state: IMainState) => state.auth);
 
   return (
     <BrowserRouter>
-      {isAuth ? (
+      {auth.isAuth ? (
         <Routes>
           {privateRoutes.map((route) => (
             <Route

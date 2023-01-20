@@ -9,6 +9,9 @@ const notesSlice = createSlice({
   name: 'notes',
   initialState: initialState,
   reducers: {
+    setDefaultNotes(state) {
+      state.notes = [];
+    },
     addAllNotes(state, action) {
       state.notes = action.payload;
     },
@@ -17,19 +20,16 @@ const notesSlice = createSlice({
     },
     updateNote(state, action) {
       state.notes = state.notes.map((note) =>
-        note._id === action.payload._id ? action.payload : note
+        note.id === action.payload.id ? action.payload : note
       );
     },
     removeNote(state, action) {
-      state.notes = state.notes.filter((note) => note._id !== action.payload);
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
     removeTag(state, action) {
       state.notes = state.notes.map((note) => ({
         ...note,
-        body: note.body.replaceAll(
-          action.payload,
-          action.payload.slice(1)
-        ),
+        body: note.body.replaceAll(action.payload, action.payload.slice(1)),
         tags: note.tags.filter((tag) => tag !== action.payload),
       }));
     },
@@ -37,5 +37,5 @@ const notesSlice = createSlice({
 });
 
 export default notesSlice.reducer;
-export const { addAllNotes, addNote, updateNote, removeNote, removeTag } =
+export const { setDefaultNotes, addAllNotes, addNote, updateNote, removeNote, removeTag } =
   notesSlice.actions;

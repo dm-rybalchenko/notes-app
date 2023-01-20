@@ -1,32 +1,29 @@
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
+import $api from './api';
 
 
-const SERVER_ENDPOINT = 'http://localhost:5000';
 export default class NoteService {
-  static async getAll() {
-    const response = await axios.get(SERVER_ENDPOINT);
-    await delay(1000);
+  static async getAll(): Promise<INote[]> {
+    const response = await $api.get('/');
+
     return response.data;
   }
 
-  static async create(note: INote) {
-    const response = await axios.post(SERVER_ENDPOINT, note);
-    await delay(1000);
+  static async create(note: INote): Promise<INote> {
+    const response = await $api.post('/', note);
+
     return response.data;
   }
 
-  static async update(note: INote) {
-    const response = await axios.put(SERVER_ENDPOINT, note);
-    await delay(1000);
+  static async update(note: INote): Promise<INote> {
+    const response = await $api.put('/', note);
+
     return response.data;
   }
 
-  static async delete(id: string) {
-    const response = await axios.delete(`${SERVER_ENDPOINT}/${id}`);
-    await delay(1000);
+  static async delete(id: string): Promise<INote> {
+    const response = await $api.delete(`/${id}`);
+
     return response.data;
   }
 }
-
-const delay = async (ms: number) =>
-  await new Promise((res) => setTimeout(res, ms));

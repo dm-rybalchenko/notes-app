@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import NoteService from '../API/NoteService';
 import { LoadingContext } from '../context';
 import useFetching from '../hooks/useFetching';
@@ -65,7 +66,7 @@ function NoteList() {
           {isLoading ? (
             <Loader />
           ) : (
-            paginatedNotes.map((note) => <Note key={note._id} note={note} />)
+            paginatedNotes.map((note) => <Note key={note.id} note={note} />)
           )}
         </div>
         {lazyLoading ? (

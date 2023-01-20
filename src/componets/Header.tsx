@@ -5,17 +5,35 @@ import TagList from './TagList';
 import Button from './UI/Button';
 import SearchForm from './SearchForm';
 import useTags from '../hooks/useTags';
-import { removeTagFromSort, sortByTag } from '../store/filterReducer';
-import { removeTag } from '../store/notesReducer';
-import { useContext } from 'react';
-import { AuthContext } from '../context';
+import {
+  removeTagFromSort,
+  setDefaultFilter,
+  sortByTag,
+} from '../store/filterReducer';
+import { removeTag, setDefaultNotes } from '../store/notesReducer';
+import useFetching from '../hooks/useFetching';
+import UserService from '../API/UserService';
+import { setDefaultPages } from '../store/paginationReducer';
+import { setDefaultAuth } from '../store/authReducer';
+import Loader from './UI/Loader';
+
 
 function Header() {
-  const { isAuth, setIsAuth } = useContext(AuthContext);
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
+  const auth = useSelector((state: IMainState) => state.auth);
   const dispatch = useDispatch();
   const [tags, setTags] = useTags(notes);
+
+  const [logout, isLoadingLogout, errLogout] = useFetching(async () => {
+    const response = await UserService.logout();
+
+    localStorage.removeItem('token');
+    dispatch(setDefaultAuth());
+    dispatch(setDefaultPages());
+    dispatch(setDefaultFilter());
+    dispatch(setDefaultNotes());
+  });
 
   const deleteTag = (tag: string) => {
     dispatch(removeTag(tag));
@@ -26,16 +44,19 @@ function Header() {
     dispatch(sortByTag(tag));
   };
 
-  const logout = () => {
-    setIsAuth(false);
-    localStorage.removeItem('auth');
-  };
-
   return (
     <header className="header">
+      {isLoadingLogout && <Loader />}
+      {errLogout && <h1>{errLogout}</h1>}
       <button onClick={logout} className="tags__item">
         Выйти
       </button>
+      <p>{auth.user.email}</p>
+      <p>
+        {auth.user.isActivated
+          ? 'Аккаунт подтвержден по почте'
+          : 'ПОДТВЕРДИТЕ АККАУНТ!'}
+      </p>
       <div className="header__upper">
         <div className="header__title">Заметки</div>
         <div className="header__add">

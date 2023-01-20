@@ -1,19 +1,36 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import AppRouter from './componets/AppRouter';
-import { AuthContext, LoadingContext } from './context';
+import { useDispatch } from 'react-redux';
+
+import { API_URL } from './API/api';
+import AppRouter from './router/AppRouter';
+import Loader from './componets/UI/Loader';
+import { LoadingContext } from './context';
+import useFetching from './hooks/useFetching';
+import { setIsAuth, setUser } from './store/authReducer';
 
 
 function App() {
+  const dispatch = useDispatch();
   const [lazyLoading, setLazyLoading] = useState<boolean>(false);
-  const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const [checkAuth, isLoadingCheck, errCheck] = useFetching(async () => {
+    const response = await axios.get<AuthResponce>(`${API_URL}/user/refresh`, {
+      withCredentials: true,
+    });
+
+    localStorage.setItem('token', response.data.accessToken);
+    dispatch(setUser(response.data.user));
+    dispatch(setIsAuth(true));
+  });
 
   useEffect(() => {
-    if (localStorage.getItem('auth')) {
-      setIsAuth(true);
-    }
-    setIsLoading(false);
+    checkAuth();
   }, []);
+
+  if (isLoadingCheck) {
+    return <Loader />;
+  }
 
   return (
     <div className="wrapper">
@@ -23,15 +40,7 @@ function App() {
           setLazyLoading,
         }}
       >
-        <AuthContext.Provider
-          value={{
-            isAuth,
-            setIsAuth,
-            isLoading,
-          }}
-        >
-          <AppRouter />
-        </AuthContext.Provider>
+        <AppRouter />
       </LoadingContext.Provider>
     </div>
   );

@@ -11,12 +11,17 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
+    setDefaultFilter(state) {
+      state.tags = [];
+      state.query = '';
+      state.sort = '';
+    },
     searchNotes(state, action) {
       state.query = action.payload;
     },
-	sortNotes(state, action){
-		state.sort = action.payload
-	},
+    sortNotes(state, action) {
+      state.sort = action.payload;
+    },
     sortByTag(state, action) {
       if (state.tags.includes(action.payload)) {
         state.tags = state.tags.filter((tag) => tag !== action.payload);
@@ -31,9 +36,5 @@ const filterSlice = createSlice({
 });
 
 export default filterSlice.reducer;
-export const {
-  searchNotes,
-  sortNotes,
-  sortByTag,
-  removeTagFromSort,
-} = filterSlice.actions;
+export const { setDefaultFilter, searchNotes, sortNotes, sortByTag, removeTagFromSort } =
+  filterSlice.actions;

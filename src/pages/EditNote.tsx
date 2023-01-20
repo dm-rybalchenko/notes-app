@@ -20,7 +20,7 @@ import FileForm from '../componets/FileForm';
 
 
 function EditNote() {
-  const notes = useSelector((state: IMainState) => state.notes.notes);
+  const { notes } = useSelector((state: IMainState) => state.notes);
   const dispatch = useDispatch();
   const params = useParams();
   const router = useNavigate();
@@ -28,32 +28,23 @@ function EditNote() {
   const [note, setNote] = useState<INote>(createNewNote());
   const [currentTags, setCurrentTags] = useState<string[]>([]);
 
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState<string>('');
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const [saveNote, isLoading, error] = useFetching(async (note: INote) => {
-    if (!note.title && !note.body) {
-      router('/notes');
-      return;
-    }
+  const [saveNote, isLoading, error] = useFetching<INote>(
+    async (note: INote) => {
+      if (note.id) {
+        const response = await NoteService.update(note);
+        dispatch(updateNote(response));
+      } else {
+        const response = await NoteService.create(note);
+        dispatch(addNote(response));
+      }
 
-    const preparedNote = { ...note, date: dayjs().format() };
-    if (!note.title && note.body) {
-      preparedNote.title =
-        note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
+      !error && router('/notes');
     }
-
-    if (preparedNote._id) {
-      const response = await NoteService.update(preparedNote);
-      dispatch(updateNote(response));
-    } else {
-      const response = await NoteService.create(preparedNote);
-      dispatch(addNote(response));
-    }
-
-    !error && router('/notes');
-  });
+  );
 
   const hightLightTag = (tag: string) => {
     if (currentTags.includes(tag)) {
@@ -96,6 +87,24 @@ function EditNote() {
     setContent(newContent.content);
   };
 
+  const handleExit = () => {
+    if (!note.title && !note.body && !note.file) {
+      router('/notes');
+      return;
+    }
+
+    const preparedNote = { ...note, date: dayjs().format() };
+    if (!note.title && note.body) {
+      preparedNote.title =
+        note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
+    }
+    if (!note.title && !note.body) {
+      preparedNote.title = 'Заголовок';
+    }
+
+    saveNote(preparedNote);
+  };
+
   useEffect(() => {
     if (note.title) {
       contentRef.current?.focus();
@@ -106,7 +115,7 @@ function EditNote() {
 
   useEffect(() => {
     if (params.id) {
-      const currentNote = notes.find((note: INote) => note._id === params.id);
+      const currentNote = notes.find((note: INote) => note.id === params.id);
 
       if (currentNote) {
         setNote(currentNote);
@@ -133,10 +142,7 @@ function EditNote() {
                 placeholder="Введите заголовок..."
               />
             </div>
-            <div
-              onClick={() => saveNote(note)}
-              className="edit-note__close-up"
-            ></div>
+            <div onClick={handleExit} className="edit-note__close-up"></div>
           </div>
           <ContentEditable
             innerRef={contentRef}
@@ -161,7 +167,7 @@ function EditNote() {
             modClass="edit-note__tags"
           />
           <div className="edit-note__down">
-            <Button onClick={() => saveNote(note)} modClass="edit-note__save">
+            <Button onClick={handleExit} modClass="edit-note__save">
               Сохранить
             </Button>
           </div>

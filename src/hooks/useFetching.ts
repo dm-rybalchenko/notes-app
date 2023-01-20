@@ -2,19 +2,20 @@ import { useState } from 'react';
 import { AxiosError } from 'axios';
 
 
-const useFetching = (callback: TFetchCallback): [TFetchCallback, boolean, string] => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+const useFetching = <T>(
+  callback: (...args: T[]) => void
+): [(...args: T[]) => Promise<void>, boolean, string] => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
-  const fetching = async (arg: INote) => {
+  const fetching = async (...args: T[]) => {
     try {
       setIsLoading(true);
-      await callback(arg);
+	  setError('');
+      await callback(...args);
     } catch (e) {
-
       if (e instanceof AxiosError && e.response) {
-        setError(e.response.data);
-		
+        setError(e.response.data.message);
       } else if (e instanceof Error) {
         setError(e.message);
       }

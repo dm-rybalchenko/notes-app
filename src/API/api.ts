@@ -1,7 +1,7 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 
 
-export const API_URL = 'http://localhost:5000';
+export const API_URL = process.env.REACT_APP_SERVER_URL;
 
 const $api = axios.create({
   withCredentials: true,

@@ -3,21 +3,23 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import FileService from '../API/FileService';
 import useFetching from '../hooks/useFetching';
 import Loader from './UI/Loader';
-
+import ButtonSmall from './UI/buttons/button-small/ButtonSmall';
 
 function FileForm({ note, setNote }: IFileFormProps) {
   const { register, handleSubmit } = useForm<IFileForm>();
 
-  const [saveFile, isLoadingSave, errSave] = useFetching<FormData>(async (formData) => {
-    let response;
-    if (note?.file) {
-      response = await FileService.update(note.file.id, formData);
-    } else {
-      response = await FileService.upload(formData);
-    }
+  const [saveFile, isLoadingSave, errSave] = useFetching<FormData>(
+    async (formData) => {
+      let response;
+      if (note?.file) {
+        response = await FileService.update(note.file.id, formData);
+      } else {
+        response = await FileService.upload(formData);
+      }
 
-    setNote({ ...note, file: response });
-  });
+      setNote({ ...note, file: response });
+    }
+  );
 
   const [removeFile, isLoadingRemove, errRemove] = useFetching(async () => {
     if (note?.file) {
@@ -51,11 +53,9 @@ function FileForm({ note, setNote }: IFileFormProps) {
             style={{ display: 'flex', gap: 20 }}
           >
             <input {...register('file')} type="file" />
-            <button className="tags__item">Загрузить файл</button>
+            <ButtonSmall>Загрузить файл</ButtonSmall>
           </form>
-          <button onClick={removeFile} className="tags__item">
-            Удалить файл
-          </button>
+          <ButtonSmall onClick={() => removeFile}>Удалить файл</ButtonSmall>
         </div>
       )}
     </div>

@@ -1,0 +1,19 @@
+@import 'src/style/variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: $base * 3;
+  padding-top: $base * 15;
+}
+
+.page {
+  width: $base * 10;
+  height: $base * 10;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.active {
+  background-color: $color-primary-600;
+}

@@ -1,0 +1,21 @@
+@import 'src/style/variables.scss';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $base * 15;
+  font-weight: $fw-bold;
+  color: $color-secondary-100;
+  background-color: $color-primary-500;
+  border-radius: $base * 25;
+
+  @media (max-width: $breakpoint-md-max) {
+    height: $base * 11;
+    font-size: $fz-s;
+  }
+
+  &:hover {
+    background-color: $color-primary-600;
+  }
+}

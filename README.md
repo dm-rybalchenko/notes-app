@@ -20,13 +20,13 @@
 
 ## Screenshots
 
-![Screenshot-app-notes](/public/Screenshot-app-notes.jpg)
+![Screenshot-app-notes](/docs/Screenshot-app-notes.jpg)
 
-![Screenshot-app-notes-edit](/public/Screenshot-app-notes-edit.jpg)
+![Screenshot-app-notes-edit](/docs/Screenshot-app-notes-edit.jpg)
 
-![Screenshot-app-notes-filter](/public/Screenshot-app-notes-filter.jpg)
+![Screenshot-app-notes-filter](/docs/Screenshot-app-notes-filter.jpg)
 
-![Screenshot-app-notes-tags](/public/Screenshot-app-notes-tags.jpg)
+![Screenshot-app-notes-tags](/docs/Screenshot-app-notes-tags.jpg)
 
 *PC and mobile versions have been implemented.*
 

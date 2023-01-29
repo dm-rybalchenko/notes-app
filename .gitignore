@@ -8,9 +8,13 @@
 # testing
 /coverage
 
+# temprorary
+/tmp
+
 # production
 /build
 .env
+.env.development
 
 # misc
 .DS_Store

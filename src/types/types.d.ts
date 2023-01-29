@@ -41,6 +41,8 @@ interface INote {
   file?: IFile;
 }
 
+declare module '*.scss';
+
 interface IFile {
   id: string;
   url: string;
@@ -89,7 +91,7 @@ interface INoteListProps {
 }
 
 interface ITagListProps {
-  modClass: string;
+  modClass?: string;
   tags: string[];
   icon?: boolean;
   current?: string[];
@@ -102,8 +104,8 @@ interface INotePorps {
 }
 
 interface IButtonProps {
-  children: string;
-  modClass: string;
+  children: string | React.ReactNode;
+  modClass?: string;
   onClick?: (e: MouseEventHandler<HTMLButtonElement>) => void;
 }
 
@@ -115,6 +117,13 @@ interface ISelectProps {
     value: string | number;
     name: string;
   }[];
+}
+
+interface IInputProps {
+  value?: string;
+  type: string;
+  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface IPaginationProps {

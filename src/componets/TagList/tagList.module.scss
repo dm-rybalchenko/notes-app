@@ -1,0 +1,20 @@
+@import 'src/style/variables.scss';
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: $fz-l;  
+}
+
+.delete {
+  display: block;
+  width: $base * 4.5;
+  height: $base * 4.5;
+  margin-left: $base;
+
+  &:hover {
+	path {
+	  fill: $color-danger;
+	}
+  }
+}

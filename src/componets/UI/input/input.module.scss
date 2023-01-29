@@ -1,0 +1,12 @@
+@import 'src/style/variables.scss';
+
+.input {
+  max-width: $base * 37.5;
+  max-height: $base * 9;
+  padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
+  font-size: $fz-m;
+  font-weight: $fw-bold;
+  color: $color-primary-500;
+  background-color: $color-secondary-100;
+  border-radius: $base * 17.5;
+}

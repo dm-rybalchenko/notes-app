@@ -1,13 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import UserService from '../API/UserService';
-import Button from '../componets/UI/Button';
-import Loader from '../componets/UI/Loader';
-import useFetching from '../hooks/useFetching';
-import { setIsAuth, setUser } from '../store/authReducer';
-import { EmailReg } from '../utils/utils';
+import UserService from '../../API/UserService';
+import Button from '../../componets/UI/buttons/button-big/ButtonBig';
+import Loader from '../../componets/UI/Loader';
+import useFetching from '../../hooks/useFetching';
+import { setIsAuth, setUser } from '../../store/authReducer';
+import { EmailReg } from '../../utils/utils';
 
+import stl from './login.module.scss';
+import InputStl from '../../componets/UI/input/input.module.scss';
+import stlBtn from '../EditNote/editNote.module.scss';
 
 function Login() {
   const dispatch = useDispatch();
@@ -50,15 +53,14 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <h1 className="login__title">Страница входа</h1>
-      <div className="login__form">
-        <form onSubmit={handleSubmit(onLogin)} className="login__form">
+    <div className={stl.login}>
+      <h1 className={stl.title}>Страница входа</h1>
+        <form onSubmit={handleSubmit(onLogin)} className={stl.form}>
           <input
             {...register('email', { required: true, pattern: EmailReg })}
             placeholder="Email"
             type="email"
-            className="header__tag-input"
+			className={InputStl.input}
           />
           {errors.email?.type === 'required' && (
             <span>Нужно ввести ваш email в это поле</span>
@@ -74,7 +76,7 @@ function Login() {
             })}
             placeholder="Пароль"
             type="password"
-            className="header__tag-input"
+			className={InputStl.input}
           />
           {errors.password?.type === 'required' && (
             <span>Нужно ввести пароль</span>
@@ -85,15 +87,16 @@ function Login() {
           {errors.password?.type === 'maxLength' && (
             <span>Пароль должен быть не более 32х символов</span>
           )}
-          <Button modClass="edit-note__save">Войти</Button>
+          <Button modClass={stlBtn.save_btn}>Войти</Button>
         </form>
+		<div className={stl.registration}>
         <Button
           onClick={handleSubmit(onRegistration)}
-          modClass="edit-note__save"
+          modClass={stlBtn.save_btn}
         >
           Зарегистрироваться
         </Button>
-      </div>
+		</div>
       {errLogin && <h1>{errLogin}</h1>}
       {errReg && <h1>{errReg}</h1>}
     </div>

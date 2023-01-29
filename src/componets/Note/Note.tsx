@@ -3,12 +3,14 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import NoteService from '../API/NoteService';
-import useFetching from '../hooks/useFetching';
-import { removeNote } from '../store/notesReducer';
+import NoteService from '../../API/NoteService';
+import useFetching from '../../hooks/useFetching';
+import { removeNote } from '../../store/notesReducer';
+
+import stl from './note.module.scss';
 
 
-export default function Note({ note }: INotePorps) {
+function Note({ note }: INotePorps) {
   const dispatch = useDispatch();
   const router = useNavigate();
 
@@ -27,25 +29,25 @@ export default function Note({ note }: INotePorps) {
     <div
       id={note.id}
       onClick={() => router(`/edit/${note.id}`)}
-      className="main__note"
+      className={stl.note}
     >
-      <div className="main__note-title">{note.title}</div>
-      <div className="main__note-body">
-        <div className="main__note-content">{note.body}</div>
-        <div className="main__note-date">
+      <div className={stl.note_tilte}>{note.title}</div>
+      <div className={stl.body}>
+        <div className={stl.content}>{note.body}</div>
+        <div className={stl.date}>
           Изменено:
           <br />
           {editDate(note)}
         </div>
       </div>
-      <div className="main__note-btns">
-        <button className="main__note-edit">Редактировать</button>
+      <div className={stl.btns}>
+        <button className={stl.edit}>Редактировать</button>
         <button
           onClick={(e) => {
             e.stopPropagation();
             remove(note);
           }}
-          className="main__note-remove"
+          className={stl.remove}
         >
           {isLoading ? 'Удаляется...' : 'Удалить'}
         </button>
@@ -54,3 +56,5 @@ export default function Note({ note }: INotePorps) {
     </div>
   );
 }
+
+export default Note;

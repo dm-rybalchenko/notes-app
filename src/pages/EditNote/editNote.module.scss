@@ -1,0 +1,124 @@
+@import 'src/style/variables.scss';
+
+.edit {
+  padding: $base * 15;
+  background-color: $color-secondary-100;
+  border-radius: $base * 5;
+
+  @media (max-width: $breakpoint-sm-max) {
+    padding: $base * 7.5;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: $base * 7.5 $base * 2.5;
+  }
+}
+
+.upper {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  @media (max-width: $breakpoint-xs-max) {
+    gap: $base * 2.5;
+  }
+}
+
+.title {
+  flex: 0 1 $base * 225;
+  font-size: $fz-title-m;
+  font-weight: $fw-bold;
+
+  input {
+    color: $color-secondary-500;
+    font-weight: $fw-bold;
+    width: 100%;
+  }
+
+  @media (max-width: $breakpoint-md-max) {
+    font-size: $fz-title-s;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xxl;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    font-size: $fz-xl;
+  }
+}
+
+.down {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: $base * 5;
+}
+
+.text {
+  width: 100%;
+  min-height: $base * 25;
+  max-height: $base * 42.5;
+  margin-top: $base * 7.5;
+  overflow: auto;
+  font-size: $fz-xl;
+  font-weight: $fw-regular;
+  line-height: 1.3;
+  color: $color-secondary-400;
+
+  @media (max-width: $breakpoint-xs-max) {
+    font-size: $fz-s;
+  }
+}
+
+.close_btn {
+  position: relative;
+  width: $base * 9;
+  height: $base * 9;
+  margin-left: auto;
+  margin-right: $base;
+  cursor: pointer;
+
+  &::after,
+  &::before {
+    position: absolute;
+    top: 50%;
+    width: $base * 12;
+    height: $base;
+    content: '';
+    background-color: $color-secondary-300;
+  }
+
+  &::after {
+    transform: rotate(45deg);
+  }
+
+  &::before {
+    transform: rotate(-45deg);
+  }
+
+  &:hover {
+    &::after,
+    &::before {
+      background-color: $color-primary-500;
+    }
+  }
+}
+
+.save_btn {
+  margin-top: $base * 5;
+  width: $base * 65;
+
+  @media (max-width: $breakpoint-md-max) {
+    width: $base * 50;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    width: $base * 30;
+  }
+}
+
+.tags {
+  margin-top: $base * 7.5;
+}

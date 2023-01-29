@@ -1,0 +1,32 @@
+@import 'src/style/variables.scss';
+
+.button {
+  display: flex;
+  align-items: center;
+  height: $base * 9;
+  padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
+  font-size: $fz-m;
+  color: $color-primary-500;
+  cursor: pointer;
+  background-color: $color-primary-100;
+  border-radius: $base * 17.5;
+
+  @media (max-width: $breakpoint-md-max) {
+    font-size: $fz-s;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: $base $base * 2 $base $base * 2;
+    font-size: $fz-xs;
+  }
+
+}
+
+.active {
+  color: $color-secondary-100;
+  background-color: $color-primary-500;
+
+  path {
+	fill: $color-primary-400;
+  }
+}

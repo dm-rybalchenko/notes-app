@@ -1,26 +1,28 @@
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { LoadingContext } from '../context';
-import { searchNotes, sortNotes } from '../store/filterReducer';
-import { setLimit } from '../store/paginationReducer';
-import Select from './UI/Select';
+import { LoadingContext } from '../../context';
+import { searchNotes, sortNotes } from '../../store/filterReducer';
+import { setLimit } from '../../store/paginationReducer';
+import Input from '../UI/input/Input';
+import Select from '../UI/select/Select';
+
+import stl from './searchForm.module.scss';
 
 
-export default function SearchForm() {
+function SearchForm() {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
   const filter = useSelector((state: IMainState) => state.filter);
   const { limit, page } = useSelector((state: IMainState) => state.pagination);
   const dispatch = useDispatch();
 
   return (
-    <div className="header__filter">
-      <input
-        value={filter.query}
+    <div className={stl.filter}>
+      <Input
         onChange={(e) => dispatch(searchNotes(e.target.value))}
+        value={filter.query}
         type="text"
         placeholder="Поиск..."
-        className="header__tag-input"
       />
       <Select
         value={filter.sort}
@@ -54,3 +56,5 @@ export default function SearchForm() {
     </div>
   );
 }
+
+export default SearchForm;

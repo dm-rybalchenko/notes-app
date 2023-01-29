@@ -1,0 +1,30 @@
+@import 'src/style/variables.scss';
+
+.login {
+	width: $base * 100;
+	margin: 0 auto;
+}
+
+.title {
+  margin-top: $base * 20;
+  text-align: center;
+  font-size: $fz-xxl;
+  font-weight: $fw-bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $base * 3;
+  margin-top: $base * 10;
+
+  input {
+	max-width: 100%;
+  }
+}
+
+.registration {
+	display: flex;
+	justify-content: center;
+}

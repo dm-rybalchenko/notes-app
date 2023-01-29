@@ -1,4 +1,4 @@
-export default function IConCloseTag() {
+export default function IconDeleteTag() {
 
   return (
     <svg

@@ -9,15 +9,16 @@ import {
   tagController,
   wrapChosenTag,
   wrapTag,
-} from '../utils/utils';
-import TagList from '../componets/TagList';
-import Button from '../componets/UI/Button';
-import NoteService from '../API/NoteService';
-import useFetching from '../hooks/useFetching';
-import Loader from '../componets/UI/Loader';
-import { addNote, updateNote } from '../store/notesReducer';
-import FileForm from '../componets/FileForm';
+} from '../../utils/utils';
+import TagList from '../../componets/TagList/TagList';
+import Button from '../../componets/UI/buttons/button-big/ButtonBig';
+import NoteService from '../../API/NoteService';
+import useFetching from '../../hooks/useFetching';
+import Loader from '../../componets/UI/Loader';
+import { addNote, updateNote } from '../../store/notesReducer';
+import FileForm from '../../componets/FileForm';
 
+import stl from './editNote.module.scss';
 
 function EditNote() {
   const { notes } = useSelector((state: IMainState) => state.notes);
@@ -25,10 +26,24 @@ function EditNote() {
   const params = useParams();
   const router = useNavigate();
 
-  const [note, setNote] = useState<INote>(createNewNote());
   const [currentTags, setCurrentTags] = useState<string[]>([]);
+  const [note, setNote] = useState<INote>(() => {
+    if (params.id) {
+      const currentNote = notes.find((note: INote) => note.id === params.id);
 
-  const [content, setContent] = useState<string>('');
+      if (currentNote) {
+        return currentNote;
+      } else {
+        router('/error');
+      }
+    }
+
+    return createNewNote();
+  });
+
+  const [content, setContent] = useState<string>(
+    tagController(note.body.replaceAll('\n', '<br>')).content
+  );
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
@@ -107,33 +122,29 @@ function EditNote() {
 
   useEffect(() => {
     if (note.title) {
-      contentRef.current?.focus();
+      let content = contentRef.current;
+      content?.focus();
+
+      const range = document.createRange();
+      content && range.selectNodeContents(content);
+      range.collapse(false);
+
+      const sel = window.getSelection();
+      sel && sel.removeAllRanges();
+      sel && sel.addRange(range);
     } else {
       titleRef.current?.focus();
     }
   }, []);
 
-  useEffect(() => {
-    if (params.id) {
-      const currentNote = notes.find((note: INote) => note.id === params.id);
-
-      if (currentNote) {
-        setNote(currentNote);
-        setContent(currentNote.body);
-      } else {
-        router('/error');
-      }
-    }
-  }, []);
-
   return (
-    <div className="edit-note" onClick={(e) => e.stopPropagation()}>
+    <div className={stl.edit}>
       {isLoading ? (
         <Loader />
       ) : (
         <div>
-          <div className="edit-note__up">
-            <div className="edit-note__title">
+          <div className={stl.upper}>
+            <div className={stl.title}>
               <input
                 value={note.title}
                 onChange={(e) => setNote({ ...note, title: e.target.value })}
@@ -142,14 +153,14 @@ function EditNote() {
                 placeholder="Введите заголовок..."
               />
             </div>
-            <div onClick={handleExit} className="edit-note__close-up"></div>
+            <div onClick={handleExit} className={stl.close_btn}></div>
           </div>
           <ContentEditable
             innerRef={contentRef}
             html={content}
             onChange={handleChange}
             data-ph="Введите текст заметки..."
-            className="edit-note__text"
+            className={stl.text}
           />
           {note.file && (
             <img
@@ -164,10 +175,10 @@ function EditNote() {
             remove={removeTag}
             current={currentTags}
             tags={note.tags}
-            modClass="edit-note__tags"
+            modClass={stl.tags}
           />
-          <div className="edit-note__down">
-            <Button onClick={handleExit} modClass="edit-note__save">
+          <div className={stl.down}>
+            <Button onClick={handleExit} modClass={stl.save_btn}>
               Сохранить
             </Button>
           </div>

@@ -1,18 +1,21 @@
 import { useContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import NoteService from '../API/NoteService';
-import { LoadingContext } from '../context';
-import useFetching from '../hooks/useFetching';
-import useFilterNotes from '../hooks/useFilterNotes';
-import useObserver from '../hooks/useObserver';
-import usePaginationNotes from '../hooks/usePaginationNotes';
-import { addAllNotes } from '../store/notesReducer';
-import { setPage } from '../store/paginationReducer';
-import Note from '../componets/Note';
-import Loader from '../componets/UI/Loader';
-import { Pagination } from '../componets/UI/Pagination';
-import Header from '../componets/Header';
+import NoteService from '../../API/NoteService';
+import { LoadingContext } from '../../context';
+import useFetching from '../../hooks/useFetching';
+import useFilterNotes from '../../hooks/useFilterNotes';
+import useObserver from '../../hooks/useObserver';
+import usePaginationNotes from '../../hooks/usePaginationNotes';
+import { addAllNotes } from '../../store/notesReducer';
+import { setPage } from '../../store/paginationReducer';
+import Note from '../../componets/Note/Note';
+import Loader from '../../componets/UI/Loader';
+import { Pagination } from '../../componets/UI/pagination/Pagination';
+import Header from '../../componets/Header/Header';
+
+import stl from './noteList.module.scss';
+
 
 function NoteList() {
   const { lazyLoading } = useContext(LoadingContext);
@@ -60,8 +63,8 @@ function NoteList() {
   return (
     <>
       <Header />
-      <main className="main">
-        <div className="main__notes">
+      <main className={stl.main}>
+        <div className={stl.notes}>
           {noteError && <h1>{noteError}</h1>}
           {isLoading ? (
             <Loader />

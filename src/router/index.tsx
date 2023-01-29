@@ -1,7 +1,7 @@
-import EditNote from '../pages/EditNote';
+import EditNote from '../pages/EditNote/EditNote';
 import Page404 from '../pages/Page404';
-import NoteList from '../pages/NoteList';
-import Login from '../pages/Login';
+import NoteList from '../pages/NoteList/NoteList';
+import Login from '../pages/Login/Login';
 
 
 export const privateRoutes = [

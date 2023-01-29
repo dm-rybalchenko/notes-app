@@ -2,12 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { API_URL } from './API/api';
-import AppRouter from './router/AppRouter';
-import Loader from './componets/UI/Loader';
-import { LoadingContext } from './context';
-import useFetching from './hooks/useFetching';
-import { setIsAuth, setUser } from './store/authReducer';
+import { API_URL } from '../API/api';
+import AppRouter from '../router/AppRouter';
+import Loader from '../componets/UI/Loader';
+import { LoadingContext } from '../context';
+import useFetching from '../hooks/useFetching';
+import { setIsAuth, setUser } from '../store/authReducer';
+
+import stl from './app.module.scss';
 
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
   });
 
   useEffect(() => {
-    checkAuth();
+    if (localStorage.getItem('token')) {
+      checkAuth();
+    }
   }, []);
 
   if (isLoadingCheck) {
@@ -33,7 +37,7 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
+    <div className={stl.wrapper}>
       <LoadingContext.Provider
         value={{
           lazyLoading,

@@ -1,3 +1,6 @@
+import stl from './select.module.scss';
+
+
 export default function Select({
   value,
   onChange,
@@ -9,7 +12,7 @@ export default function Select({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="header__tag-input"
+      className={stl.select}
     >
       <option disabled value="">
         {defaultValue}

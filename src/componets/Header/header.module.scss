@@ -1,0 +1,82 @@
+@import 'src/style/variables.scss';
+
+.header {
+  padding: 0 $base * 15;
+
+  @media (max-width: $breakpoint-sm-max) {
+    padding: 0 $base * 10;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: 0 $base * 4;
+  }
+}
+
+.upper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: $base * 52;
+
+  @media (max-width: $breakpoint-md-max) {
+    height: $base * 37.5;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    flex-wrap: wrap;
+    height: $base * 22.5;
+  }
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  gap: $base * 7.5;
+
+  @media (max-width: $breakpoint-lg-max) {
+    flex-wrap: wrap-reverse;
+    gap: $base * 5;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    margin-top: $base * 5;
+  }
+}
+
+.title {
+  font-size: $fz-title-l;
+  letter-spacing: -0.03em;
+
+  @media (max-width: $breakpoint-md-max) {
+    font-size: $fz-title-m;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-title-s;
+  }
+}
+
+.add {
+  margin-left: auto;
+}
+
+.btn {
+  width: $base * 75;
+
+  @media (max-width: $breakpoint-md-max) {
+    width: $base * 57.5;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    width: $base * 50;
+  }
+
+  &::before {
+    display: block;
+    width: $base * 6;
+    height: $base * 6;
+    margin-right: $base * 1.5;
+    content: '';
+    background: url('../../img/add-circle.svg');
+  }
+}

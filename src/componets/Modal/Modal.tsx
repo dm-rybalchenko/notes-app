@@ -52,7 +52,7 @@ export default function Modal({ coords, set }: any){
 				}}>Отменить</button>
 			<button onClick={() => {
 				document.body.classList.remove('block');
-				remove(note)
+				// remove(note)
 				}}>Удалить</button>
           </div>
 	)

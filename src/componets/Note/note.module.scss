@@ -12,72 +12,49 @@
   border-radius: $base * 2.5;
   cursor: pointer;
 
-  &_title {
-	font-size: $fz-l;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-  }
-
   &:hover {
     box-shadow: 2px 8px 45px rgba(20, 44, 89, 0.2);
 
-    .note_title {
+    [class^='note_title'] {
       color: $color-primary-500;
     }
   }
 }
 
+.title {
+  font-size: $fz-l;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-.edit,
-.remove {
+.btns {
+  display: flex;
+  height: $base * 3.5;
+  margin-top: $base * 2;
+  font-size: $fz-xlxxs;
+  font-weight: $fw-bold;
+  color: $color-secondary-300;
+
+  button {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: $base;
+    }
+  }
+}
+
+.pin,
+.favorites {
   position: relative;
-  padding-left: $base * 4.5;
-
-  &::before {
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: $base * 3.5;
-    height: $base * 3.5;
-    content: '';
-  }
-}
-
-.remove {
-  margin-left: $base * 6;
-
-  &::before {
-    background: url('../../img/trash.svg') center no-repeat;
-  }
-
-  &:hover {
-    color: $color-danger;
-
-    &::before {
-      background: url('../../img/trash-hover.svg') center no-repeat;
-    }
-  }
-}
-
-.edit {
-  &::before {
-    background: url('../../img/edit.svg') center no-repeat;
-  }
-
-  &:hover {
-    color: $color-primary-500;
-
-    &::before {
-      background: url('../../img/edit-hover.svg') center no-repeat;
-    }
-  }
+  margin-right: $base * 4;
 
   &::after {
     display: block;
     position: absolute;
-    right: -$base * 3;
+    right: -$base * 2;
     bottom: 50%;
     width: $base;
     height: $base;
@@ -88,17 +65,56 @@
   }
 }
 
+.pin {
+  &:hover {
+    color: $color-primary-500;
+
+    [class='pin'] {
+      stroke: $color-primary-500;
+    }
+
+    [class='unpin'] {
+      stroke: $color-primary-500;
+      fill: $color-primary-500;
+    }
+  }
+}
+
+.favorites {
+  &:hover {
+    color: $color-primary-500;
+
+    path {
+      stroke: $color-primary-500;
+    }
+  }
+}
+
+.in_favorites {
+  color: $color-secondary-500;
+
+  & path {
+    stroke: $color-danger;
+    fill: $color-danger;
+  }
+}
+
+.remove {
+  &:hover {
+    color: $color-danger;
+
+    path {
+      stroke: $color-danger;
+    }
+  }
+}
+
 .body {
   display: flex;
+  flex-grow: 1;
   justify-content: space-between;
   font-size: $fz-xs;
   font-weight: $fw-medium;
-  color: $color-secondary-300;
-}
-
-.btns {
-  font-size: $fz-xxs;
-  font-weight: $fw-bold;
   color: $color-secondary-300;
 }
 
@@ -120,9 +136,8 @@
 }
 
 .date {
-  min-width: fit-content;
-  padding-left: $base * 5;
-  font-weight: $fw-bold;
-  text-align: right;
-  line-height: 1.5;
+  color: $color-gray;
+  font-size: $fz-xxxs;
+  font-weight: $fw-medium;
+  letter-spacing: 0.02em;
 }

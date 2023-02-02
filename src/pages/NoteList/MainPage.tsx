@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NoteService from '../../API/NoteService';
@@ -7,17 +7,18 @@ import useFetching from '../../hooks/useFetching';
 import useFilterNotes from '../../hooks/useFilterNotes';
 import useObserver from '../../hooks/useObserver';
 import usePaginationNotes from '../../hooks/usePaginationNotes';
-import { addAllNotes } from '../../store/notesReducer';
-import { setPage } from '../../store/paginationReducer';
-import Note from '../../componets/Note/Note';
+import { addAllNotes } from '../../store/reducers/notesReducer';
+import { setPage } from '../../store/reducers/paginationReducer';
 import Loader from '../../componets/UI/Loader';
 import { Pagination } from '../../componets/UI/pagination/Pagination';
 import Header from '../../componets/Header/Header';
+import Filters from '../../componets/Filters/Filters';
+import Footer from '../../componets/UI/footer/Footer';
+import NoteList from '../../componets/NoteList/NoteList';
 
-import stl from './noteList.module.scss';
+import stl from './mainPage.module.scss';
 
-
-function NoteList() {
+function MainPage() {
   const { lazyLoading } = useContext(LoadingContext);
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
@@ -25,12 +26,13 @@ function NoteList() {
   const dispatch = useDispatch();
   const lastElement = useRef<HTMLDivElement>(null);
 
-  const filteredNotes = useFilterNotes(notes, filter);
+  const [allNotes, pinnedNotes, favoriteNotes] = useFilterNotes(notes, filter);
+  const [showFavorites, setShowFavorites] = useState<boolean>(false);
   const [paginatedNotes, totalPages] = usePaginationNotes(
     lazyLoading,
     page,
     limit,
-    filteredNotes
+    allNotes
   );
 
   const [fetchNotes, isLoading, noteError] = useFetching(async () => {
@@ -64,26 +66,38 @@ function NoteList() {
     <>
       <Header />
       <main className={stl.main}>
-        <div className={stl.notes}>
+        <Filters favorites={showFavorites} setFavorites={setShowFavorites} />
+        <div>
           {noteError && <h1>{noteError}</h1>}
           {isLoading ? (
             <Loader />
           ) : (
-            paginatedNotes.map((note) => <Note key={note.id} note={note} />)
+            <div>
+              {showFavorites ? (
+                <NoteList notes={favoriteNotes} title="Избранное" />
+              ) : (
+                <div>
+                  <NoteList notes={pinnedNotes} wrap title="Закрепленные" />
+                  <hr className={stl.line} />
+                  <NoteList notes={paginatedNotes} title="Все заметки" />
+                  {lazyLoading ? (
+                    <div ref={lastElement} />
+                  ) : (
+                    <Pagination
+                      current={page}
+                      totalPages={totalPages}
+                      changePage={setCurrentPage}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
           )}
         </div>
-        {lazyLoading ? (
-          <div ref={lastElement} />
-        ) : (
-          <Pagination
-            current={page}
-            totalPages={totalPages}
-            changePage={setCurrentPage}
-          />
-        )}
       </main>
+      <Footer />
     </>
   );
 }
 
-export default NoteList;
+export default MainPage;

@@ -1,14 +1,24 @@
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
 
-function useFilterNotes(notes: INote[], filter: IFilter): INote[] {
+function useFilterNotes(notes: INote[], filter: IFilter): INote[][] {
   let filteredNotes = useSortNotes(notes, filter.sort);
 
   filteredNotes = useFilterNotesByTags(filteredNotes, filter.tags);
 
   filteredNotes = useFilterNotesBySearch(filteredNotes, filter.query);
 
-  return filteredNotes;
+  return useSplitNotes(filteredNotes);
+}
+
+function useSplitNotes(notes: INote[]) {
+  return useMemo(() => {
+    return [
+      notes.filter((note) => !note.pinned),
+      notes.filter((note) => note.pinned),
+      notes.filter((note) => note.favorite),
+    ];
+  }, [notes]);
 }
 
 function useSortNotes(notes: INote[], param: string): INote[] {
@@ -62,7 +72,9 @@ function useFilterNotesBySearch(notes: INote[], searchString: string): INote[] {
     }
 
     return notes.filter((note) =>
-      `${note.title} ${note.body}`.toLowerCase().includes(searchString.toLowerCase())
+      `${note.title} ${note.body}`
+        .toLowerCase()
+        .includes(searchString.toLowerCase())
     );
   }, [searchString, notes]);
 }

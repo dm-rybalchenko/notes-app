@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { LoadingContext } from '../context';
 
 function useObserver(
-  ref: TRefDiv,
+  ref: React.MutableRefObject<HTMLDivElement | null>,
   canLoad: boolean,
   isLoading: boolean,
   length: number,

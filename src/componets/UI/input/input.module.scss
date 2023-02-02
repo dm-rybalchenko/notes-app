@@ -1,12 +1,18 @@
 @import 'src/style/variables.scss';
 
 .input {
-  max-width: $base * 37.5;
-  max-height: $base * 9;
-  padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
-  font-size: $fz-m;
+  width: $base * 65;
+  height: $base * 10.5;
+  padding: $base * 3.5 $base * 4;
+  font-size: $fz-xs;	
   font-weight: $fw-bold;
-  color: $color-primary-500;
+  color: $color-secondary-500;
   background-color: $color-secondary-100;
-  border-radius: $base * 17.5;
+  border: 1px solid $color-primary-50;
+  border-radius: $base * 2.5;
+  caret-color: $color-primary-500;
+
+  &:focus{
+	border: 2px solid $color-primary-500;
+  }
 }

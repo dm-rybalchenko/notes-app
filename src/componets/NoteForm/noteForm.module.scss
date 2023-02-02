@@ -1,0 +1,45 @@
+@import 'src/style/variables.scss';
+
+.title {
+  flex: 0 1 $base * 225;
+  font-size: $fz-title-m;
+  font-weight: $fw-bold;
+
+  input {
+    color: $color-secondary-500;
+    font-weight: $fw-bold;
+    width: 100%;
+    &:focus::placeholder,
+    &::placeholder {
+      color: $color-secondary-500;
+    }
+  }
+
+  @media (max-width: $breakpoint-md-max) {
+    font-size: $fz-title-s;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xxl;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    font-size: $fz-xl;
+  }
+}
+
+.text {
+  width: 100%;
+  min-height: $base * 25;
+  max-height: $base * 42.5;
+  margin-top: $base * 7.5;
+  overflow: auto;
+  font-size: $fz-xl;
+  font-weight: $fw-regular;
+  line-height: 1.3;
+  color: $color-secondary-400;
+
+  @media (max-width: $breakpoint-xs-max) {
+    font-size: $fz-s;
+  }
+}

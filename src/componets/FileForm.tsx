@@ -4,8 +4,13 @@ import FileService from '../API/FileService';
 import useFetching from '../hooks/useFetching';
 import Loader from './UI/Loader';
 import ButtonSmall from './UI/buttons/button-small/ButtonSmall';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNote } from '../store/reducers/editNoteReducer';
 
-function FileForm({ note, setNote }: IFileFormProps) {
+
+function FileForm() {
+  const { note } = useSelector((state: IMainState) => state.editNote);
+  const dispatch = useDispatch();
   const { register, handleSubmit } = useForm<IFileForm>();
 
   const [saveFile, isLoadingSave, errSave] = useFetching<FormData>(
@@ -17,7 +22,7 @@ function FileForm({ note, setNote }: IFileFormProps) {
         response = await FileService.upload(formData);
       }
 
-      setNote({ ...note, file: response });
+      dispatch(setNote({ ...note, file: response }));
     }
   );
 
@@ -27,7 +32,7 @@ function FileForm({ note, setNote }: IFileFormProps) {
 
       let newNote = { ...note };
       delete newNote.file;
-      setNote(newNote);
+      dispatch(setNote(newNote));
     }
   });
 

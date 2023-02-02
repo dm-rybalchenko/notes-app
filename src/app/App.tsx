@@ -7,7 +7,7 @@ import AppRouter from '../router/AppRouter';
 import Loader from '../componets/UI/Loader';
 import { LoadingContext } from '../context';
 import useFetching from '../hooks/useFetching';
-import { setIsAuth, setUser } from '../store/authReducer';
+import { setIsAuth, setUser } from '../store/reducers/authReducer';
 
 import stl from './app.module.scss';
 

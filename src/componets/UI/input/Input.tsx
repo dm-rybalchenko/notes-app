@@ -1,23 +1,28 @@
 import stl from './input.module.scss';
 
 
-
 export default function Input({
   value,
   type,
   placeholder,
   onChange,
-  ...props
+  register,
+  modClass,
 }: IInputProps) {
+	const rootClasses = [stl.input];
+
+	if(modClass){
+		rootClasses.push(modClass)
+	}
 
   return (
     <input
-      {...props}
+	  {...register}
       value={value}
       onChange={onChange}
       type={type}
       placeholder={placeholder}
-      className={stl.input}
+      className={rootClasses.join(' ')}
     />
   );
 }

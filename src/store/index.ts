@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import notesSlice from './notesReducer';
-import filterSlice from './filterReducer';
-import paginationSlice from './paginationReducer';
-import authSlice from './authReducer';
+import notesSlice from './reducers/notesReducer';
+import filterSlice from './reducers/filterReducer';
+import paginationSlice from './reducers/paginationReducer';
+import authSlice from './reducers/authReducer';
+import editNoteSlice from './reducers/editNoteReducer';
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   filter: filterSlice,
   pagination: paginationSlice,
   auth: authSlice,
+  editNote: editNoteSlice,
 });
 
 export const store = configureStore({

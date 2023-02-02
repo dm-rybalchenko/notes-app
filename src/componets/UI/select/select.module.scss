@@ -1,24 +1,20 @@
 @import 'src/style/variables.scss';
 
 .select {
-  max-width: $base * 37.5;
-  max-height: $base * 9;
-  padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
-  font-size: $fz-m;
-  font-weight: $fw-bold;
-  color: $color-primary-500;
-  background-color: $color-secondary-100;
-  border-radius: $base * 17.5;
+    min-width: $base * 65;
+    height: $base * 9;
+    padding: $base * 2 $base * 4;
+    font-size: $fz-xs;
+    font-weight: $fw-semi-bold;
+    color: $color-secondary-500;
+    background: $color-secondary-100 url('./../../../img/arrow-down.svg') $base *
+      58 center no-repeat;
+    cursor: pointer;
+    border: 1px solid $color-primary-50;
+    border-radius: $base * 2.5;
+    appearance: none;
 
-  @include keyframes(fade) {
-    0% {
-      width: 0;
+    &:hover {
+      color: $color-primary-500;
     }
-
-    100% {
-      width: $base * 37.5;
-    }
-  }
-
-  @include animate(fade, 0.3s, linear, 1);
 }

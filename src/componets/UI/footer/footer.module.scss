@@ -1,0 +1,39 @@
+@import 'src/style/variables.scss';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: $base * 20;
+  min-width: 100vw;
+  padding: 0 $base * 15;
+}
+
+.left {
+  width: $base * 25;
+}
+
+.logo {
+  text-align: center;
+  font-size: $fz-xs;
+}
+
+.subtitle {
+  margin-top: $base;
+  color: $color-secondary-300;
+  font-size: $fz-xllxxs;
+  font-weight: $fw-semi-bold;
+}
+
+.develop {
+  width: $base * 25;
+  text-align: right;
+  font-size: $fz-xlxxs;
+  font-weight: $fw-semi-bold;
+  line-height: 1.2;
+}
+
+.develop_title {
+  color: $color-secondary-300;
+  font-size: $fz-xllxxs;
+}

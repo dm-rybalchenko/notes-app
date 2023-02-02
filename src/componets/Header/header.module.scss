@@ -1,7 +1,18 @@
 @import 'src/style/variables.scss';
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 100;
+  height: $base * 20;
+  align-items: center;
   padding: 0 $base * 15;
+  background: rgba($color-secondary-100, 0.7);
+  backdrop-filter: blur(50px);
 
   @media (max-width: $breakpoint-sm-max) {
     padding: 0 $base * 10;
@@ -12,71 +23,51 @@
   }
 }
 
-.upper {
+.btn {
+  &::before {
+    display: block;
+    width: $base * 4.5;
+    height: $base * 4.5;
+    margin-right: $base * 1;
+    content: '';
+    background: url('../../img/add-circle.svg') 0 0/100% 100%;
+  }
+}
+
+.logo {
+  margin-right: $base * 10;
+}
+
+.logout {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: $base * 52;
+  justify-content: center;
+  height: $base * 9;
+  padding: 0 $base * 4;
+  font-size: $fz-xs;
+  font-weight: $fw-bold;
+  cursor: pointer;
+  background: $color-secondary-100;
+  border: 1px solid $color-primary-50;
+  border-radius: $base * 2.5;
 
-  @media (max-width: $breakpoint-md-max) {
-    height: $base * 37.5;
+  & svg {
+    margin-left: $base;
   }
 
-  @media (max-width: $breakpoint-sm-max) {
-    flex-wrap: wrap;
-    height: $base * 22.5;
-  }
-}
+  &:hover {
+    background: $color-danger-slight;
 
-.lower {
-  display: flex;
-  flex-direction: column;
-  gap: $base * 7.5;
-
-  @media (max-width: $breakpoint-lg-max) {
-    flex-wrap: wrap-reverse;
-    gap: $base * 5;
-  }
-
-  @media (max-width: $breakpoint-sm-max) {
-    margin-top: $base * 5;
+    & path {
+      fill: $color-danger;
+    }
   }
 }
 
-.title {
-  font-size: $fz-title-l;
-  letter-spacing: -0.03em;
-
-  @media (max-width: $breakpoint-md-max) {
-    font-size: $fz-title-m;
-  }
-
-  @media (max-width: $breakpoint-sm-max) {
-    font-size: $fz-title-s;
-  }
-}
-
-.add {
+.search {
   margin-left: auto;
 }
 
-.btn {
-  width: $base * 75;
-
-  @media (max-width: $breakpoint-md-max) {
-    width: $base * 57.5;
-  }
-
-  @media (max-width: $breakpoint-xs-max) {
-    width: $base * 50;
-  }
-
-  &::before {
-    display: block;
-    width: $base * 6;
-    height: $base * 6;
-    margin-right: $base * 1.5;
-    content: '';
-    background: url('../../img/add-circle.svg');
-  }
+.add {
+  margin-left: $base * 5;
 }

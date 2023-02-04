@@ -7,7 +7,7 @@
 .notes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: $base * 4;
   margin-top: $base * 5;
 }

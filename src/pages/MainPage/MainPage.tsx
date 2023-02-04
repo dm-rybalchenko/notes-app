@@ -15,11 +15,13 @@ import Header from '../../componets/Header/Header';
 import Filters from '../../componets/Filters/Filters';
 import Footer from '../../componets/UI/footer/Footer';
 import NoteList from '../../componets/NoteList/NoteList';
+import Modal from '../../componets/Modal/Modal';
 
 import stl from './mainPage.module.scss';
 
 function MainPage() {
   const { lazyLoading } = useContext(LoadingContext);
+  const { coords } = useSelector((state: IMainState) => state.modal);
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
   const { limit, page } = useSelector((state: IMainState) => state.pagination);
@@ -64,7 +66,7 @@ function MainPage() {
 
   return (
     <>
-      <Header />
+      <Header main />
       <main className={stl.main}>
         <Filters favorites={showFavorites} setFavorites={setShowFavorites} />
         <div>
@@ -94,6 +96,7 @@ function MainPage() {
             </div>
           )}
         </div>
+        {coords && <Modal />}
       </main>
       <Footer />
     </>

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { prepareNote } from '../../utils/utils';
@@ -8,12 +8,17 @@ import NoteService from '../../API/NoteService';
 import useFetching from '../../hooks/useFetching';
 import Loader from '../../componets/UI/Loader';
 import { addNote, updateNote } from '../../store/reducers/notesReducer';
-import { highlightTag, removeTag, setDefaultNote } from '../../store/reducers/editNoteReducer';
-import FileForm from '../../componets/FileForm';
+import {
+  highlightTag,
+  removeTag,
+  setDefaultNote,
+} from '../../store/reducers/editNoteReducer';
+import FileForm from '../../componets/FileForm/FileForm';
 import NoteForm from '../../componets/NoteForm/NoteForm';
 
 import stl from './editNote.module.scss';
-
+import IconBack from '../../componets/UI/icons/IconBack';
+import IconDeleteTag from '../../componets/UI/icons/IconDeleteTag';
 
 function EditNote() {
   const { note, currentTags } = useSelector(
@@ -49,39 +54,37 @@ function EditNote() {
   };
 
   return (
-    <div className={stl.edit}>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          <div className={stl.upper}>
-            <div onClick={handleExit} className={stl.close_btn}></div>
-          </div>
-          <NoteForm />
-          {note.file && (
-            <img
-              src={note.file.url}
-              alt={note.file.name}
-              style={{ width: 100, height: 100, objectFit: 'contain' }}
+    <>
+      <header className={stl.header}>
+        <Link onClick={handleExit} to="/notes" className={stl.back}>
+          <IconBack />
+          <span>Все заметки</span>
+        </Link>
+        <Button onClick={handleExit} modClass={stl.save_btn}>
+          Сохранить
+        </Button>
+      </header>
+      <div className={stl.edit}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <NoteForm />
+            <div className={stl.file}>
+              <FileForm />
+            </div>
+            <TagList
+              choose={(tag) => dispatch(highlightTag(tag))}
+              remove={(tag) => dispatch(removeTag(tag))}
+              current={currentTags}
+              tags={note.tags}
+              modClass={stl.tags}
             />
-          )}
-          <FileForm />
-          <TagList
-            choose={(tag) => dispatch(highlightTag(tag))}
-            remove={(tag) => dispatch(removeTag(tag))}
-            current={currentTags}
-            tags={note.tags}
-            modClass={stl.tags}
-          />
-          <div className={stl.down}>
-            <Button onClick={handleExit} modClass={stl.save_btn}>
-              Сохранить
-            </Button>
           </div>
-        </div>
-      )}
-      {error && <h1>{error}</h1>}
-    </div>
+        )}
+        {error && <h1>{error}</h1>}
+      </div>
+    </>
   );
 }
 

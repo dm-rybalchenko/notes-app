@@ -19,7 +19,7 @@ function AppRouter() {
             />
           ))}
           <Route path="/" element={<Navigate to="/notes" />} />
-          <Route path="login" element={<Navigate to="/notes" />} />
+          <Route path="/login" element={<Navigate to="/notes" />} />
           <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       ) : (
@@ -31,7 +31,11 @@ function AppRouter() {
               key={route.path}
             />
           ))}
-          <Route path="*" element={<Navigate to="/login" />} />
+		  <Route path="/" element={<Navigate to="/login" />} />
+		  <Route path="/notes" element={<Navigate to="/login" />} />
+		  <Route path="/edit" element={<Navigate to="/login" />} />
+		  <Route path="/edit:id" element={<Navigate to="/login" />} />
+		  <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       )}
     </BrowserRouter>

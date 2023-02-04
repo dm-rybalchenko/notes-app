@@ -54,8 +54,8 @@ $fz-m: rem(18px);
 $fz-l: rem(20px);
 $fz-xl: rem(22px);
 $fz-xxl: rem(30px);
-$fz-title-s: rem(38px);
-$fz-title-m: rem(50px);
+$fz-title-s: rem(34px);
+$fz-title-m: rem(40px);
 $fz-title-l: rem(70px);
 
 // common transition
@@ -81,12 +81,14 @@ $color-secondary-200: #e2e8ef;
 $color-secondary-300: #9eafc4;
 // $color-secondary-400: #929cb0; // текст тега
 // $color-secondary-400: #687795; // текст удаления
+$color-secondary-440: #7a8899;
 $color-secondary-400: #5e5e5e;
 $color-secondary-500: #1c273d;
 
 // Colors
 $color-danger-slight: #fff5f5;
 $color-danger-medium: rgba(255, 50, 50, 0.4);
+$color-danger-regular: #fff3f3;
 $color-danger: #ff3232;
 $color-gray: rgba(158, 175, 196, 0.8);
 

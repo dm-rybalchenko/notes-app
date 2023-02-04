@@ -1,59 +1,56 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeModal } from '../../store/reducers/modalReducer';
+import { getModalPosition } from '../../utils/utils';
 
-export default function Modal({ coords, set }: any){
-	
-	const appearCoords = getPosition(coords);
+import stl from './modal.module.scss';
 
-	function getPosition(coords: any){
-		const el = document.documentElement;
-		const coodX = el.clientWidth + el.scrollLeft;
-		const coordY = el.clientHeight + el.scrollTop;
-	
-		let x = coords.x + 40;
-		let y = coords.y - 90;
-	
-		if((x + 340) > coodX){
-			x = coodX - 340;
-		}
-		
-		if((y + 180) > coordY){
-			y = coordY - 180; 
-		}
-	
-		return {x, y}
-	}
 
-	useEffect(() => {
-		document.body.classList.add('block');
+export default function Modal() {
+  const modal = useSelector((state: IMainState) => state.modal);
+  const dispatch = useDispatch();
+  const appearCoords = getModalPosition(modal.coords);
 
-	document.addEventListener('click', () => {
-		set(null);
-		document.body.classList.remove('block');
-	}, {once: true})
-	},[])
+  const exitModal = () => {
+    document.body.classList.remove('block');
+    dispatch(removeModal());
+  };
 
-	return (
-		<div
-		  onClick={(e) => e.stopPropagation()}
-            style={{
-              height: 170,
-			  width: 330,
-              background: 'red',
-              position: 'absolute',
-			  zIndex: 110,
-              top: coords.y,
-              left: coords.x,
+  useEffect(() => {
+    document.body.classList.add('block');
+    document.addEventListener('click', exitModal, { once: true });
+  }, []);
+
+  return (
+    <>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{ top: appearCoords.y, left: appearCoords.x }}
+        className={stl.modal}
+      >
+        <div className={stl.title}>{modal.title}</div>
+        <div className={stl.body}>{modal.body}</div>
+        <div className={stl.btns}>
+          <button onClick={exitModal} className={stl.cancel}>
+            Отменить
+          </button>
+          <button
+            onClick={() => {
+              modal.callback();
+              exitModal();
             }}
+            className={stl.delete}
           >
-            Попап
-			<button onClick={() => {
-				document.body.classList.remove('block');
-				set(null)
-				}}>Отменить</button>
-			<button onClick={() => {
-				document.body.classList.remove('block');
-				// remove(note)
-				}}>Удалить</button>
-          </div>
-	)
+            Удалить
+          </button>
+        </div>
+      </div>
+      <div
+        className={stl.scrollbar}
+        style={{
+          width: window.innerWidth - document.documentElement.clientWidth,
+        }}
+      ></div>
+    </>
+  );
 }

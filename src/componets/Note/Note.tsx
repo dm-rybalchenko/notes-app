@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import NoteService from '../../API/NoteService';
 import useFetching from '../../hooks/useFetching';
+import { setModal } from '../../store/reducers/modalReducer';
 import { removeNote, updateNote } from '../../store/reducers/notesReducer';
 import { prepareDate } from '../../utils/utils';
-import Modal from '../Modal/Modal';
 import IconFavorites from '../UI/icons/IconFavorites';
 import IconPin from '../UI/icons/IconPin';
 import IconTrashBin from '../UI/icons/IconTrashBin';
@@ -17,7 +17,6 @@ import stl from './note.module.scss';
 function Note({ note }: INotePorps) {
   const dispatch = useDispatch();
   const router = useNavigate();
-  const [showPopup, setShowPopup] = useState<any>(null);
 
   const [remove, isLoading, err] = useFetching<INote>(async (note: INote) => {
     note.id && (await NoteService.delete(note.id));
@@ -43,11 +42,16 @@ function Note({ note }: INotePorps) {
     dispatch(updateNote({ ...note, pinned: !note.pinned }));
   };
 
-  const handleRemove = (e: any) => {
-    setShowPopup({x: e.pageX, y: e.pageY});
+  const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(
+      setModal({
+        coords: { x: e.pageX, y: e.pageY },
+        body: `«${note.title}»`,
+        title: 'Удалить заметку?',
+		callback: () => remove(note),
+      })
+    );
   };
-
-
 
   return (
     <div
@@ -82,9 +86,6 @@ function Note({ note }: INotePorps) {
           <IconTrashBin /> {isLoading ? 'Удаляется...' : 'Удалить'}
         </button>
         {err && <h1>{err}</h1>}
-      </div>
-      <div>
-        {showPopup && <Modal coords={showPopup} />}
       </div>
     </div>
   );

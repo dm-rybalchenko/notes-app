@@ -4,6 +4,7 @@ import filterSlice from './reducers/filterReducer';
 import paginationSlice from './reducers/paginationReducer';
 import authSlice from './reducers/authReducer';
 import editNoteSlice from './reducers/editNoteReducer';
+import modalSlice from './reducers/modalReducer'
 
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   pagination: paginationSlice,
   auth: authSlice,
   editNote: editNoteSlice,
+  modal: modalSlice
 });
 
 export const store = configureStore({

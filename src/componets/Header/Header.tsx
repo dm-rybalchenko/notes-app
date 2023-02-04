@@ -17,7 +17,8 @@ import Loader from '../UI/Loader';
 
 import stl from './header.module.scss';
 
-function Header() {
+
+function Header({ children, main }: IHeaderPorps) {
   const filter = useSelector((state: IMainState) => state.filter);
   const auth = useSelector((state: IMainState) => state.auth);
   const dispatch = useDispatch();
@@ -44,23 +45,29 @@ function Header() {
       <div className={stl.logo}>
         <img src="./img/Logo.png" alt="logo" />
       </div>
-      <button onClick={logout} className={stl.logout}>
-        {auth.user.email}
-        <IconLogout />
-      </button>
-      <div className={stl.search}>
-        <Input
-          onChange={(e) => dispatch(searchNotes(e.target.value))}
-          value={filter.query}
-          type="text"
-          placeholder="Поиск по заметкам..."
-        />
-      </div>
-      <div className={stl.add}>
-        <Link to="/edit">
-          <Button modClass={stl.btn}>Добавить заметку</Button>
-        </Link>
-      </div>
+      {main ? (
+        <>
+          <button onClick={logout} className={stl.logout}>
+            {auth.user.email}
+            <IconLogout />
+          </button>
+          <div className={stl.search}>
+            <Input
+              onChange={(e) => dispatch(searchNotes(e.target.value))}
+              value={filter.query}
+              type="text"
+              placeholder="Поиск по заметкам..."
+            />
+          </div>
+          <div className={stl.add}>
+            <Link to="/edit">
+              <Button modClass={stl.btn}>Добавить заметку</Button>
+            </Link>
+          </div>
+        </>
+      ) : (
+        <div className={stl.login}>{children}</div>
+      )}
     </header>
   );
 }

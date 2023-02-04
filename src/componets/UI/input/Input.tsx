@@ -6,6 +6,7 @@ export default function Input({
   type,
   placeholder,
   onChange,
+  onFocus,
   register,
   modClass,
 }: IInputProps) {
@@ -20,6 +21,7 @@ export default function Input({
 	  {...register}
       value={value}
       onChange={onChange}
+	  onFocus={onFocus}
       type={type}
       placeholder={placeholder}
       className={rootClasses.join(' ')}

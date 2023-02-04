@@ -12,6 +12,7 @@ interface IMainState {
     limit: number;
   };
   editNote: IEditNote;
+  modal: IModal;
 }
 
 interface IEditNote {
@@ -58,9 +59,24 @@ interface IFilter {
   sort: string;
 }
 
+interface IModal {
+	coords: null | {
+	  x: number;
+	  y: number;
+	};
+	title: string;
+	body: string;
+	callback: any;
+  }
+
 interface ILoginForm {
   email: string;
   password: string;
+}
+interface IRegForm {
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 interface IFileForm {
@@ -106,9 +122,19 @@ interface INotePorps {
   note: INote;
 }
 
+interface IHeaderPorps {
+  children?: React.ReactNode;
+  main?: boolean;
+}
+
+interface IRegFormPorps {
+  setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 interface IButtonProps {
   children: string | React.ReactNode;
   modClass?: string;
+  type?: 'submit';
   onClick?: (e: MouseEventHandler<HTMLButtonElement>) => void;
 }
 
@@ -127,6 +153,7 @@ interface IInputProps {
   placeholder: string;
   modClass?: string;
   value?: string;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   register?: UseFormRegister<TFieldValues>;
 }

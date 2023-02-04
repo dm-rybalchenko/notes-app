@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 
+
 export const EmailReg =
   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
@@ -74,4 +75,23 @@ export function wrapTag(tag: string): string {
 
 export function wrapChosenTag(tag: string): string {
   return `<span class="chosen">${tag}</span>`;
+}
+
+export function getModalPosition(coords: any) {
+  const el = document.documentElement;
+  const coodX = el.clientWidth + el.scrollLeft;
+  const coordY = el.clientHeight + el.scrollTop;
+
+  let x = coords.x + 40;
+  let y = coords.y - 90;
+
+  if (x + 340 > coodX) {
+    x = coodX - 340;
+  }
+
+  if (y + 180 > coordY) {
+    y = coordY - 180;
+  }
+
+  return { x, y };
 }

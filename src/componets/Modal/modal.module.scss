@@ -1,0 +1,57 @@
+@import 'src/style/variables.scss';
+
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  z-index: 110;
+  width: $base * 82.5;
+  min-height: $base * 42.5;
+  padding: $base * 8 $base * 8.5 $base * 5;
+  text-align: center;
+  background: $color-secondary-100;
+  box-shadow: 2px $base * 5 $base * 10 rgba(3, 37, 104, 0.16);
+  border-radius: $base * 3.5;
+}
+
+.title {
+  font-size: $fz-xl;
+}
+
+.body {
+  flex-grow: 1;
+  margin-top: $base * 1.5;
+  font-size: $fz-xs;
+  font-weight: $fw-medium;
+  color: $color-secondary-440;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: $base * 2.5;
+  margin-top: $base * 6;
+}
+
+.cancel,
+.delete {
+  width: $base * 30;
+  height: $base * 10.5;
+  font-size: $fz-xs;
+  border-radius: $base * 3;
+}
+
+.cancel {
+  color: $color-secondary-300;
+  background: $color-secondary-100;
+  border: 2px solid rgba($color-secondary-300, 0.2);
+}
+
+.delete {
+  color: $color-secondary-100;
+  background: $color-danger;
+}
+
+.scrollbar{
+	background: transparent;
+}

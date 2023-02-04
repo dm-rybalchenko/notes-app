@@ -1,14 +1,16 @@
 import EditNote from '../pages/EditNote/EditNote';
-import Page404 from '../pages/Page404';
-import Login from '../pages/Login/Login';
-import MainPage from '../pages/NoteList/MainPage';
-
+import Page404 from '../pages/Page404/Page404';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import MainPage from '../pages/MainPage/MainPage';
 
 export const privateRoutes = [
   { path: '/notes', component: <MainPage /> },
-  { path: '/error', component: <Page404 /> },
   { path: '/edit', component: <EditNote /> },
   { path: '/edit/:id', component: <EditNote /> },
+  { path: '/error', component: <Page404 /> },
 ];
 
-export const publicRoutes = [{ path: '/login', component: <Login /> }];
+export const publicRoutes = [
+  { path: '/login', component: <LoginPage /> },
+  { path: '/error', component: <Page404 /> },
+];

@@ -1,12 +1,14 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import FileService from '../API/FileService';
-import useFetching from '../hooks/useFetching';
-import Loader from './UI/Loader';
-import ButtonSmall from './UI/buttons/button-small/ButtonSmall';
+import FileService from '../../API/FileService';
+import useFetching from '../../hooks/useFetching';
+import Loader from '../UI/Loader';
+import ButtonSmall from '../UI/buttons/button-small/ButtonSmall';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNote } from '../store/reducers/editNoteReducer';
+import { setNote } from '../../store/reducers/editNoteReducer';
 
+import stl from './fileForm.module.scss';
+import IconDeleteTag from '../UI/icons/IconDeleteTag';
 
 function FileForm() {
   const { note } = useSelector((state: IMainState) => state.editNote);
@@ -44,23 +46,33 @@ function FileForm() {
     saveFile(formData);
   };
 
+  const handleRemove = () => {
+	// TODO добавить поп-ап
+	removeFile();
+  }
+
   return (
     <div>
-      <p>Добавить файл</p>
       {errSave && <h1>{errSave}</h1>}
       {errRemove && <h1>{errRemove}</h1>}
       {isLoadingSave || isLoadingRemove ? (
         <Loader />
       ) : (
-        <div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            style={{ display: 'flex', gap: 20 }}
-          >
-            <input {...register('file')} type="file" />
-            <ButtonSmall>Загрузить файл</ButtonSmall>
-          </form>
-          <ButtonSmall onClick={() => removeFile}>Удалить файл</ButtonSmall>
+        <div className={stl.container}>
+          {note.file && (
+            <div className={stl.image}>
+              <img src={note.file.url} alt={note.file.name} />
+              <span onClick={handleRemove} className={stl.delete}>
+                <IconDeleteTag />
+              </span>
+            </div>
+          )}
+          <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input {...register('file')} type="file" />
+              <ButtonSmall>Загрузить файл</ButtonSmall>
+            </form>
+          </div>
         </div>
       )}
     </div>

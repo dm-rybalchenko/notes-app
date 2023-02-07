@@ -1,20 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
+function useTags(notes: INote[]): string[] {
+  return useMemo(() => {
+    const tagsArr: string[] = [];
 
-function useTags(notes: INote[]): TuseTags {
-  const [tags, setTags] = useState(getTags(notes));
+    notes?.length &&
+      notes.forEach((note) =>
+        note.tags.forEach((tag) => !tagsArr.includes(tag) && tagsArr.push(tag))
+      );
 
-  useMemo(() => setTags(getTags(notes)), [notes]);
-
-  return [tags, setTags];
+    return tagsArr;
+  }, [notes]);
 }
 
-function getTags(notes: INote[]): string[] {
-  const tagsArr: string[] = [];
-
-  notes?.length && notes.forEach((note) => note.tags.forEach(tag => !tagsArr.includes(tag) && tagsArr.push(tag)));
-
-  return tagsArr;
-}
 
 export default useTags;

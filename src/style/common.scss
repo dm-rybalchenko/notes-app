@@ -12,16 +12,16 @@ body {
 // === / COMMON ===
 
 // === CONTENTEDITABLE ===
-[class^='editNote_text']{
-	& .chosen,
-	& .tag {
-	  font-weight: $fw-bold;
-	  color: $color-primary-500;
-	}
-  
-	& .chosen {
-	  background-color: $color-primary-200;
-	}
+[class^='noteForm_text'] {
+  & .chosen,
+  & .tag {
+    font-weight: $fw-bold;
+    color: $color-primary-500;
+  }
+
+  & .chosen {
+    background-color: $color-primary-200;
+  }
 }
 
 [contenteditable='true']:empty::before {
@@ -41,7 +41,23 @@ body {
 // === PLACEHOLDERS ===
 input:focus::placeholder,
 input::placeholder {
-  color: $color-secondary-400;
+  color: $color-secondary-300;
+  font-weight: $fw-semi-bold;
 }
 
 // === / PLACEHOLDERS ===
+
+// === FAVORITES ===
+[class^='filters_filters'] {
+  button.active {
+    color: $color-secondary-100;
+    background: $color-danger;
+
+    & path {
+      stroke: $color-secondary-100;
+      fill: $color-secondary-100;
+    }
+  }
+}
+
+// === / FAVORITES ===

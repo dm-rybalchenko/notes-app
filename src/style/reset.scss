@@ -42,6 +42,7 @@ body {
 }
 
 input,
+select,
 button,
 textarea {
   font-family: inherit;
@@ -50,6 +51,7 @@ textarea {
   color: inherit;
   background-color: inherit;
 }
+
 
 input::-ms-clear {
   display: none;

@@ -8,12 +8,16 @@
 }
 
 .page {
-  width: $base * 10;
-  height: $base * 10;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  width: $base * 8;
+  height: $base * 8;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .active {
+  color: $color-secondary-100;
   background-color: $color-primary-600;
 }

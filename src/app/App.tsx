@@ -1,20 +1,27 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { API_URL } from '../API/api';
 import AppRouter from '../router/AppRouter';
-import Loader from '../componets/UI/Loader';
-import { LoadingContext } from '../context';
+import Loader from '../componets/UI/loader/Loader';
+import { LoadingContext, ModalContext } from '../context';
 import useFetching from '../hooks/useFetching';
-import { setIsAuth, setUser } from '../store/authReducer';
+import { setIsAuth, setUser } from '../store/reducers/authReducer';
+import Warning from '../componets/UI/notifications/Warning';
+import Error from '../componets/UI/notifications/Error';
 
 import stl from './app.module.scss';
+import { showError } from '../store/reducers/notificationReducer';
 
 
 function App() {
-  const dispatch = useDispatch();
   const [lazyLoading, setLazyLoading] = useState<boolean>(false);
+  const [modal, setModal] = useState<null | IModal>(null);
+  const { error, warning } = useSelector(
+    (state: IMainState) => state.notification
+  );
+  const dispatch = useDispatch();
 
   const [checkAuth, isLoadingCheck, errCheck] = useFetching(async () => {
     const response = await axios.get<AuthResponce>(`${API_URL}/user/refresh`, {
@@ -44,7 +51,16 @@ function App() {
           setLazyLoading,
         }}
       >
-        <AppRouter />
+        <ModalContext.Provider
+          value={{
+            modal,
+            setModal,
+          }}
+        >
+          {error && <Error />}
+          {warning && <Warning />}
+          <AppRouter />
+        </ModalContext.Provider>
       </LoadingContext.Provider>
     </div>
   );

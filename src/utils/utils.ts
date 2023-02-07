@@ -1,4 +1,7 @@
-export const EmailReg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+import dayjs from 'dayjs';
+
+export const EmailReg =
+  /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
 export function createNewNote(): INote {
   return {
@@ -6,7 +9,38 @@ export function createNewNote(): INote {
     body: '',
     tags: [],
     date: '',
+    pinned: false,
+    favorite: false,
   };
+}
+
+export function prepareNote(note: INote): INote {
+  let preparedNote = { ...note, date: dayjs().format() };
+
+  if (!note.title && note.body) {
+    preparedNote.title =
+      note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
+  }
+  if (!note.title && !note.body) {
+    preparedNote.title = 'Заголовок';
+  }
+
+  return preparedNote;
+}
+
+const mounths = ['янв', 'февр', 'апр', 'авг', 'сент', 'окт', 'нояб', 'дек'];
+
+export function prepareDate(date: string) {
+  let formatDate = '';
+  if (date) {
+    formatDate = dayjs(date)
+      .format('D MM YYYY в HH:mm')
+      .replace(/\s\d+\s/gm, (str: string) => ` ${mounths[parseInt(str) - 1]} `);
+  } else {
+    formatDate = 'unknown';
+  }
+
+  return formatDate;
 }
 
 const tagReg = /\s#[\wа-яА-Я-]+\s/gm;
@@ -40,4 +74,26 @@ export function wrapTag(tag: string): string {
 
 export function wrapChosenTag(tag: string): string {
   return `<span class="chosen">${tag}</span>`;
+}
+
+export function getModalPosition(coords?: { x: number; y: number }) {
+  if (!coords) {
+    return null;
+  }
+  const el = document.documentElement;
+  const coodX = el.clientWidth + el.scrollLeft;
+  const coordY = el.clientHeight + el.scrollTop;
+
+  let x = coords.x + 40;
+  let y = coords.y - 90;
+
+  if (x + 340 > coodX) {
+    x = coodX - 340;
+  }
+
+  if (y + 180 > coordY) {
+    y = coordY - 180;
+  }
+
+  return { x, y };
 }

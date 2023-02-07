@@ -3,30 +3,36 @@
 .button {
   display: flex;
   align-items: center;
-  height: $base * 9;
+  height: $base * 8;
   padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
-  font-size: $fz-m;
-  color: $color-primary-500;
+  font-size: $fz-xs;
+  line-heigth: 1.4;
+  font-weight: $fw-semi-bold;
+  color: $color-secondary-300;
   cursor: pointer;
-  background-color: $color-primary-100;
+  background-color: $color-secondary-100;
   border-radius: $base * 17.5;
 
-  @media (max-width: $breakpoint-md-max) {
-    font-size: $fz-s;
+  &:hover {
+    color: $color-secondary-500;
+
+    path {
+      fill: $color-primary-400;
+    }
   }
 
   @media (max-width: $breakpoint-xs-max) {
     padding: $base $base * 2 $base $base * 2;
     font-size: $fz-xs;
   }
-
 }
 
 .active {
   color: $color-secondary-100;
+  font-weight: $fw-bold;
   background-color: $color-primary-500;
 
   path {
-	fill: $color-primary-400;
+    fill: $color-primary-400;
   }
 }

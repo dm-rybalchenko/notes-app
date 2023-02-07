@@ -1,82 +1,96 @@
 // === MIXINS ===
 @mixin animate($animation, $duration, $method, $times) {
-	animation: $animation $duration $method $times;
+  animation: $animation $duration $method $times;
+}
+
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
   }
-  
-  @mixin keyframes($name) {
-	@keyframes #{$name} {
-	  @content;
-	}
-  }
-  
-  // === / MIXINS ===
-  
-  // ===  FUNCTIONS ===
-  @function strip-unit($num) {
-	$one-unit: $num * 0 + 1;
-  
-	@return calc($num / $one-unit);
-  }
-  
-  @function rem($num) {
-	@return (calc(strip-unit($num) / 16)) * 1rem;
-  }
-  
-  // === / FUNCTIONS ===
-  
-  // === VARIABLES ===
-  $breakpoint-sm-min: 500px;
-  $breakpoint-xs-max: $breakpoint-sm-min - 1px;
-  $breakpoint-md-min: 650px;
-  $breakpoint-sm-max: $breakpoint-md-min - 1px;
-  $breakpoint-lg-min: 850px;
-  $breakpoint-md-max: $breakpoint-lg-min - 1px;
-  $breakpoint-xl-min: 1050px;
-  $breakpoint-lg-max: $breakpoint-xl-min - 1px;
-  
-  // common base
-  $base: rem(4px);
-  
-  // font waights
-  $fw-regular: 400;
-  $fw-medium: 500;
-  $fw-bold: 700;
-  
-  // font sizes
-  $fz-xxs: rem(12px);
-  $fz-xs: rem(14px);
-  $fz-s: rem(16px);
-  $fz-m: rem(18px);
-  $fz-l: rem(20px);
-  $fz-xl: rem(22px);
-  $fz-xxl: rem(30px);
-  $fz-title-s: rem(38px);
-  $fz-title-m: rem(50px);
-  $fz-title-l: rem(70px);
-  
-  // common transition
-  $transition: 0.2s;
-  
-  // Primary color
-  $color-primary-100: #eff6ff;
-  $color-primary-200: #d9eaff;
-  $color-primary-300: #c4d8ff;
-  $color-primary-400: #79a6de;
-  $color-primary-500: #2266eb;
-  $color-primary-600: #0940ab;
-  
-  // Secondary color
-  $color-secondary-100: #fff;
-  $color-secondary-200: #e2e8ef;
-  $color-secondary-300: #9eafc4;
-  $color-secondary-400: #5e5e5e;
-  $color-secondary-500: #000;
-  
-  // Colors
-  $color-danger: #ff3232;
-  
-  // Wrapper popup
-  $color-wrapper-popup: rgba(21, 25, 33, 0.9);
-  $color-btn-light: rgba(34, 102, 235, 0.15);
-  
-  // === / VARIABLES ===
+}
+
+// === / MIXINS ===
+
+// ===  FUNCTIONS ===
+@function strip-unit($num) {
+  $one-unit: $num * 0 + 1;
+
+  @return calc($num / $one-unit);
+}
+
+@function rem($num) {
+  @return (calc(strip-unit($num) / 16)) * 1rem;
+}
+
+// === / FUNCTIONS ===
+
+// === VARIABLES ===
+$breakpoint-sm-min: 500px;
+$breakpoint-xs-max: $breakpoint-sm-min - 1px;
+$breakpoint-md-min: 650px;
+$breakpoint-sm-max: $breakpoint-md-min - 1px;
+$breakpoint-lg-min: 850px;
+$breakpoint-md-max: $breakpoint-lg-min - 1px;
+$breakpoint-xl-min: 1090px;
+$breakpoint-lg-max: $breakpoint-xl-min - 1px;
+
+// common base
+$base: rem(4px);
+
+// font waights
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semi-bold: 600;
+$fw-bold: 700;
+
+// font sizes
+$fz-xllxxs: rem(7px);
+$fz-xxxs: rem(9px);
+$fz-xlxxs: rem(10px);
+$fz-xxs: rem(12px);
+$fz-xs: rem(14px);
+$fz-s: rem(16px);
+$fz-m: rem(18px);
+$fz-l: rem(20px);
+$fz-xl: rem(22px);
+$fz-xxl: rem(30px);
+$fz-title-s: rem(34px);
+$fz-title-m: rem(40px);
+$fz-title-l: rem(70px);
+
+// common transition
+$transition: 0.2s;
+
+// Primary color
+$color-primary-50: #e9ecf0;
+$color-primary-100: #eff6ff;
+$color-primary-400: #dfecfd;
+$color-primary-200: #d9eaff;
+// $color-primary-300: #d6e5f3; //
+$color-primary-300: #c4d8ff;
+// $color-primary-400: #bdd6f4; //
+// $color-primary-400: #98bfef; // - удалить тег
+$color-primary-400: #79a6de;
+$color-primary-500: #2266eb;
+$color-primary-600: #1458db;
+$color-primary-700: #0c49c0;
+
+// Secondary color
+
+$color-secondary-100: #fff;
+$color-secondary-200: #e2e8ef;
+$color-secondary-300: #9eafc4;
+// $color-secondary-400: #929cb0; // текст тега
+// $color-secondary-400: #687795; // текст удаления
+$color-secondary-440: #7a8899;
+$color-secondary-400: #5e5e5e;
+$color-secondary-500: #1c273d;
+
+// Colors
+$color-danger-slight: #fff5f5;
+$color-danger-medium: rgba(255, 50, 50, 0.4);
+$color-danger-regular: #fff3f3;
+$color-danger: #ff3232;
+$color-gray: rgba(158, 175, 196, 0.8);
+
+// === / VARIABLES ===

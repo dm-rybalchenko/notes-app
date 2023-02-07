@@ -1,5 +1,5 @@
 import stl from './pagination.module.scss';
-import btnStl from '../buttons/button-big/buttonBig.module.scss';
+import btnStl from '../buttons/button-small/buttonSmall.module.scss';
 
 
 function Pagination({ current, totalPages, changePage }: IPaginationProps) {

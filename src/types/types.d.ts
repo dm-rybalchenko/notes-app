@@ -1,8 +1,5 @@
-type TNoteFunc = (id: string) => void;
-type TTagFunc = (tag: string) => void;
-type TPageFunc = (page: number) => void;
-type TuseTags = [string[], React.Dispatch<React.SetStateAction<string[]>>];
-type TRefDiv = React.MutableRefObject<HTMLDivElement | null>;
+declare module '*.module.css';
+declare module '*.module.scss';
 
 interface IMainState {
   auth: IAuth;
@@ -14,8 +11,16 @@ interface IMainState {
     page: number;
     limit: number;
   };
+  editNote: IEditNote;
+  modal: IModal;
+  notification: INotification;
 }
 
+interface IEditNote {
+  note: INote;
+  html: string;
+  currentTags: string[];
+}
 interface IUser {
   id: string;
   email: string;
@@ -39,9 +44,9 @@ interface INote {
   tags: string[];
   date: Dayjs | string;
   file?: IFile;
+  pinned?: boolean;
+  favorite?: boolean;
 }
-
-declare module '*.scss';
 
 interface IFile {
   id: string;
@@ -55,23 +60,47 @@ interface IFilter {
   sort: string;
 }
 
+interface IModal {
+  coords: {
+    x: number;
+    y: number;
+  };
+  title: string;
+  body: string;
+  callback: any;
+}
+
+interface INotification {
+  error: null | string;
+  warning: null | string;
+}
+
 interface ILoginForm {
   email: string;
   password: string;
+}
+interface IRegForm {
+  email: string;
+  password: string;
+  confirmPassword: string;
 }
 
 interface IFileForm {
   file: FileList;
 }
 
-interface ILoadingType {
+interface ILoadingContext {
   lazyLoading: boolean;
   setLazyLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-interface IFileFormProps {
-  note: INote;
-  setNote: React.Dispatch<React.SetStateAction<INote>>;
+interface IModalContext {
+  modal: null | IModal;
+  setModal: React.Dispatch<React.SetStateAction<null | IModal>>;
+}
+interface IFiltersProps {
+  favorites: boolean;
+  setFavorites: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IShowNoteProps {
@@ -85,9 +114,9 @@ interface ISearchFormProps {
 }
 
 interface INoteListProps {
-  notes: INotes[];
-  remove: TNoteFunc;
-  edit: TNoteFunc;
+  notes: INote[];
+  title: string;
+  wrap?: boolean;
 }
 
 interface ITagListProps {
@@ -95,17 +124,27 @@ interface ITagListProps {
   tags: string[];
   icon?: boolean;
   current?: string[];
-  choose: TTagFunc;
-  remove?: TTagFunc;
+  choose: (tag: string) => void;
+  remove: (tag: string) => void;
 }
 
 interface INotePorps {
   note: INote;
 }
 
+interface IHeaderPorps {
+  children?: React.ReactNode;
+  main?: boolean;
+}
+
+interface IRegFormPorps {
+  setLoginPage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 interface IButtonProps {
   children: string | React.ReactNode;
   modClass?: string;
+  type?: 'submit';
   onClick?: (e: MouseEventHandler<HTMLButtonElement>) => void;
 }
 
@@ -120,14 +159,17 @@ interface ISelectProps {
 }
 
 interface IInputProps {
-  value?: string;
   type: string;
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  modClass?: string;
+  value?: string;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  register?: UseFormRegister<TFieldValues>;
 }
 
 interface IPaginationProps {
   current: number;
   totalPages: number[];
-  changePage: TPageFunc;
+  changePage: (page: number) => void;
 }

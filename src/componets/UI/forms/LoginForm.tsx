@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+
 import UserService from '../../../API/UserService';
 import useFetching from '../../../hooks/useFetching';
 import { setUser, setIsAuth } from '../../../store/reducers/authReducer';
 import { EmailReg } from '../../../utils/utils';
 import Input from '../input/Input';
 import ButtonBig from '../buttons/button-big/ButtonBig';
-import Loader from '../Loader';
+import Loader from '../loader/Loader';
+import { showError } from '../../../store/reducers/notificationReducer';
 
 import stl from './forms.module.scss';
-import stlBtn from '../../../pages/EditNote/editNote.module.scss';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -36,6 +38,10 @@ function LoginForm() {
     login(data.email, data.password);
   };
 
+  useEffect(() => {
+    errLogin && dispatch(showError(`Ошибка входа: ${errLogin}`));
+  }, [errLogin]);
+
   if (isLoadingLogin) {
     return <Loader />;
   }
@@ -44,13 +50,7 @@ function LoginForm() {
     <div>
       <h2 className={stl.title}>Войти</h2>
       <form onSubmit={handleSubmit(onLogin)} className={stl.form} noValidate>
-        {Boolean(Object.values(errors).length) && (
-          <div className={stl.errors_box}>
-            {Object.values(errors).map((err) => (
-              <p key={err.message}>{err.message}</p>
-            ))}
-          </div>
-        )}
+        {/* {errLogin && <div className={stl.errors_box}>{errLogin}</div>} */}
         <Input
           register={register('email', {
             required: 'Нужно ввести ваш email',
@@ -64,6 +64,9 @@ function LoginForm() {
           type="email"
           modClass={errors.email ? stl.error : ''}
         />
+        {errors.email && (
+          <div className={stl.errors_box}>{errors.email.message}</div>
+        )}
         <Input
           register={register('password', {
             required: 'Нужно ввести пароль',
@@ -81,12 +84,14 @@ function LoginForm() {
           type="password"
           modClass={errors.password ? stl.error : ''}
         />
-        <ButtonBig modClass={stlBtn.save_btn}>Войти</ButtonBig>
+        {errors.password && (
+          <div className={stl.errors_box}>{errors.password.message}</div>
+        )}
+        <ButtonBig modClass={stl.btn}>Войти</ButtonBig>
         <button onClick={(e) => e.preventDefault()} className={stl.sub_btn}>
           Забыли пароль?
         </button>
       </form>
-      {errLogin && <h1>{errLogin}</h1>}
     </div>
   );
 }

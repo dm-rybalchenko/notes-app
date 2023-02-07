@@ -7,6 +7,7 @@
     font-size: $fz-xs;
     font-weight: $fw-semi-bold;
     color: $color-secondary-500;
+	line-height: 1.1;
     background: $color-secondary-100 url('./../../../img/arrow-down.svg') $base *
       58 center no-repeat;
     cursor: pointer;

@@ -2,26 +2,28 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NoteService from '../../API/NoteService';
-import { LoadingContext } from '../../context';
+import { LoadingContext, ModalContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
 import useFilterNotes from '../../hooks/useFilterNotes';
 import useObserver from '../../hooks/useObserver';
 import usePaginationNotes from '../../hooks/usePaginationNotes';
 import { addAllNotes } from '../../store/reducers/notesReducer';
 import { setPage } from '../../store/reducers/paginationReducer';
-import Loader from '../../componets/UI/Loader';
+import Loader from '../../componets/UI/loader/Loader';
 import { Pagination } from '../../componets/UI/pagination/Pagination';
 import Header from '../../componets/Header/Header';
 import Filters from '../../componets/Filters/Filters';
 import Footer from '../../componets/UI/footer/Footer';
 import NoteList from '../../componets/NoteList/NoteList';
 import Modal from '../../componets/Modal/Modal';
+import { showError } from '../../store/reducers/notificationReducer';
 
 import stl from './mainPage.module.scss';
 
 function MainPage() {
   const { lazyLoading } = useContext(LoadingContext);
-  const { coords } = useSelector((state: IMainState) => state.modal);
+  const { modal } = useContext(ModalContext);
+
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
   const { limit, page } = useSelector((state: IMainState) => state.pagination);
@@ -64,13 +66,16 @@ function MainPage() {
     }
   );
 
+  useEffect(() => {
+    noteError && dispatch(showError(`Ошибка загрузки заметок: ${noteError}`));
+  }, [noteError]);
+
   return (
     <>
       <Header main />
       <main className={stl.main}>
         <Filters favorites={showFavorites} setFavorites={setShowFavorites} />
         <div>
-          {noteError && <h1>{noteError}</h1>}
           {isLoading ? (
             <Loader />
           ) : (
@@ -96,7 +101,7 @@ function MainPage() {
             </div>
           )}
         </div>
-        {coords && <Modal />}
+        {modal && <Modal />}
       </main>
       <Footer />
     </>

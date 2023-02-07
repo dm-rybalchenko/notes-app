@@ -10,6 +10,14 @@
   text-align: center;
   font-size: $fz-title-s;
   font-weight: $fw-bold;
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xxl;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    font-size: $fz-xl;
+  }
 }
 
 .form {
@@ -23,6 +31,15 @@
   input {
     width: 100%;
   }
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: 0 $base * 5 $base * 13;
+  }
+}
+
+.btn {
+	width: 100%;
+	margin-top: $base;
 }
 
 .sub_btn {

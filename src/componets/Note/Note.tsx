@@ -1,11 +1,12 @@
-import { useCallback } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import NoteService from '../../API/NoteService';
+import { ModalContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
-import { setModal } from '../../store/reducers/modalReducer';
 import { removeNote, updateNote } from '../../store/reducers/notesReducer';
+import { showError } from '../../store/reducers/notificationReducer';
 import { prepareDate } from '../../utils/utils';
 import IconFavorites from '../UI/icons/IconFavorites';
 import IconPin from '../UI/icons/IconPin';
@@ -15,13 +16,25 @@ import IconUnpin from '../UI/icons/IconUnpin';
 import stl from './note.module.scss';
 
 function Note({ note }: INotePorps) {
+  const { setModal } = useContext(ModalContext);
   const dispatch = useDispatch();
   const router = useNavigate();
 
-  const [remove, isLoading, err] = useFetching<INote>(async (note: INote) => {
-    note.id && (await NoteService.delete(note.id));
-    !err && dispatch(removeNote(note.id));
-  });
+  const [remove, isLoadingRemove, errRemove] = useFetching<INote>(
+    async (note: INote) => {
+      if (note.id) {
+        dispatch(removeNote(note.id));
+        await NoteService.delete(note.id);
+      }
+    }
+  );
+
+  const [saveNote, isLoadingSave, errSave] = useFetching<INote>(
+    async (note: INote) => {
+      dispatch(updateNote(note));
+      await NoteService.update(note);
+    }
+  );
 
   const editDate = useCallback(
     (date: string) => prepareDate(date),
@@ -35,23 +48,27 @@ function Note({ note }: INotePorps) {
   }
 
   const toggleFavorites = (note: INote) => {
-    dispatch(updateNote({ ...note, favorite: !note.favorite }));
+    saveNote({ ...note, favorite: !note.favorite });
   };
 
   const togglePinned = (note: INote) => {
-    dispatch(updateNote({ ...note, pinned: !note.pinned }));
+    saveNote({ ...note, pinned: !note.pinned });
   };
 
   const handleRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch(
-      setModal({
-        coords: { x: e.pageX, y: e.pageY },
-        body: `«${note.title}»`,
-        title: 'Удалить заметку?',
-		callback: () => remove(note),
-      })
-    );
+    setModal({
+      coords: { x: e.pageX, y: e.pageY },
+      body: `«${note.title}»`,
+      title: 'Удалить заметку?',
+      callback: () => remove(note),
+    });
   };
+
+  useEffect(() => {
+    errRemove && dispatch(showError(`Ошибка удаления заметки: ${errRemove}`));
+    errSave &&
+      dispatch(showError(`Ошибка сохранения изменений заметки: ${errSave}`));
+  }, [errRemove, errSave]);
 
   return (
     <div
@@ -83,10 +100,12 @@ function Note({ note }: INotePorps) {
           )}
         </button>
         <button onClick={handleRemove} className={stl.remove}>
-          <IconTrashBin /> {isLoading ? 'Удаляется...' : 'Удалить'}
+          <IconTrashBin /> {isLoadingRemove ? 'Удаляется...' : 'Удалить'}
         </button>
-        {err && <h1>{err}</h1>}
       </div>
+      {/* {isLoadingSave && 'Сохраняется...'} */}
+      {errRemove && <h1>{errRemove}</h1>}
+      {errSave && <h1>{errSave}</h1>}
     </div>
   );
 }

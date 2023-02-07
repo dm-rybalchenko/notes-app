@@ -16,11 +16,12 @@ import Select from '../UI/select/Select';
 
 import stl from './filters.module.scss';
 
+
 function Filters({favorites, setFavorites}: IFiltersProps) {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
-  const { limit, page } = useSelector((state: IMainState) => state.pagination);
+  const { limit } = useSelector((state: IMainState) => state.pagination);
   const dispatch = useDispatch();
   const tags = useTags(notes);
 

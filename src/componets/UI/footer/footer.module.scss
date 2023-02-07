@@ -4,9 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: $base * 20;
+  min-height: $base * 20;
   min-width: 100vw;
   padding: 0 $base * 15;
+
+  @media (max-width: $breakpoint-xs-max) {
+    flex-direction: column;
+	gap: $base * 6;
+	padding-bottom: $base * 2;
+  }
 }
 
 .left {
@@ -31,6 +37,10 @@
   font-size: $fz-xlxxs;
   font-weight: $fw-semi-bold;
   line-height: 1.2;
+
+  @media (max-width: $breakpoint-xs-max) {
+    text-align: left;
+  }
 }
 
 .develop_title {

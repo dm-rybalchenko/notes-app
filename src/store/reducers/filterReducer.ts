@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 const initialState: IFilter = {
@@ -16,20 +16,20 @@ const filterSlice = createSlice({
       state.query = '';
       state.sort = '';
     },
-    searchNotes(state, action) {
+    searchNotes(state, action: PayloadAction<string>) {
       state.query = action.payload;
     },
-    sortNotes(state, action) {
+    sortNotes(state, action: PayloadAction<string>) {
       state.sort = action.payload;
     },
-    sortByTag(state, action) {
+    sortByTag(state, action: PayloadAction<string>) {
       if (state.tags.includes(action.payload)) {
         state.tags = state.tags.filter((tag) => tag !== action.payload);
       } else {
         state.tags.push(action.payload);
       }
     },
-    removeTagFromSort(state, action) {
+    removeTagFromSort(state, action: PayloadAction<string>) {
       state.tags = state.tags.filter((tag) => tag !== action.payload);
     },
   },

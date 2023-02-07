@@ -13,6 +13,7 @@ interface IMainState {
   };
   editNote: IEditNote;
   modal: IModal;
+  notification: INotification;
 }
 
 interface IEditNote {
@@ -60,14 +61,19 @@ interface IFilter {
 }
 
 interface IModal {
-	coords: null | {
-	  x: number;
-	  y: number;
-	};
-	title: string;
-	body: string;
-	callback: any;
-  }
+  coords: {
+    x: number;
+    y: number;
+  };
+  title: string;
+  body: string;
+  callback: any;
+}
+
+interface INotification {
+  error: null | string;
+  warning: null | string;
+}
 
 interface ILoginForm {
   email: string;
@@ -83,11 +89,15 @@ interface IFileForm {
   file: FileList;
 }
 
-interface ILoadingType {
+interface ILoadingContext {
   lazyLoading: boolean;
   setLazyLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+interface IModalContext {
+  modal: null | IModal;
+  setModal: React.Dispatch<React.SetStateAction<null | IModal>>;
+}
 interface IFiltersProps {
   favorites: boolean;
   setFavorites: React.Dispatch<React.SetStateAction<boolean>>;
@@ -115,7 +125,7 @@ interface ITagListProps {
   icon?: boolean;
   current?: string[];
   choose: (tag: string) => void;
-  remove?: (tag: string) => void;
+  remove: (tag: string) => void;
 }
 
 interface INotePorps {

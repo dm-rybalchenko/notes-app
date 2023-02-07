@@ -5,7 +5,8 @@
   align-items: center;
   height: $base * 8;
   padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
-  font-size: $fz-s;
+  font-size: $fz-xs;
+  line-heigth: 1.4;
   font-weight: $fw-semi-bold;
   color: $color-secondary-300;
   cursor: pointer;

@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 
 import './style/reset.scss';
-import './style/fonts.scss';
 import './style/common.scss';
+import './style/fonts.scss';
 
 
 const root = ReactDOM.createRoot(

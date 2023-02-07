@@ -31,7 +31,7 @@ $breakpoint-md-min: 650px;
 $breakpoint-sm-max: $breakpoint-md-min - 1px;
 $breakpoint-lg-min: 850px;
 $breakpoint-md-max: $breakpoint-lg-min - 1px;
-$breakpoint-xl-min: 1050px;
+$breakpoint-xl-min: 1090px;
 $breakpoint-lg-max: $breakpoint-xl-min - 1px;
 
 // common base
@@ -64,6 +64,7 @@ $transition: 0.2s;
 // Primary color
 $color-primary-50: #e9ecf0;
 $color-primary-100: #eff6ff;
+$color-primary-400: #dfecfd;
 $color-primary-200: #d9eaff;
 // $color-primary-300: #d6e5f3; //
 $color-primary-300: #c4d8ff;

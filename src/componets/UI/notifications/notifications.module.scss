@@ -1,0 +1,64 @@
+@import 'src/style/variables.scss';
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: $base * 20;
+  background: $color-danger-slight;
+  font-size: $fz-xs;
+  line-height: 1.4;
+  animation: appear 1s;
+
+  svg {
+    margin-right: $base * 1.5;
+  }
+}
+
+.close{
+	position: absolute;
+	display: block;
+	top: $base * 4;
+	right: $base * 8;
+	width: $base * 5;
+	height: $base * 5;
+	cursor: pointer;
+
+	&::before, &::after{
+		position: absolute;
+		width: 100%;
+		height: 2px;
+		background-color: $color-danger;
+		content: '';
+	}
+
+	&::before{
+		transform: translateX(-50%) rotate(45deg);
+	}
+	
+	&::after{
+		transform: translateX(-50%) rotate(-45deg);
+	}
+}
+
+.error{
+	color: $color-danger;
+
+	path {
+		fill: $color-danger;
+	}
+}
+
+@keyframes appear {
+	0% {
+		top: -100%;
+	}
+	100% {
+		top: 0;
+	}
+}

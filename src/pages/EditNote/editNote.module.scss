@@ -13,17 +13,23 @@
   background: rgba($color-secondary-100, 0.7);
   border-bottom: 1px solid $color-primary-50;
   backdrop-filter: blur(50px);
+
+  @media (max-width: $breakpoint-xs-max) {
+    padding: 0 $base * 7.5;
+  }
 }
 
 .back {
   display: flex;
   align-items: center;
+  font-size: $fz-xs;
+
   span {
     color: $color-secondary-300;
   }
 
   svg {
-    margin-right: $base * 2;
+    margin-right: $base * 1.5;
   }
 
   &:hover {
@@ -43,16 +49,15 @@
   background-color: $color-secondary-100;
 
   @media (max-width: $breakpoint-sm-max) {
-    padding: $base * 7.5;
+    padding: $base * 40 $base * 7.5 $base * 7.5;
   }
 
   @media (max-width: $breakpoint-xs-max) {
-    padding: $base * 7.5 $base * 2.5;
+    padding: $base * 40 $base * 2.5 $base * 7.5;
   }
 }
 
 .file {
-
   margin-top: $base * 15;
 }
 

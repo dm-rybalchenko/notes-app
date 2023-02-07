@@ -24,4 +24,13 @@
   background: $color-secondary-100;
   border: 1px solid $color-primary-300;
   border-radius: $base * 2.5;
+
+  @media (max-width: $breakpoint-sm-max) {
+    width: $base * 100;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    width: auto;
+	margin: $base * 44 $base * 3;
+  }
 }

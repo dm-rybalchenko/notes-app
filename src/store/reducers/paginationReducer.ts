@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 const initialState = {
@@ -14,10 +14,10 @@ const paginationSlice = createSlice({
       state.page = 1;
       state.limit = 10;
     },
-    setPage(state, action) {
+    setPage(state, action: PayloadAction<number>) {
       state.page = action.payload;
     },
-    setLimit(state, action) {
+    setLimit(state, action: PayloadAction<number>) {
       state.limit = action.payload;
     },
   },

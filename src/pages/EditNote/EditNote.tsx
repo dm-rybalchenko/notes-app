@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -6,7 +7,7 @@ import TagList from '../../componets/TagList/TagList';
 import Button from '../../componets/UI/buttons/button-big/ButtonBig';
 import NoteService from '../../API/NoteService';
 import useFetching from '../../hooks/useFetching';
-import Loader from '../../componets/UI/Loader';
+import Loader from '../../componets/UI/loader/Loader';
 import { addNote, updateNote } from '../../store/reducers/notesReducer';
 import {
   highlightTag,
@@ -15,12 +16,16 @@ import {
 } from '../../store/reducers/editNoteReducer';
 import FileForm from '../../componets/FileForm/FileForm';
 import NoteForm from '../../componets/NoteForm/NoteForm';
+import Modal from '../../componets/Modal/Modal';
+import { ModalContext } from '../../context';
+import IconBack from '../../componets/UI/icons/IconBack';
+import { showError } from '../../store/reducers/notificationReducer';
 
 import stl from './editNote.module.scss';
-import IconBack from '../../componets/UI/icons/IconBack';
-import IconDeleteTag from '../../componets/UI/icons/IconDeleteTag';
+
 
 function EditNote() {
+  const { modal } = useContext(ModalContext);
   const { note, currentTags } = useSelector(
     (state: IMainState) => state.editNote
   );
@@ -53,6 +58,10 @@ function EditNote() {
     }
   };
 
+  useEffect(() => {
+    error && dispatch(showError(`Ошибка сохранения заметки: ${error}`));
+  }, [error]);
+
   return (
     <>
       <header className={stl.header}>
@@ -64,7 +73,7 @@ function EditNote() {
           Сохранить
         </Button>
       </header>
-      <div className={stl.edit}>
+      <main className={stl.edit}>
         {isLoading ? (
           <Loader />
         ) : (
@@ -82,8 +91,8 @@ function EditNote() {
             />
           </div>
         )}
-        {error && <h1>{error}</h1>}
-      </div>
+        {modal && <Modal />}
+      </main>
     </>
   );
 }

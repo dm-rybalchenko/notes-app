@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 const initialState: IAuth = {
@@ -14,10 +14,10 @@ const authSlice = createSlice({
       state.user = {} as IUser;
       state.isAuth = false;
     },
-    setUser(state, action) {
+    setUser(state, action: PayloadAction<IUser>) {
       state.user = action.payload;
     },
-    setIsAuth(state, action) {
+    setIsAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload;
     },
   },

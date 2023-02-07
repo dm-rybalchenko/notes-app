@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createNewNote, wrapChosenTag, wrapTag } from '../../utils/utils';
 
 const initialState: IEditNote = {
@@ -16,18 +16,18 @@ const editNoteSlice = createSlice({
       state.html = '';
       state.currentTags = [];
     },
-    setNote(state, action) {
+    setNote(state, action: PayloadAction<INote>) {
       state.note = action.payload;
     },
-    setHtmlContent(state, action) {
+    setHtmlContent(state, action: PayloadAction<string>) {
       state.html = action.payload;
     },
-    addTag(state, action) {
+    addTag(state, action: PayloadAction<string>) {
       if (!state.note.tags.includes(action.payload)) {
         state.note.tags.push(action.payload);
       }
     },
-    highlightTag(state, action) {
+    highlightTag(state, action: PayloadAction<string>) {
       const tag = action.payload;
 
       if (state.currentTags.includes(tag)) {
@@ -38,7 +38,7 @@ const editNoteSlice = createSlice({
         state.html = state.html.replaceAll(wrapTag(tag), wrapChosenTag(tag));
       }
     },
-    removeTag(state, action) {
+    removeTag(state, action: PayloadAction<string>) {
       const tag = action.payload;
 
       state.note.body = state.note.body.replaceAll(tag, tag.slice(1));

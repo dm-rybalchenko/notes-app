@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 const initialState: { notes: INote[] } = {
@@ -12,21 +12,21 @@ const notesSlice = createSlice({
     setDefaultNotes(state) {
       state.notes = [];
     },
-    addAllNotes(state, action) {
+    addAllNotes(state, action: PayloadAction<INote[]>) {
       state.notes = action.payload;
     },
-    addNote(state, action) {
+    addNote(state, action: PayloadAction<INote>) {
       state.notes.push(action.payload);
     },
-    updateNote(state, action) {
+    updateNote(state, action: PayloadAction<INote>) {
       state.notes = state.notes.map((note) =>
         note.id === action.payload.id ? action.payload : note
       );
     },
-    removeNote(state, action) {
+    removeNote(state, action: PayloadAction<string>) {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
-    removeTag(state, action) {
+    removeTag(state, action: PayloadAction<string>) {
       state.notes = state.notes.map((note) => ({
         ...note,
         body: note.body.replaceAll(action.payload, action.payload.slice(1)),

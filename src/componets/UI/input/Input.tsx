@@ -18,10 +18,10 @@ export default function Input({
 
   return (
     <input
-	  {...register}
       value={value}
       onChange={onChange}
 	  onFocus={onFocus}
+	  {...register}
       type={type}
       placeholder={placeholder}
       className={rootClasses.join(' ')}

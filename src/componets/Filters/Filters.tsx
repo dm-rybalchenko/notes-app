@@ -1,14 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import NoteService from '../../API/NoteService';
 
 import { LoadingContext } from '../../context';
+import useFetching from '../../hooks/useFetching';
 import useTags from '../../hooks/useTags';
 import {
   removeTagFromSort,
   sortByTag,
   sortNotes,
 } from '../../store/reducers/filterReducer';
-import { removeTag } from '../../store/reducers/notesReducer';
+import { updateNote } from '../../store/reducers/notesReducer';
+import { showError } from '../../store/reducers/notificationReducer';
 import { setLimit } from '../../store/reducers/paginationReducer';
 import TagList from '../TagList/TagList';
 import IconFavorites from '../UI/icons/IconFavorites';
@@ -17,7 +20,7 @@ import Select from '../UI/select/Select';
 import stl from './filters.module.scss';
 
 
-function Filters({favorites, setFavorites}: IFiltersProps) {
+function Filters({ favorites, setFavorites }: IFiltersProps) {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
   const { notes } = useSelector((state: IMainState) => state.notes);
   const filter = useSelector((state: IMainState) => state.filter);
@@ -25,28 +28,45 @@ function Filters({favorites, setFavorites}: IFiltersProps) {
   const dispatch = useDispatch();
   const tags = useTags(notes);
 
-  const rootClasses = [stl.favorites]
+  const [removeTags, isLoading, error] = useFetching<INote[]>(async (notes) => {
+    notes.forEach(async (note) => {
+      await NoteService.update(note);
+    });
+  });
 
-  if(favorites) {
-	rootClasses.push(stl.active)
+  const rootClasses = [stl.favorites];
+  if (favorites) {
+    rootClasses.push(stl.active);
   }
 
   const deleteTag = (tag: string) => {
-    dispatch(removeTag(tag));
+    let editedNotes = notes
+      .filter((note) => note.tags.includes(tag))
+      .map((note) => ({
+        ...note,
+        body: note.body.replaceAll(tag, tag.slice(1)),
+        tags: note.tags.filter((noteTag) => noteTag !== tag),
+      }));
+
+    editedNotes.forEach((note) => dispatch(updateNote(note)));
     dispatch(removeTagFromSort(tag));
+    removeTags(editedNotes);
   };
 
-  const includeTag = (tag: string) => {
-    dispatch(sortByTag(tag));
-  };
+  useEffect(() => {
+    error && dispatch(showError(`Ошибка обновления заметок: ${error}`));
+  }, [error]);
 
   return (
     <div>
       <div className={stl.filters}>
-		<button onClick={() => setFavorites(!favorites)} className={rootClasses.join(' ')}>
-			<IconFavorites />
-			Избранное
-		</button>
+        <button
+          onClick={() => setFavorites(!favorites)}
+          className={rootClasses.join(' ')}
+        >
+          <IconFavorites />
+          Избранное
+        </button>
         <Select
           value={filter.sort}
           onChange={(value) => dispatch(sortNotes(value))}
@@ -79,7 +99,7 @@ function Filters({favorites, setFavorites}: IFiltersProps) {
       </div>
       <div className={stl.tags}>
         <TagList
-          choose={includeTag}
+          choose={(tag: string) => dispatch(sortByTag(tag))}
           remove={deleteTag}
           tags={tags}
           current={filter.tags}

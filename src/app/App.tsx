@@ -12,7 +12,6 @@ import Warning from '../componets/UI/notifications/Warning';
 import Error from '../componets/UI/notifications/Error';
 
 import stl from './app.module.scss';
-import { showError } from '../store/reducers/notificationReducer';
 
 
 function App() {
@@ -44,25 +43,35 @@ function App() {
   }
 
   return (
-    <div className={stl.wrapper}>
-      <LoadingContext.Provider
-        value={{
-          lazyLoading,
-          setLazyLoading,
-        }}
-      >
-        <ModalContext.Provider
+    <>
+      <div className={stl.wrapper}>
+        <LoadingContext.Provider
           value={{
-            modal,
-            setModal,
+            lazyLoading,
+            setLazyLoading,
           }}
         >
-          {error && <Error />}
-          {warning && <Warning />}
-          <AppRouter />
-        </ModalContext.Provider>
-      </LoadingContext.Provider>
-    </div>
+          <ModalContext.Provider
+            value={{
+              modal,
+              setModal,
+            }}
+          >
+            {error && <Error />}
+            {warning && <Warning />}
+            <AppRouter />
+          </ModalContext.Provider>
+        </LoadingContext.Provider>
+      </div>
+      {modal && (
+        <div
+          className={stl.scrollbar}
+          style={{
+            width: window.innerWidth - document.documentElement.clientWidth,
+          }}
+        ></div>
+      )}
+    </>
   );
 }
 

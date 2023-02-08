@@ -8,6 +8,12 @@ export default class NoteService {
     return response.data;
   }
 
+  static async getById(id: string): Promise<INote> {
+    const response = await $api.get(`/${id}`);
+
+    return response.data;
+  }
+
   static async create(note: INote): Promise<INote> {
     const response = await $api.post('/', note);
 

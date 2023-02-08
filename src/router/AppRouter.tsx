@@ -31,11 +31,9 @@ function AppRouter() {
               key={route.path}
             />
           ))}
-		  <Route path="/" element={<Navigate to="/login" />} />
-		  <Route path="/notes" element={<Navigate to="/login" />} />
-		  <Route path="/edit" element={<Navigate to="/login" />} />
-		  <Route path="/edit:id" element={<Navigate to="/login" />} />
-		  <Route path="*" element={<Navigate to="/error" />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/notes" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       )}
     </BrowserRouter>

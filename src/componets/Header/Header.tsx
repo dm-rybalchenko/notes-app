@@ -49,8 +49,6 @@ function Header({ children, main }: IHeaderPorps) {
 
   return (
     <header className={stl.header}>
-      {isLoadingLogout && <Loader />}
-      {errLogout && <h1>{errLogout}</h1>}
       <div className={stl.logo}>
         <img src="./img/Logo.png" alt="logo" />
       </div>
@@ -60,6 +58,7 @@ function Header({ children, main }: IHeaderPorps) {
             {auth.user.email}
             <IconLogout />
           </button>
+		  {isLoadingLogout && <Loader />}
           <div className={stl.search}>
             <Input
               onChange={(e) => dispatch(searchNotes(e.target.value))}

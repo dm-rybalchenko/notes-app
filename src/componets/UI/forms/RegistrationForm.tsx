@@ -12,6 +12,7 @@ import Loader from '../loader/Loader';
 
 import stl from './forms.module.scss';
 
+
 function RegistrationForm({ setLoginPage }: IRegFormPorps) {
   const dispatch = useDispatch();
   const {
@@ -22,6 +23,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps) {
     formState: { errors },
   } = useForm<IRegForm>({
     shouldFocusError: false,
+    reValidateMode: 'onSubmit',
   });
 
   const [registration, isLoadingReg, errReg] = useFetching<string>(

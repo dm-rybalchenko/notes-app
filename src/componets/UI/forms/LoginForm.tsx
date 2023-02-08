@@ -13,6 +13,7 @@ import { showError } from '../../../store/reducers/notificationReducer';
 
 import stl from './forms.module.scss';
 
+
 function LoginForm() {
   const dispatch = useDispatch();
   const {
@@ -22,6 +23,7 @@ function LoginForm() {
     formState: { errors },
   } = useForm<ILoginForm>({
     shouldFocusError: false,
+    reValidateMode: 'onSubmit',
   });
 
   const [login, isLoadingLogin, errLogin] = useFetching<string>(

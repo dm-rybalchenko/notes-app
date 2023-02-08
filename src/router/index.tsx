@@ -3,6 +3,7 @@ import Page404 from '../pages/Page404/Page404';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import MainPage from '../pages/MainPage/MainPage';
 
+
 export const privateRoutes = [
   { path: '/notes', component: <MainPage /> },
   { path: '/edit', component: <EditNote /> },
@@ -12,5 +13,7 @@ export const privateRoutes = [
 
 export const publicRoutes = [
   { path: '/login', component: <LoginPage /> },
+  { path: '/edit', component: <LoginPage /> },
+  { path: '/edit/:id', component: <LoginPage /> },
   { path: '/error', component: <Page404 /> },
 ];

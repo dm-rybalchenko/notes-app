@@ -1,12 +1,18 @@
 @import 'src/style/variables.scss';
 
 // === COMMON ===
+body {
+	font-family: 'Inter', sans-serif;
+	background-color: $color-secondary-200;
+}
+
 body.block {
   overflow: hidden;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
+#root{
+	display: flex;
+	justify-content: center;
 }
 
 // === / COMMON ===

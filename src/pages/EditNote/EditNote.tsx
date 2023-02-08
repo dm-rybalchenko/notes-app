@@ -7,12 +7,12 @@ import TagList from '../../componets/TagList/TagList';
 import Button from '../../componets/UI/buttons/button-big/ButtonBig';
 import NoteService from '../../API/NoteService';
 import useFetching from '../../hooks/useFetching';
-import Loader from '../../componets/UI/loader/Loader';
 import { addNote, updateNote } from '../../store/reducers/notesReducer';
 import {
   highlightTag,
   removeTag,
   setDefaultNote,
+  setNote,
 } from '../../store/reducers/editNoteReducer';
 import FileForm from '../../componets/FileForm/FileForm';
 import NoteForm from '../../componets/NoteForm/NoteForm';
@@ -40,6 +40,10 @@ function EditNote() {
       } else {
         const response = await NoteService.create(note);
         dispatch(addNote(response));
+
+        if (!note.id && note.file) {
+          dispatch(setNote(response));
+        }
       }
     }
   );
@@ -59,6 +63,12 @@ function EditNote() {
   };
 
   useEffect(() => {
+    if (!note.id && note.file) {
+      saveNote(note);
+    }
+  }, [note.file]);
+
+  useEffect(() => {
     error && dispatch(showError(`Ошибка сохранения заметки: ${error}`));
   }, [error]);
 
@@ -74,23 +84,19 @@ function EditNote() {
         </Button>
       </header>
       <main className={stl.edit}>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div>
-            <NoteForm />
-            <div className={stl.file}>
-              <FileForm />
-            </div>
-            <TagList
-              choose={(tag) => dispatch(highlightTag(tag))}
-              remove={(tag) => dispatch(removeTag(tag))}
-              current={currentTags}
-              tags={note.tags}
-              modClass={stl.tags}
-            />
+        <div>
+          <NoteForm />
+          <div className={stl.file}>
+            <FileForm />
           </div>
-        )}
+          <TagList
+            choose={(tag) => dispatch(highlightTag(tag))}
+            remove={(tag) => dispatch(removeTag(tag))}
+            current={currentTags}
+            tags={note.tags}
+            modClass={stl.tags}
+          />
+        </div>
         {modal && <Modal />}
       </main>
     </>

@@ -26,16 +26,9 @@ const notesSlice = createSlice({
     removeNote(state, action: PayloadAction<string>) {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
-    removeTag(state, action: PayloadAction<string>) {
-      state.notes = state.notes.map((note) => ({
-        ...note,
-        body: note.body.replaceAll(action.payload, action.payload.slice(1)),
-        tags: note.tags.filter((tag) => tag !== action.payload),
-      }));
-    },
   },
 });
 
 export default notesSlice.reducer;
-export const { setDefaultNotes, addAllNotes, addNote, updateNote, removeNote, removeTag } =
+export const { setDefaultNotes, addAllNotes, addNote, updateNote, removeNote } =
   notesSlice.actions;

@@ -52,7 +52,7 @@
   }
 }
 
-.error{
+.error, .error:focus{
 	border: 2px solid $color-danger;
 }
 

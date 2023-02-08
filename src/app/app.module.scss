@@ -5,10 +5,15 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100vw;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
   font-size: $fz-l;
   font-weight: $fw-bold;
   color: $color-secondary-500;
   background-color: $color-secondary-200;
+}
+
+.scrollbar{
+	background: transparent;
 }

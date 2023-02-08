@@ -2,8 +2,15 @@ import { useEffect, useRef } from 'react';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addTag, setHtmlContent, setNote } from '../../store/reducers/editNoteReducer';
+
+import NoteService from '../../API/NoteService';
+import {
+  addTag,
+  setHtmlContent,
+  setNote,
+} from '../../store/reducers/editNoteReducer';
 import { tagController } from '../../utils/utils';
+
 import stl from './noteForm.module.scss';
 
 
@@ -16,7 +23,6 @@ function NoteForm() {
 
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
-
 
   const handleChange = (e: ContentEditableEvent) => {
     dispatch(setNote({ ...note, body: contentRef.current!.innerText }));
@@ -45,24 +51,32 @@ function NoteForm() {
   };
 
   useEffect(() => {
-	setFocus(note.title);
+    async function fetchNote() {
+      setFocus(note.title);
 
-    if (params.id) {
-      let currentNote = notes.find((note: INote) => note.id === params.id);
+      if (params.id) {
+        let currentNote = notes.find((note: INote) => note.id === params.id);
 
-      if (currentNote) {
-        dispatch(setNote(currentNote));
-        dispatch(
-          setHtmlContent(
-            tagController(currentNote.body.replaceAll('\n', '<br>')).content
-          )
-        );
+        if (!currentNote) {
+          currentNote = await NoteService.getById(params.id);
+        }
 
-        setFocus(currentNote.title);
-      } else {
-        router('/error');
+        if (currentNote?.id) {
+          dispatch(setNote(currentNote));
+          dispatch(
+            setHtmlContent(
+              tagController(currentNote.body.replaceAll('\n', '<br>')).content
+            )
+          );
+
+          setFocus(currentNote.title);
+        } else {
+          router('/error');
+        }
       }
     }
+
+    fetchNote();
   }, []);
 
   return (

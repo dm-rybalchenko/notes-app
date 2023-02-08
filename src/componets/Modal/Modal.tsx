@@ -18,38 +18,29 @@ function Modal() {
     document.addEventListener('click', exitModal, { once: true });
   }, []);
 
-
   return (
-    <>
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{ top: appearCoords?.y, left: appearCoords?.x }}
-        className={stl.modal}
-      >
-        <div className={stl.title}>{modal?.title}</div>
-        <div className={stl.body}>{modal?.body}</div>
-        <div className={stl.btns}>
-          <button onClick={exitModal} className={stl.cancel}>
-            Отменить
-          </button>
-          <button
-            onClick={() => {
-              modal?.callback();
-              exitModal();
-            }}
-            className={stl.delete}
-          >
-            Удалить
-          </button>
-        </div>
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{ top: appearCoords?.y, left: appearCoords?.x }}
+      className={stl.modal}
+    >
+      <div className={stl.title}>{modal?.title}</div>
+      <div className={stl.body}>{modal?.body}</div>
+      <div className={stl.btns}>
+        <button onClick={exitModal} className={stl.cancel}>
+          Отменить
+        </button>
+        <button
+          onClick={() => {
+            modal?.callback();
+            exitModal();
+          }}
+          className={stl.delete}
+        >
+          Удалить
+        </button>
       </div>
-      <div
-        className={stl.scrollbar}
-        style={{
-          width: window.innerWidth - document.documentElement.clientWidth,
-        }}
-      ></div>
-    </>
+    </div>
   );
 }
 

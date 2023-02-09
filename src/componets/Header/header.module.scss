@@ -37,6 +37,7 @@
 
 .logo {
   margin-right: $base * 10;
+  cursor: pointer;
 }
 
 .logout {
@@ -54,19 +55,47 @@
 
   & svg {
     margin-left: $base;
+
+    &:hover {
+      & path {
+        fill: $color-danger;
+      }
+    }
   }
 
   &:hover {
-    background: $color-danger-slight;
+    background: $color-secondary-250;
+  }
 
-    & path {
-      fill: $color-danger;
-    }
+  &:has(svg:hover) {
+    background: $color-danger-slight;
   }
 }
 
 .search {
-  margin-left: auto;
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-left: $base * 25;
+
+  input {
+    transition: $transition;
+  }
+
+  input:focus {
+    width: 100%;
+  }
+
+  input::placeholder {
+    color: $color-secondary-300;
+    font-weight: $fw-semi-bold;
+    -webkit-text-fill-color: $color-secondary-300;
+  }
+
+  input:focus::placeholder {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 
   @media (max-width: $breakpoint-sm-max) {
     margin-left: 0;
@@ -74,9 +103,9 @@
 }
 
 .add {
-  margin-left: $base * 5;
+  margin-left: $base * 2;
 }
 
 .login {
-	margin-left: auto;
+  margin-left: auto;
 }

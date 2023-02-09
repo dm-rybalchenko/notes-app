@@ -116,7 +116,8 @@ interface ISearchFormProps {
 interface INoteListProps {
   notes: INote[];
   title: string;
-  wrap?: boolean;
+  wrapper?: boolean;
+  counter?: boolean;
 }
 
 interface ITagListProps {

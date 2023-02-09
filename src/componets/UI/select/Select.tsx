@@ -1,4 +1,3 @@
-import IconDropDown from '../icons/iconDropDown';
 import stl from './select.module.scss';
 
 

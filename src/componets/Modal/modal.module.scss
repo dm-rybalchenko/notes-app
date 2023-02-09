@@ -45,9 +45,17 @@
   color: $color-secondary-300;
   background: $color-secondary-100;
   border: 2px solid rgba($color-secondary-300, 0.2);
+
+  &:hover{
+	border: 2px solid rgba($color-secondary-300, 0.5);
+  }
 }
 
 .delete {
   color: $color-secondary-100;
   background: $color-danger;
+
+  &:hover{
+	background: $color-danger-bold;
+  }
 }

@@ -1,7 +1,7 @@
 @import 'src/style/variables.scss';
 
 .list {
-	margin: $base * 7.5 0;
+  margin: $base * 7.5 0;
 }
 
 .notes {
@@ -14,13 +14,20 @@
 
 .title {
   display: inline;
-  margin-right: $base * 4;
   font-weight: $fw-bold;
   font-size: $fz-xxl;
 }
 
-.wrap {
+.wrapper {
+  margin-left: $base * 4;
   color: $color-secondary-300;
   font-size: $fz-xxs;
   cursor: pointer;
+}
+
+.counter {
+  margin-left: $base * 2;
+  font-weight: $fw-semi-bold;
+  font-size: $fz-xxl;
+  color: $color-secondary-300;
 }

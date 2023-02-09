@@ -72,6 +72,10 @@
 
 .tags {
   margin-top: $base * 7.5;
+
+  button {
+	border: 1px solid $color-primary-400;
+  }
 }
 
 // .upper {

@@ -23,7 +23,7 @@
     display: block;
     height: 28px;
     width: 28px;
-    background: $color-secondary-100;
+    background: $color-secondary-250;
     border-radius: 50%;
   }
 
@@ -40,7 +40,7 @@
 }
 
 .right {
-  left: 50%;
+  left: 49%;
 }
 
 .anim {
@@ -76,13 +76,12 @@
 
 .outer .right .anim {
   animation-name: rotate-right;
-  animation-delay: 0;
   animation-delay: 0.75s;
 }
 
 @keyframes rotate-right {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(-5deg);
   }
   25% {
     transform: rotate(180deg);

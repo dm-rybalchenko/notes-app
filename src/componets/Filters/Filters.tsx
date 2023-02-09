@@ -16,9 +16,9 @@ import { setLimit } from '../../store/reducers/paginationReducer';
 import TagList from '../TagList/TagList';
 import IconFavorites from '../UI/icons/IconFavorites';
 import Select from '../UI/select/Select';
+import Switcher from '../UI/switcher/Switcher';
 
 import stl from './filters.module.scss';
-
 
 function Filters({ favorites, setFavorites }: IFiltersProps) {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
@@ -72,9 +72,9 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
           onChange={(value) => dispatch(sortNotes(value))}
           defaultValue="Сортировать"
           options={[
+            { value: 'new', name: 'По дате изменения' },
             { value: 'title', name: 'По заголовку' },
-            { value: 'old', name: 'Старые' },
-            { value: 'new', name: 'Новые' },
+            { value: 'old', name: 'Сначала старые' },
           ]}
         />
         <Select
@@ -88,13 +88,12 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
             { value: 15, name: 'По 15' },
           ]}
         />
-        <div>
-          <input
-            checked={lazyLoading}
+        <div className={stl.lazy}>
+          <Switcher
+            checked={!lazyLoading}
             onChange={() => setLazyLoading(!lazyLoading)}
-            type="checkbox"
           />
-          Lazy
+          Страницы
         </div>
       </div>
       <div className={stl.tags}>

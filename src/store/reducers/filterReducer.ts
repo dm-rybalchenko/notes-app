@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initialState: IFilter = {
   tags: [],
   query: '',
-  sort: '',
+  sort: 'new',
 };
 
 const filterSlice = createSlice({
@@ -14,7 +14,7 @@ const filterSlice = createSlice({
     setDefaultFilter(state) {
       state.tags = [];
       state.query = '';
-      state.sort = '';
+      state.sort = 'new';
     },
     searchNotes(state, action: PayloadAction<string>) {
       state.query = action.payload;

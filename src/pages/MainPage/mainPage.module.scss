@@ -1,12 +1,13 @@
 @import 'src/style/variables.scss';
 
 .main {
+  flex-grow: 1;
   padding: $base * 20 $base * 15 $base * 15;
 
   @media (max-width: $breakpoint-lg-max) {
     padding: $base * 30 $base * 15 $base * 15;
   }
-  
+
   @media (max-width: $breakpoint-sm-max) {
     padding: $base * 30 $base * 10 $base * 8.5;
   }

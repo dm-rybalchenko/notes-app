@@ -84,9 +84,22 @@ function MainPage() {
                 <NoteList notes={favoriteNotes} title="Избранное" />
               ) : (
                 <div>
-                  <NoteList notes={pinnedNotes} wrap title="Закрепленные" />
-                  <hr className={stl.line} />
-                  <NoteList notes={paginatedNotes} title="Все заметки" />
+                  {pinnedNotes.length > 0 && (
+                    <>
+                      <NoteList
+                        notes={pinnedNotes}
+						counter
+                        wrapper
+                        title="Закрепленные"
+                      />
+                      <hr className={stl.line} />
+                    </>
+                  )}
+                  <NoteList
+                    notes={paginatedNotes}
+                    counter
+                    title="Все заметки"
+                  />
                   {lazyLoading ? (
                     <div ref={lastElement} />
                   ) : (

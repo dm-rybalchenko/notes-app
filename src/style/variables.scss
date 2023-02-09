@@ -31,7 +31,7 @@ $breakpoint-md-min: 650px;
 $breakpoint-sm-max: $breakpoint-md-min - 1px;
 $breakpoint-lg-min: 850px;
 $breakpoint-md-max: $breakpoint-lg-min - 1px;
-$breakpoint-xl-min: 1090px;
+$breakpoint-xl-min: 1180px;
 $breakpoint-lg-max: $breakpoint-xl-min - 1px;
 
 // common base
@@ -79,7 +79,9 @@ $color-primary-700: #0c49c0;
 
 $color-secondary-100: #fff;
 $color-secondary-200: #e2e8ef;
+$color-secondary-250: #f2f6fa; //bg
 $color-secondary-300: #9eafc4;
+$color-secondary-350: #e3d9ac;
 // $color-secondary-400: #929cb0; // текст тега
 // $color-secondary-400: #687795; // текст удаления
 $color-secondary-440: #7a8899;
@@ -90,7 +92,9 @@ $color-secondary-500: #1c273d;
 $color-danger-slight: #fff5f5;
 $color-danger-medium: rgba(255, 50, 50, 0.4);
 $color-danger-regular: #fff3f3;
+$color-danger-bold: #e71414;
 $color-danger: #ff3232;
 $color-gray: rgba(158, 175, 196, 0.8);
+$color-success: #2ab651;
 
 // === / VARIABLES ===

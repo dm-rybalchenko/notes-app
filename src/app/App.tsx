@@ -15,7 +15,7 @@ import stl from './app.module.scss';
 
 
 function App() {
-  const [lazyLoading, setLazyLoading] = useState<boolean>(false);
+  const [lazyLoading, setLazyLoading] = useState<boolean>(true);
   const [modal, setModal] = useState<null | IModal>(null);
   const { error, warning } = useSelector(
     (state: IMainState) => state.notification

@@ -3,7 +3,7 @@
 // === COMMON ===
 body {
 	font-family: 'Inter', sans-serif;
-	background-color: $color-secondary-200;
+	background-color: $color-secondary-250;
 }
 
 body.block {
@@ -52,6 +52,17 @@ input::placeholder {
 }
 
 // === / PLACEHOLDERS ===
+
+// === CLOSE-BUTTON IN SEARCH-INPUTS ===
+input[type='search']::-webkit-search-cancel-button {
+	appearance: none;
+	width: $base * 2.5;
+	height: $base * 2.5;
+	background: url('../img/icon-search-clear.svg') 0 0/100% 100% no-repeat;
+	cursor: pointer;
+}
+
+// === / CLOSE-BUTTON IN SEARCH-INPUTS ===
 
 // === FAVORITES ===
 [class^='filters_filters'] {

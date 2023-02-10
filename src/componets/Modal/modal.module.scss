@@ -10,7 +10,7 @@
   padding: $base * 8 $base * 8.5 $base * 5;
   text-align: center;
   background: $color-secondary-100;
-  box-shadow: 2px $base * 5 $base * 10 rgba(3, 37, 104, 0.16);
+  box-shadow: $base * 0.5 $base * 5 $base * 10 rgba($color-secondary-700, 0.16);
   border-radius: $base * 3.5;
 }
 
@@ -23,7 +23,7 @@
   margin-top: $base * 1.5;
   font-size: $fz-xs;
   font-weight: $fw-medium;
-  color: $color-secondary-440;
+  color: $color-secondary-500;
 }
 
 .btns {
@@ -42,12 +42,20 @@
 }
 
 .cancel {
-  color: $color-secondary-300;
+  color: $color-secondary-400;
   background: $color-secondary-100;
-  border: 2px solid rgba($color-secondary-300, 0.2);
+  border: $base * 0.5 solid rgba($color-secondary-400, 0.2);
+
+  &:hover {
+    border: $base * 0.5 solid rgba($color-secondary-400, 0.5);
+  }
 }
 
 .delete {
   color: $color-secondary-100;
-  background: $color-danger;
+  background: $color-danger-200;
+
+  &:hover {
+    background: $color-danger-300;
+  }
 }

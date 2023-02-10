@@ -8,7 +8,7 @@
 .title {
   margin-top: $base * 10;
   text-align: center;
-  font-size: $fz-title-s;
+  font-size: $fz-xxxl;
   font-weight: $fw-bold;
 
   @media (max-width: $breakpoint-sm-max) {
@@ -28,7 +28,8 @@
   gap: $base * 4;
   margin-top: $base * 14;
 
-  input {
+  input,
+  div {
     width: 100%;
   }
 
@@ -38,31 +39,52 @@
 }
 
 .btn {
-	width: 100%;
-	margin-top: $base;
+  width: 100%;
+  margin-top: $base;
 }
 
 .sub_btn {
   margin-top: $base * 8.5;
   font-size: $fz-xxs;
-  color: $color-secondary-300;
+  color: $color-secondary-400;
 
-  &:hover{
-	text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-.error, .error:focus{
-	border: 2px solid $color-danger;
+.error,
+.error:focus {
+  border: $base * 0.5 solid $color-danger-200;
 }
 
-.errors_box{
-	width: 100%;
-	padding: $base * 2.5 $base * 5;
-	text-align: center;
-	color: $color-danger;
-	font-size: $fz-xlxxs;
-	line-height: 1.5;
-	background: $color-danger-regular;
-	border-radius: $base * 2.5;
+.success,
+.success:focus {
+  position: relative;
+
+  input {
+    border: $base * 0.5 solid $color-success;
+  }
+
+  &::after {
+    position: absolute;
+    display: inline-block;
+    right: $base * 4;
+    top: $base * 2.5;
+    width: $base * 3;
+    height: $base * 3;
+    color: $color-success;
+    content: '✓';
+  }
+}
+
+.errors_box {
+  width: 100%;
+  padding: $base * 2.5 $base * 5;
+  text-align: center;
+  color: $color-danger-200;
+  font-size: $fz-xxxs;
+  line-height: 1.5;
+  background: $color-danger-100;
+  border-radius: $base * 2.5;
 }

@@ -1,28 +1,20 @@
-import IconDropDown from '../icons/iconDropDown';
-import stl from './select.module.scss';
+import Select from 'react-select';
 
 
-export default function Select({
+export default function CustomSelect({
   value,
   onChange,
-  defaultValue,
   options,
 }: ISelectProps) {
-	
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      className={stl.select}
-    >
-      <option disabled value="">
-        {defaultValue}
-      </option>
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.name}
-        </option>
-      ))}
-    </select>
+    <Select<IOption>
+      isSearchable={false}
+      defaultValue={value}
+      options={options}
+      getOptionLabel={(option: IOption) => option.name}
+      getOptionValue={(option: IOption) => option.value}
+      onChange={onChange}
+      classNamePrefix="custom-select"
+    />
   );
 }

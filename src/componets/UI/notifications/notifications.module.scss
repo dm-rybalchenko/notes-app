@@ -8,57 +8,49 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0 $base * 40;
   min-width: 100vw;
   min-height: $base * 20;
-  background: $color-danger-slight;
+  background: $color-danger-50;
   font-size: $fz-xs;
+  text-align: center;
   line-height: 1.4;
   animation: appear 1s;
 
   svg {
     margin-right: $base * 1.5;
+    transform: translateY(20%);
   }
 }
 
-.close{
-	position: absolute;
-	display: block;
-	top: $base * 4;
-	right: $base * 8;
-	width: $base * 5;
-	height: $base * 5;
-	cursor: pointer;
-
-	&::before, &::after{
-		position: absolute;
-		width: 100%;
-		height: 2px;
-		background-color: $color-danger;
-		content: '';
-	}
-
-	&::before{
-		transform: translateX(-50%) rotate(45deg);
-	}
-	
-	&::after{
-		transform: translateX(-50%) rotate(-45deg);
-	}
+.close {
+  position: absolute;
+  top: $base * 6;
+  right: $base * 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $base * 30;
+  height: $base * 8;
+  color: black;
+  cursor: pointer;
+  border: 1px solid $color-secondary-300;
+  border-radius: $base * 2.5;
 }
 
-.error{
-	color: $color-danger;
+.error {
+  color: $color-danger-200;
 
-	path {
-		fill: $color-danger;
-	}
+  path {
+    fill: $color-danger-200;
+  }
 }
 
 @keyframes appear {
-	0% {
-		top: -100%;
-	}
-	100% {
-		top: 0;
-	}
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 0;
+  }
 }

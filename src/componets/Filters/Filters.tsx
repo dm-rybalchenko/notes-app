@@ -16,9 +16,9 @@ import { setLimit } from '../../store/reducers/paginationReducer';
 import TagList from '../TagList/TagList';
 import IconFavorites from '../UI/icons/IconFavorites';
 import Select from '../UI/select/Select';
+import Switcher from '../UI/switcher/Switcher';
 
 import stl from './filters.module.scss';
-
 
 function Filters({ favorites, setFavorites }: IFiltersProps) {
   const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
@@ -68,33 +68,30 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
           Избранное
         </button>
         <Select
-          value={filter.sort}
-          onChange={(value) => dispatch(sortNotes(value))}
-          defaultValue="Сортировать"
+          value={{ value: 'new', name: 'По дате изменения' }}
+          onChange={(value) => value && dispatch(sortNotes(value?.value))}
           options={[
+            { value: 'new', name: 'По дате изменения' },
             { value: 'title', name: 'По заголовку' },
-            { value: 'old', name: 'Старые' },
-            { value: 'new', name: 'Новые' },
+            { value: 'old', name: 'Сначала старые' },
           ]}
         />
         <Select
-          value={limit}
-          onChange={(value) => dispatch(setLimit(parseInt(value)))}
-          defaultValue="Заметок на странице"
+          value={{ value: '10', name: 'По 10' }}
+          onChange={(value) => value && dispatch(setLimit(parseInt(value?.value)))}
           options={[
-            { value: -1, name: 'Выводить все' },
-            { value: 5, name: 'По 5' },
-            { value: 10, name: 'По 10' },
-            { value: 15, name: 'По 15' },
+            { value: '-1', name: 'Выводить все' },
+            { value: '5', name: 'По 5' },
+            { value: '10', name: 'По 10' },
+            { value: '15', name: 'По 15' },
           ]}
         />
-        <div>
-          <input
-            checked={lazyLoading}
+        <div className={stl.lazy}>
+          <Switcher
+            checked={!lazyLoading}
             onChange={() => setLazyLoading(!lazyLoading)}
-            type="checkbox"
           />
-          Lazy
+          Страницы
         </div>
       </div>
       <div className={stl.tags}>

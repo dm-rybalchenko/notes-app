@@ -21,6 +21,7 @@ import IconLogout from '../UI/icons/IconLogout';
 import Loader from '../UI/loader/Loader';
 
 import stl from './header.module.scss';
+import IconLogo from '../UI/icons/IconLogo';
 
 function Header({ children, main }: IHeaderPorps) {
   const filter = useSelector((state: IMainState) => state.filter);
@@ -49,21 +50,21 @@ function Header({ children, main }: IHeaderPorps) {
 
   return (
     <header className={stl.header}>
-      <div className={stl.logo}>
-        <img src="./img/Logo.png" alt="logo" />
-      </div>
+      <Link to='/' className={stl.logo}>
+        <IconLogo />
+      </Link>
       {main ? (
         <>
-          <button onClick={logout} className={stl.logout}>
+          <button className={stl.logout}>
             {auth.user.email}
-            <IconLogout />
+            <IconLogout onClick={logout} />
           </button>
 		  {isLoadingLogout && <Loader />}
           <div className={stl.search}>
             <Input
               onChange={(e) => dispatch(searchNotes(e.target.value))}
               value={filter.query}
-              type="text"
+              type="search"
               placeholder="Поиск по заметкам..."
             />
           </div>

@@ -5,6 +5,7 @@ import paginationSlice from './reducers/paginationReducer';
 import authSlice from './reducers/authReducer';
 import editNoteSlice from './reducers/editNoteReducer';
 import notificationSlice from './reducers/notificationReducer';
+import popupSlice from './reducers/popupReducer';
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   pagination: paginationSlice,
   auth: authSlice,
   editNote: editNoteSlice,
-  notification: notificationSlice
+  notification: notificationSlice,
+  popup: popupSlice
 });
 
 export const store = configureStore({

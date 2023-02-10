@@ -1,0 +1,58 @@
+@import 'src/style/variables.scss';
+
+.label {
+  position: relative;
+  display: inline-block;
+  height: $base * 4;
+  margin-right: $base * 2.5;
+  font-size: $base * 3.5;
+  line-height: $base * 7;
+  vertical-align: middle;
+  user-select: none;
+  cursor: pointer;
+}
+
+.label .switcher {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: $base * 7;
+  height: $base * 4;
+  border: 1px solid $color-secondary-400;
+  border-radius: $base * 5;
+  vertical-align: top;
+  background: transparent;
+  transition: $transition;
+}
+
+.label .switcher::before {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: inline-block;
+  width: $base * 3;
+  height: $base * 3;
+  content: '';
+  background: $color-secondary-400;
+  border-radius: 50%;
+  transition: $transition;
+}
+
+.label input[type='checkbox'] {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.label input[type='checkbox']:checked + .switcher {
+  border: 1px solid $color-primary-600;
+  background: $color-primary-600;
+}
+
+.label input[type='checkbox']:checked + .switcher:before {
+  background: $color-secondary-100;
+  transform: translateX($base * 3);
+}

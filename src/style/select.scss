@@ -1,0 +1,122 @@
+@import 'src/style/variables.scss';
+
+// === MAIN CONTROLLER ===
+div .custom-select__control {
+  width: $base * 65;
+  height: $base * 9;
+  padding: $base * 2 $base * 4;
+  font-size: $fz-xs;
+  font-weight: $fw-semi-bold;
+  color: $color-secondary-700;
+  line-height: 1.1;
+  cursor: pointer;
+  background: $color-secondary-100;
+  box-shadow: none;
+  border: 1px solid $color-primary-100;
+  border-radius: $base * 2.5;
+
+  .custom-select__indicators {
+    svg,
+    .custom-select__indicator-separator {
+      display: none;
+    }
+  }
+
+  & .custom-select__single-value,
+  .custom-select__value-container {
+    padding: 0;
+    margin: 0;
+  }
+
+  .custom-select__dropdown-indicator {
+    background: url('../componets/UI/icons/scss/arrow-down.svg') center no-repeat;
+  }
+
+  &:hover {
+    color: rgba($color-secondary-700, 0.7);
+
+    .custom-select__dropdown-indicator {
+      background: url('../componets/UI/icons/scss/arrow-down-hover.svg') center no-repeat;
+    }
+  }
+
+  &.custom-select__control--is-focused {
+    outline: none;
+    border: 1px solid $color-primary-100;
+    border-bottom: none;
+  }
+
+  &.custom-select__control--menu-is-open {
+    outline: none;
+    border: 1px solid $color-primary-100;
+    border-bottom: none;
+    border-radius: $base * 2.5 $base * 2.5 0 0;
+
+    .custom-select__dropdown-indicator {
+      background: url('../componets/UI/icons/scss/arrow-up.svg') center no-repeat;
+    }
+  }
+}
+
+// === / MAIN CONTROLLER ===
+
+// === OPTIONS-MENU ===
+div .custom-select__menu {
+  margin: 0;
+  border: 1px solid $color-primary-100;
+  border-top: none;
+  border-radius: 0 0 $base * 2.5 $base * 2.5;
+  box-shadow: $base * 0.5 $base * 4 $base * 7.5 rgba($color-secondary-500, 0.1);
+}
+
+// === / OPTIONS-MENU ===
+
+// === MENU-LIST ===
+.custom-select__menu .custom-select__menu-list {
+  padding: $base * 3.5 $base * 4 $base;
+}
+
+// === / MENU-LIST ===
+
+// === MENU-OPTIONS ===
+div .custom-select__option {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 $base * 4 0;
+  padding: 0 0 0 $base * 5;
+  height: $base * 3.5;
+  font-size: $fz-xs;
+  font-weight: $fw-semi-bold;
+  color: $color-secondary-400;
+  vertical-align: middle;
+  line-height: 1.1;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-secondary-700;
+    background: none;
+  }
+
+  &.custom-select__option--is-focused {
+    color: $color-secondary-700;
+    background: none;
+  }
+
+  &.custom-select__option--is-selected {
+    color: $color-secondary-700;
+    background: none;
+
+    &::before {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: $base * 4;
+      width: $base * 3.5;
+      content: '✓';
+      color: $color-primary-600;
+      transform: translateY(-50%);
+    }
+  }
+}
+// === / MENU-OPTIONS ===

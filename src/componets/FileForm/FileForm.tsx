@@ -12,6 +12,7 @@ import { ModalContext } from '../../context';
 import { showError } from '../../store/reducers/notificationReducer';
 
 import stl from './fileForm.module.scss';
+import { showPopup } from '../../store/reducers/popupReducer';
 
 function FileForm() {
   const { setModal } = useContext(ModalContext);
@@ -56,6 +57,14 @@ function FileForm() {
     accept: { 'image/*': [] },
   });
 
+  const rootClasses = [stl.uploader];
+  if (isDragAccept) {
+    rootClasses.push(stl.drop);
+  }
+  if (errSave) {
+    rootClasses.push(stl.error);
+  }
+
   const handleRemove = (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation();
     setModal({
@@ -66,14 +75,6 @@ function FileForm() {
     });
   };
 
-  const rootClasses = [stl.uploader];
-  if (isDragAccept) {
-    rootClasses.push(stl.drop);
-  }
-  if (errSave) {
-    rootClasses.push(stl.error);
-  }
-
   useEffect(() => {
     errSave && dispatch(showError(`Ошибка сохранения файла: ${errSave}`));
     errRemove && dispatch(showError(`Ошибка удаления файла: ${errRemove}`));
@@ -83,7 +84,13 @@ function FileForm() {
     <div>
       <div className={stl.container}>
         {note.file && (
-          <div className={stl.image}>
+          <div
+            onClick={() => {
+				console.log('click')
+				note.file && dispatch(showPopup(note.file))
+			}}
+            className={stl.image}
+          >
             <img src={note.file.url} alt={note.file.name} />
             <span onClick={handleRemove} className={stl.delete}>
               <IconDeleteTag />

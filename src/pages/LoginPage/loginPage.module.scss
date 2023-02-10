@@ -7,14 +7,14 @@
   height: $base * 8;
   padding: $base * 2 $base * 3.5 $base * 2.5 $base * 4;
   font-size: $fz-xs;
-  color: $color-secondary-300;
+  color: $color-secondary-400;
   background: $color-secondary-100;
-  border: 1px solid $color-primary-50;
+  border: 1px solid $color-primary-100;
   border-radius: $base * 2.5;
 }
 
 .active {
-  color: $color-secondary-500;
+  color: $color-secondary-700;
 }
 
 .form {
@@ -22,7 +22,7 @@
   min-height: $base * 96;
   margin: $base * 44 auto;
   background: $color-secondary-100;
-  border: 1px solid $color-primary-300;
+  border: 1px solid $color-primary-400;
   border-radius: $base * 2.5;
 
   @media (max-width: $breakpoint-sm-max) {
@@ -31,6 +31,6 @@
 
   @media (max-width: $breakpoint-xs-max) {
     width: auto;
-	margin: $base * 44 $base * 3;
+    margin: $base * 44 $base * 3;
   }
 }

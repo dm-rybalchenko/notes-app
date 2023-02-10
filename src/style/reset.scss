@@ -52,7 +52,6 @@ textarea {
   background-color: inherit;
 }
 
-
 input::-ms-clear {
   display: none;
 }
@@ -97,21 +96,21 @@ h6 {
 }
 
 table {
-	border-collapse: inherit;
+  border-collapse: inherit;
 }
 
 :focus::-webkit-input-placeholder {
-    color: transparent;
+  color: transparent;
 }
 
 :focus::-moz-placeholder {
-    color: transparent;
+  color: transparent;
 }
 
 :focus:-moz-placeholder {
-    color: transparent;
+  color: transparent;
 }
 
 :focus:-ms-input-placeholder {
-    color: transparent;
+  color: transparent;
 }

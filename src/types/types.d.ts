@@ -14,8 +14,12 @@ interface IMainState {
   editNote: IEditNote;
   modal: IModal;
   notification: INotification;
+  popup: IPopup;
 }
 
+interface IPopup {
+	popup: null | IFile;
+  }
 interface IEditNote {
   note: INote;
   html: string;
@@ -149,14 +153,17 @@ interface IButtonProps {
   onClick?: (e: MouseEventHandler<HTMLButtonElement>) => void;
 }
 
+interface IOption {
+  value: string;
+  name: string;
+}
 interface ISelectProps {
-  value: string | number;
-  onChange: (value: string | string) => void;
-  defaultValue: string;
-  options: {
-    value: string | number;
-    name: string;
-  }[];
+  value: IOption;
+  onChange: (
+    newValue: SingleValue<IOption>,
+    actionMeta: ActionMeta<IOption>
+  ) => void;
+  options: IOption[];
 }
 
 interface IInputProps {

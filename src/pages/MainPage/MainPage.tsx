@@ -9,7 +9,7 @@ import useObserver from '../../hooks/useObserver';
 import usePaginationNotes from '../../hooks/usePaginationNotes';
 import { addAllNotes } from '../../store/reducers/notesReducer';
 import { setPage } from '../../store/reducers/paginationReducer';
-import Loader from '../../componets/UI/loader/Loader';
+import NotesSkeleton from '../../componets/UI/skeleton/NotesSkeleton';
 import { Pagination } from '../../componets/UI/pagination/Pagination';
 import Header from '../../componets/Header/Header';
 import Filters from '../../componets/Filters/Filters';
@@ -77,7 +77,7 @@ function MainPage() {
         <Filters favorites={showFavorites} setFavorites={setShowFavorites} />
         <div>
           {isLoading ? (
-            <Loader />
+            <NotesSkeleton />
           ) : (
             <div>
               {showFavorites ? (

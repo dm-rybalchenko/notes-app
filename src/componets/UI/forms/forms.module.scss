@@ -8,7 +8,7 @@
 .title {
   margin-top: $base * 10;
   text-align: center;
-  font-size: $fz-title-s;
+  font-size: $fz-xxxl;
   font-weight: $fw-bold;
 
   @media (max-width: $breakpoint-sm-max) {
@@ -46,7 +46,7 @@
 .sub_btn {
   margin-top: $base * 8.5;
   font-size: $fz-xxs;
-  color: $color-secondary-300;
+  color: $color-secondary-400;
 
   &:hover {
     text-decoration: underline;
@@ -55,7 +55,7 @@
 
 .error,
 .error:focus {
-    border: 2px solid $color-danger;
+  border: $base * 0.5 solid $color-danger-200;
 }
 
 .success,
@@ -63,7 +63,7 @@
   position: relative;
 
   input {
-    border: 2px solid $color-success;
+    border: $base * 0.5 solid $color-success;
   }
 
   &::after {
@@ -82,9 +82,9 @@
   width: 100%;
   padding: $base * 2.5 $base * 5;
   text-align: center;
-  color: $color-danger;
-  font-size: $fz-xlxxs;
+  color: $color-danger-200;
+  font-size: $fz-xxxs;
   line-height: 1.5;
-  background: $color-danger-regular;
+  background: $color-danger-100;
   border-radius: $base * 2.5;
 }

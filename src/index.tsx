@@ -7,6 +7,7 @@ import { store } from './store';
 import './style/reset.scss';
 import './style/common.scss';
 import './style/fonts.scss';
+import './style/select.scss';
 
 
 const root = ReactDOM.createRoot(

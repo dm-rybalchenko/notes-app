@@ -68,9 +68,8 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
           Избранное
         </button>
         <Select
-          value={filter.sort}
-          onChange={(value) => dispatch(sortNotes(value))}
-          defaultValue="Сортировать"
+          value={{ value: 'new', name: 'По дате изменения' }}
+          onChange={(value) => value && dispatch(sortNotes(value?.value))}
           options={[
             { value: 'new', name: 'По дате изменения' },
             { value: 'title', name: 'По заголовку' },
@@ -78,14 +77,13 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
           ]}
         />
         <Select
-          value={limit}
-          onChange={(value) => dispatch(setLimit(parseInt(value)))}
-          defaultValue="Заметок на странице"
+          value={{ value: '10', name: 'По 10' }}
+          onChange={(value) => value && dispatch(setLimit(parseInt(value?.value)))}
           options={[
-            { value: -1, name: 'Выводить все' },
-            { value: 5, name: 'По 5' },
-            { value: 10, name: 'По 10' },
-            { value: 15, name: 'По 15' },
+            { value: '-1', name: 'Выводить все' },
+            { value: '5', name: 'По 5' },
+            { value: '10', name: 'По 10' },
+            { value: '15', name: 'По 15' },
           ]}
         />
         <div className={stl.lazy}>

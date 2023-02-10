@@ -1,0 +1,40 @@
+@import 'src/style/variables.scss';
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $base * 4;
+  margin-top: $base * 6.5;
+}
+
+.title {
+  width: $base * 64;
+  height: $base * 6;
+  margin-top: $base * 7.5;
+  background: linear-gradient(
+    270deg,
+    $color-skeleton-start 0%,
+    $color-skeleton-end 50%
+  );
+  border-radius: $base * 8;
+  opacity: 0.2;
+}
+
+.note {
+  width: $base * 87.5;
+  height: $base * 40;
+  background: linear-gradient(
+    270deg,
+    $color-skeleton-start 0%,
+    $color-skeleton-end 50%
+  );
+  border-radius: $base * 2.5;
+  opacity: 0.2;
+}
+
+.line {
+  margin-top: $base * 7.5;
+  width: 100%;
+  height: 1px;
+  background-color: $color-skeleton-line;
+}

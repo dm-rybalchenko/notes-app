@@ -20,12 +20,15 @@ import Modal from '../../componets/Modal/Modal';
 import { ModalContext } from '../../context';
 import IconBack from '../../componets/UI/icons/IconBack';
 import { showError } from '../../store/reducers/notificationReducer';
+import Loader from '../../componets/UI/loader/Loader';
 
 import stl from './editNote.module.scss';
+import Popup from '../../componets/Popup/Popup';
 
 
 function EditNote() {
   const { modal } = useContext(ModalContext);
+  const {popup} = useSelector((state: IMainState) => state.popup)
   const { note, currentTags } = useSelector(
     (state: IMainState) => state.editNote
   );
@@ -79,6 +82,7 @@ function EditNote() {
           <IconBack />
           <span>Все заметки</span>
         </Link>
+		{isLoading && <Loader/>}
         <Button onClick={handleExit} modClass={stl.save_btn}>
           Сохранить
         </Button>
@@ -98,6 +102,7 @@ function EditNote() {
           />
         </div>
         {modal && <Modal />}
+		{popup && <Popup />}
       </main>
     </>
   );

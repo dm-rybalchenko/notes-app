@@ -13,10 +13,10 @@
   cursor: pointer;
 
   &:hover {
-    box-shadow: 2px 8px 45px rgba(20, 44, 89, 0.2);
+    box-shadow: $base * 0.5 $base * 2 $base * 11 rgba($color-secondary-700, 0.2);
 
     [class^='note_title'] {
-      color: $color-primary-500;
+      color: $color-primary-600;
     }
   }
 }
@@ -34,7 +34,7 @@
   margin-top: $base * 2.75;
   font-size: $fz-xxs;
   font-weight: $fw-bold;
-  color: $color-secondary-300;
+  color: $color-secondary-400;
 
   button {
     display: flex;
@@ -60,58 +60,57 @@
     height: $base;
     content: '';
     border-radius: 50%;
-    background-color: $color-secondary-300;
+    background-color: $color-secondary-400;
     transform: translate(50%, 50%);
   }
 }
 
 .pin {
   &:hover {
-    color: $color-primary-500;
+    color: $color-primary-600;
 
     [class='pin'] {
-      stroke: $color-primary-500;
+      stroke: $color-primary-600;
     }
 
     [class='unpin'] {
-      stroke: $color-primary-500;
-      fill: $color-primary-500;
+      stroke: $color-primary-600;
+      fill: $color-primary-600;
     }
   }
 }
 
 .favorites {
   &:hover {
-    color: $color-primary-500;
+    color: $color-primary-600;
 
     path {
-      stroke: $color-primary-500;
+      stroke: $color-primary-600;
     }
   }
 }
 
 .in_favorites {
-  color: $color-secondary-500;
+  color: $color-secondary-700;
 
   & path {
-    stroke: $color-danger;
-    fill: $color-danger;
+    stroke: $color-danger-200;
+    fill: $color-danger-200;
   }
 
   &:hover {
-	
     path {
-      stroke: $color-danger;
+      stroke: $color-danger-200;
     }
   }
 }
 
 .remove {
   &:hover {
-    color: $color-danger;
+    color: $color-danger-200;
 
     path {
-      stroke: $color-danger;
+      stroke: $color-danger-200;
     }
   }
 }
@@ -122,7 +121,7 @@
   justify-content: space-between;
   font-size: $fz-xs;
   font-weight: $fw-medium;
-  color: $color-secondary-300;
+  color: $color-secondary-400;
 }
 
 .content {
@@ -133,8 +132,8 @@
   overflow: hidden;
   background: linear-gradient(
     180deg,
-    #7a8899 0%,
-    rgba(122, 136, 153, 0.29) 100%
+    $color-secondary-500 0%,
+    rgba($color-secondary-500, 0.29) 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -143,7 +142,7 @@
 }
 
 .date {
-  color: $color-gray;
+  color: rgba($color-secondary-400, 0.8);
   font-size: $fz-xxxs;
   font-weight: $fw-medium;
   letter-spacing: 0.02em;

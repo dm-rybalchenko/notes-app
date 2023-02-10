@@ -10,8 +10,8 @@
 
   @media (max-width: $breakpoint-xs-max) {
     flex-direction: column;
-	gap: $base * 6;
-	padding-bottom: $base * 2;
+    gap: $base * 6;
+    padding-bottom: $base * 2;
   }
 }
 
@@ -26,15 +26,15 @@
 
 .subtitle {
   margin-top: $base;
-  color: $color-secondary-300;
-  font-size: $fz-xllxxs;
+  color: $color-secondary-400;
+  font-size: $fz-small-footer;
   font-weight: $fw-semi-bold;
 }
 
 .develop {
   width: $base * 25;
   text-align: right;
-  font-size: $fz-xlxxs;
+  font-size: $fz-xxxs;
   font-weight: $fw-semi-bold;
   line-height: 1.2;
 
@@ -44,6 +44,6 @@
 }
 
 .develop_title {
-  color: $color-secondary-300;
-  font-size: $fz-xllxxs;
+  color: $color-secondary-400;
+  font-size: $fz-small-footer;
 }

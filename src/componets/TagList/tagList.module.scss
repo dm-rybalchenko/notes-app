@@ -1,9 +1,9 @@
 @import 'src/style/variables.scss';
 
 .tags {
-	display: flex;
-	flex-wrap: wrap;
-	gap: $fz-l;  
+  display: flex;
+  flex-wrap: wrap;
+  gap: $fz-l;
 }
 
 .delete {
@@ -13,9 +13,8 @@
   margin-left: $base;
 
   &:hover {
-	
-	path {
-	  fill: $color-danger;
-	}
+    path {
+      fill: $color-danger-200;
+    }
   }
 }

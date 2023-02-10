@@ -13,7 +13,7 @@
   min-height: $base * 20;
   padding: $base * 3 $base * 15;
   background: rgba($color-secondary-100, 0.7);
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur($base * 12.5);
 
   @media (max-width: $breakpoint-sm-max) {
     padding: $base * 3 $base * 10;
@@ -31,7 +31,7 @@
     height: $base * 4.5;
     margin-right: $base * 1;
     content: '';
-    background: url('../../img/add-circle.svg') 0 0/100% 100%;
+    background: url('../UI/icons/scss/add-circle.svg') 0 0/100% 100%;
   }
 }
 
@@ -50,7 +50,7 @@
   font-weight: $fw-bold;
   cursor: pointer;
   background: $color-secondary-100;
-  border: 1px solid $color-primary-50;
+  border: 1px solid $color-primary-100;
   border-radius: $base * 2.5;
 
   & svg {
@@ -58,17 +58,17 @@
 
     &:hover {
       & path {
-        fill: $color-danger;
+        fill: $color-danger-200;
       }
     }
   }
 
   &:hover {
-    background: $color-secondary-250;
+    background: $color-secondary-200;
   }
 
   &:has(svg:hover) {
-    background: $color-danger-slight;
+    background: $color-danger-50;
   }
 }
 
@@ -87,9 +87,9 @@
   }
 
   input::placeholder {
-    color: $color-secondary-300;
+    color: $color-secondary-400;
     font-weight: $fw-semi-bold;
-    -webkit-text-fill-color: $color-secondary-300;
+    -webkit-text-fill-color: $color-secondary-400;
   }
 
   input:focus::placeholder {

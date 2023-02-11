@@ -1,78 +1,64 @@
-# Notes app
+# Note app
 
-* Creating/removing/editing notes with tags
+[ENG](https://github.com/dm-rybalchenko/notes-app/tree/develop/docs/README.md)
 
-* Adding/removing tags for a note in edit mode via "#"
+Fullstack-приложение для заметок. Создано в команде web-разработчика и UI/UX-дизайнера.
 
-* Highlighting tags in edit mode by default and by clicking on a tag below
+[Ссылка на приложение](https://notes-app-umber.vercel.app)
 
-* Filter notes by tags on the main page
+### Стек
 
-* Adding/removing tags for the filter from the main page
+* Клиент: React, TypeScript, Redux-Toolkit, SCSS-modules, axios
 
-* Viewing notes from the main page by clicking on the note title
+* Сервер: Node, Express, MongoDB, Mongoose, JWT, Cloudinary, nodeMailer ([Ссылка на исходный код сервера](https://github.com/dm-rybalchenko/notes-app-server))
 
-* Saving notes privately in localStorage individually for every user
+### Функционал
 
-* Adaptive markup (layout)
+* Регистрация пользователей с подтверждением аккаунта по email
 
-[Link to deployed application](https://resplendent-axolotl-6ea452.netlify.app/)
+* Создание, удаление и редактирование заметок индивидуально для каждого пользователя
 
-## Screenshots
+* Возможность загрузки(удаления, апдейта) и прикрепления к каждой заметке файла с изображением, в т.ч. drag-and-drop'ом. Последующий просмотр картинок в поп-апе
 
-![Screenshot-app-notes](/docs/Screenshot-app-notes.jpg)
+* На странице редактирования в теле заметки присутствует добавление тегов в реальном времени через символ `#`
 
-![Screenshot-app-notes-edit](/docs/Screenshot-app-notes-edit.jpg)
+* Теги подсвечиваются, отображаются списком внизу, можно их выделать, удалять
 
-![Screenshot-app-notes-filter](/docs/Screenshot-app-notes-filter.jpg)
+* Различные фильтры и сортировки заметок на главной, в т.ч. по тегам. Поиск, выбор lazy-loading или пагинации
 
-![Screenshot-app-notes-tags](/docs/Screenshot-app-notes-tags.jpg)
+* Заметки можно закреплять наверх, добавлять в избранное
 
-*PC and mobile versions have been implemented.*
+* Лоадер-скелетон при загрузке заметок
 
-# Getting Started with Create React App
+* Страница регистрации и входа с валидацией полей
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Диалоговое окно удаления заметки, появляющееся в месте клика
 
-## Available Scripts
+* Предусмотрены всплывающие ошибки и предупреждения
 
-In the project directory, you can run:
+* Кастомная страница 404
 
-### `npm start`
+* Адаптивная верстка
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Скриншоты
 
-### `npm test`
+Главная, диалоговое окно удаления
+![Screenshot-app-notes](/docs/screenshots/Screenshot-main.jpg)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Страница редактирования заметки, загрузка файла, тег
+![Screenshot-app-notes-edit](/docs/screenshots/Screenshot-edit.jpg)
 
-### `npm run build`
+Сортировка и избранное
+![Screenshot-app-notes-filter](/docs/screenshots/Screenshot-filters.jpg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Поиск и пагинация
+![Screenshot-app-notes-search](/docs/screenshots/Screenshot-search.jpg)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Страница входа и валидация полей
+![Screenshot-app-notes-login](/docs/screenshots/Screenshot-login.jpg)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+*Реализованы версии для ПК и мобильных устройств.*
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Для разработчиков](https://github.com/dm-rybalchenko/notes-app/tree/develop/docs/for-developers.md)

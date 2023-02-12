@@ -5,7 +5,7 @@ import ButtonBig from '../../componets/UI/buttons/button-big/ButtonBig';
 import stl from './page404.module.scss';
 
 
-export default function Page404() {
+export default function Page404(): JSX.Element {
   return (
     <>
       <Header>

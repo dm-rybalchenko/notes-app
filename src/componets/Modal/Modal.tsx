@@ -1,11 +1,12 @@
 import { useEffect, useContext } from 'react';
 import { ModalContext } from '../../context';
+import { IModalContext } from '../../interfaces/context.types';
 import { getModalPosition } from '../../utils/utils';
 import stl from './modal.module.scss';
 
 
-function Modal() {
-  const { setModal, modal } = useContext(ModalContext);
+function Modal(): JSX.Element {
+  const { setModal, modal } = useContext<IModalContext>(ModalContext);
   const appearCoords = getModalPosition(modal?.coords);
 
   const exitModal = () => {

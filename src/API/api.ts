@@ -1,4 +1,5 @@
 import axios, { AxiosRequestHeaders } from 'axios';
+import { IAuthModel } from '../interfaces/apiModels.types';
 
 
 export const API_URL = process.env.REACT_APP_SERVER_URL;
@@ -12,7 +13,7 @@ $api.interceptors.request.use((config) => {
   (
     config.headers as Partial<AxiosRequestHeaders>
   ).Authorization = `Bearer ${localStorage.getItem('token')}`;
-  
+
   return config;
 });
 
@@ -31,7 +32,7 @@ $api.interceptors.response.use(
       originalRequest._isRetry = true;
 
       try {
-        const response = await axios.get<AuthResponce>(
+        const response = await axios.get<IAuthModel>(
           `${API_URL}/user/refresh`,
           {
             withCredentials: true,

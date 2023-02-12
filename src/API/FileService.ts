@@ -1,15 +1,16 @@
 import $api from './api';
+import { IFileModel } from '../interfaces/apiModels.types';
 
 
 export default class FileService {
-  static async upload(file: FormData): Promise<IFile> {
-    const response = await $api.post<IFile>('/upload', file);
+  static async upload(file: FormData): Promise<IFileModel> {
+    const response = await $api.post<IFileModel>('/upload', file);
 
     return response.data;
   }
 
-  static async update(id: string, file: FormData): Promise<IFile> {
-    const response = await $api.put<IFile>(`/upload/${id}`, file);
+  static async update(id: string, file: FormData): Promise<IFileModel> {
+    const response = await $api.put<IFileModel>(`/upload/${id}`, file);
 
     return response.data;
   }

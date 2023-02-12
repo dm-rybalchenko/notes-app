@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import { INotification } from '../../interfaces/reducers.types';
 
 
 const initialState: INotification = {

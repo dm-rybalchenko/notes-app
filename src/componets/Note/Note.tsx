@@ -2,6 +2,8 @@ import { useCallback, useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { INote, INotePorps } from './note.types';
+import { IModalContext } from '../../interfaces/context.types';
 import NoteService from '../../API/NoteService';
 import { ModalContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
@@ -15,8 +17,9 @@ import IconUnpin from '../UI/icons/IconUnpin';
 
 import stl from './note.module.scss';
 
-function Note({ note }: INotePorps) {
-  const { setModal } = useContext(ModalContext);
+
+function Note({ note }: INotePorps): JSX.Element {
+  const { setModal } = useContext<IModalContext>(ModalContext);
   const dispatch = useDispatch();
   const router = useNavigate();
 

@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { IAuthModel } from '../interfaces/apiModels.types';
+import { IModal } from '../interfaces/context.types';
 import { API_URL } from '../API/api';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import AppRouter from '../router/AppRouter';
 import Loader from '../componets/UI/loader/Loader';
 import { LoadingContext, ModalContext } from '../context';
@@ -14,16 +17,14 @@ import Error from '../componets/UI/notifications/Error';
 import stl from './app.module.scss';
 
 
-function App() {
+function App(): JSX.Element {
   const [lazyLoading, setLazyLoading] = useState<boolean>(true);
   const [modal, setModal] = useState<null | IModal>(null);
-  const { error, warning } = useSelector(
-    (state: IMainState) => state.notification
-  );
+  const { error, warning } = useTypedSelector((state) => state.notification);
   const dispatch = useDispatch();
 
   const [checkAuth, isLoadingCheck, errCheck] = useFetching(async () => {
-    const response = await axios.get<AuthResponce>(`${API_URL}/user/refresh`, {
+    const response = await axios.get<IAuthModel>(`${API_URL}/user/refresh`, {
       withCredentials: true,
     });
 
@@ -31,6 +32,16 @@ function App() {
     dispatch(setUser(response.data.user));
     dispatch(setIsAuth(true));
   });
+
+  const LoadingContextValue = useMemo(
+    () => ({ lazyLoading, setLazyLoading }),
+    [lazyLoading, setLazyLoading]
+  );
+
+  const ModalContextValue = useMemo(
+    () => ({ modal, setModal }),
+    [modal, setModal]
+  );
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -45,18 +56,8 @@ function App() {
   return (
     <>
       <div className={stl.wrapper}>
-        <LoadingContext.Provider
-          value={{
-            lazyLoading,
-            setLazyLoading,
-          }}
-        >
-          <ModalContext.Provider
-            value={{
-              modal,
-              setModal,
-            }}
-          >
+        <LoadingContext.Provider value={LoadingContextValue}>
+          <ModalContext.Provider value={ModalContextValue}>
             {error && <Error />}
             {warning && <Warning />}
             <AppRouter />

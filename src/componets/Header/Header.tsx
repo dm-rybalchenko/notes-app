@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { IHeaderPorps } from './header.types';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import {
   searchNotes,
   setDefaultFilter,
@@ -15,17 +17,18 @@ import useFetching from '../../hooks/useFetching';
 import UserService from '../../API/UserService';
 import { setDefaultPages } from '../../store/reducers/paginationReducer';
 import { setDefaultAuth } from '../../store/reducers/authReducer';
-import Button from '../UI/buttons/button-big/ButtonBig';
+import ButtonBig from '../UI/buttons/button-big/ButtonBig';
 import Input from '../UI/input/Input';
 import IconLogout from '../UI/icons/IconLogout';
 import Loader from '../UI/loader/Loader';
-
-import stl from './header.module.scss';
 import IconLogo from '../UI/icons/IconLogo';
 
-function Header({ children, main }: IHeaderPorps) {
-  const filter = useSelector((state: IMainState) => state.filter);
-  const auth = useSelector((state: IMainState) => state.auth);
+import stl from './header.module.scss';
+
+
+function Header({ children, main }: IHeaderPorps): JSX.Element {
+  const filter = useTypedSelector((state) => state.filter);
+  const auth = useTypedSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [logout, isLoadingLogout, errLogout] = useFetching(async () => {
@@ -50,7 +53,7 @@ function Header({ children, main }: IHeaderPorps) {
 
   return (
     <header className={stl.header}>
-      <Link to='/' className={stl.logo}>
+      <Link to="/" className={stl.logo}>
         <IconLogo />
       </Link>
       {main ? (
@@ -59,7 +62,7 @@ function Header({ children, main }: IHeaderPorps) {
             {auth.user.email}
             <IconLogout onClick={logout} />
           </button>
-		  {isLoadingLogout && <Loader />}
+          {isLoadingLogout && <Loader />}
           <div className={stl.search}>
             <Input
               onChange={(e) => dispatch(searchNotes(e.target.value))}
@@ -70,7 +73,7 @@ function Header({ children, main }: IHeaderPorps) {
           </div>
           <div className={stl.add}>
             <Link to="/edit">
-              <Button modClass={stl.btn}>Добавить заметку</Button>
+              <ButtonBig modClass={stl.btn}>Добавить заметку</ButtonBig>
             </Link>
           </div>
         </>

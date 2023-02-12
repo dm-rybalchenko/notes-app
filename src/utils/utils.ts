@@ -1,9 +1,11 @@
 import dayjs from 'dayjs';
+import { INoteModel } from '../interfaces/apiModels.types';
+
 
 export const EmailReg =
   /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
 
-export function createNewNote(): INote {
+export function createNewNote(): INoteModel {
   return {
     title: '',
     body: '',
@@ -14,7 +16,7 @@ export function createNewNote(): INote {
   };
 }
 
-export function prepareNote(note: INote): INote {
+export function prepareNote(note: INoteModel): INoteModel {
   let preparedNote = { ...note, date: dayjs().format() };
 
   if (!note.title && note.body) {

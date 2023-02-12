@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
+import { INoteModel } from '../interfaces/apiModels.types';
 
-function useTags(notes: INote[]): string[] {
+
+function useTags(notes: INoteModel[]): string[] {
   return useMemo(() => {
     const tagsArr: string[] = [];
 
@@ -12,6 +14,5 @@ function useTags(notes: INote[]): string[] {
     return tagsArr;
   }, [notes]);
 }
-
 
 export default useTags;

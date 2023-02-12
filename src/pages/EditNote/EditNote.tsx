@@ -1,7 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { INote } from './editNote.types';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { prepareNote } from '../../utils/utils';
 import TagList from '../../componets/TagList/TagList';
 import Button from '../../componets/UI/buttons/button-big/ButtonBig';
@@ -21,17 +23,15 @@ import { ModalContext } from '../../context';
 import IconBack from '../../componets/UI/icons/IconBack';
 import { showError } from '../../store/reducers/notificationReducer';
 import Loader from '../../componets/UI/loader/Loader';
-
-import stl from './editNote.module.scss';
 import Popup from '../../componets/Popup/Popup';
 
+import stl from './editNote.module.scss';
 
-function EditNote() {
+
+function EditNote(): JSX.Element {
   const { modal } = useContext(ModalContext);
-  const {popup} = useSelector((state: IMainState) => state.popup)
-  const { note, currentTags } = useSelector(
-    (state: IMainState) => state.editNote
-  );
+  const { popup } = useTypedSelector((state) => state.popup);
+  const { note, currentTags } = useTypedSelector((state) => state.editNote);
   const dispatch = useDispatch();
   const router = useNavigate();
 
@@ -82,7 +82,7 @@ function EditNote() {
           <IconBack />
           <span>Все заметки</span>
         </Link>
-		{isLoading && <Loader/>}
+        {isLoading && <Loader />}
         <Button onClick={handleExit} modClass={stl.save_btn}>
           Сохранить
         </Button>
@@ -102,7 +102,7 @@ function EditNote() {
           />
         </div>
         {modal && <Modal />}
-		{popup && <Popup />}
+        {popup && <Popup />}
       </main>
     </>
   );

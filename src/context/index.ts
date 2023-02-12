@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { ILoadingContext, IModalContext } from '../interfaces/context.types';
 
 
 export const LoadingContext = createContext<ILoadingContext>(

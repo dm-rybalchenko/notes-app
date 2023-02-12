@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
+import { IFileModel } from '../../interfaces/apiModels.types';
+import { IPopup } from '../../interfaces/reducers.types';
 
 
 const initialState: IPopup = {
@@ -10,7 +11,7 @@ const popupSlice = createSlice({
   name: 'popup',
   initialState,
   reducers: {
-    showPopup(state, action: PayloadAction<IFile>) {
+    showPopup(state, action: PayloadAction<IFileModel>) {
       state.popup = action.payload;
     },
     closePopup(state) {

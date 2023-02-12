@@ -1,6 +1,7 @@
 import stl from './footer.module.scss';
 
-export default function Footer() {
+
+export default function Footer(): JSX.Element {
   return (
     <footer className={stl.footer}>
       <div className={stl.left}></div>

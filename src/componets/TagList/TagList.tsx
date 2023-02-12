@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 
+import { ITagListProps } from './tagList.types';
 import ButtonSmall from '../UI/buttons/button-small/ButtonSmall';
 import IconDeleteTag from '../UI/icons/IconDeleteTag';
 import btnStl from '../UI/buttons/button-small/buttonSmall.module.scss';
+import { IModalContext } from '../../interfaces/context.types';
 import { ModalContext } from '../../context';
 
 import stl from './tagList.module.scss';
 
 
 function TagList({ modClass, tags, current, choose, remove }: ITagListProps) {
-  const [chosenTags, setChosenTags] = useState(current);
-  const { setModal } = useContext(ModalContext);
+  const [chosenTags, setChosenTags] = useState<string[] | undefined>(current);
+  const { setModal } = useContext<IModalContext>(ModalContext);
   const rootClasses = [stl.tags];
 
   if (modClass) {

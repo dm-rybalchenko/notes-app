@@ -1,4 +1,4 @@
-export default function IconAddFile() {
+export default function IconAddFile(): JSX.Element {
   return (
     <svg
       width="70"

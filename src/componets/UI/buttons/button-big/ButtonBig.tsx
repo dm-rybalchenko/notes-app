@@ -1,6 +1,12 @@
+import { IButtonBigProps } from './buttonBig.types';
 import stl from './buttonBig.module.scss';
 
-function ButtonBig({ children, modClass, ...props }: IButtonProps) {
+
+function ButtonBig({
+  children,
+  modClass,
+  ...props
+}: IButtonBigProps): JSX.Element {
   const rootClasses = [stl.button];
 
   if (modClass) {

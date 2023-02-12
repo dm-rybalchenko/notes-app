@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { INote } from './noteForm.types';
 import NoteService from '../../API/NoteService';
 import {
   addTag,
@@ -14,9 +16,9 @@ import { tagController } from '../../utils/utils';
 import stl from './noteForm.module.scss';
 
 
-function NoteForm() {
-  const { notes } = useSelector((state: IMainState) => state.notes);
-  const { note, html } = useSelector((state: IMainState) => state.editNote);
+function NoteForm(): JSX.Element {
+  const { notes } = useTypedSelector((state) => state.notes);
+  const { note, html } = useTypedSelector((state) => state.editNote);
   const dispatch = useDispatch();
   const params = useParams();
   const router = useNavigate();

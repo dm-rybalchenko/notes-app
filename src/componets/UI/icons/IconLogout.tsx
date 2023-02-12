@@ -2,7 +2,7 @@ export default function IconLogout({
   onClick,
 }: {
   onClick: React.MouseEventHandler<SVGSVGElement>;
-}) {
+}): JSX.Element {
   return (
     <svg
       onClick={onClick}

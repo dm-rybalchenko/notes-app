@@ -1,4 +1,4 @@
-export default function IconFavorites() {
+export default function IconFavorites(): JSX.Element {
   return (
     <svg
       width="14"

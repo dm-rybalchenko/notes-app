@@ -1,7 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { INote } from './fileForm.types';
+import { IModalContext } from '../../interfaces/context.types';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import FileService from '../../API/FileService';
 import useFetching from '../../hooks/useFetching';
 import Loader from '../UI/loader/Loader';
@@ -10,13 +13,14 @@ import IconDeleteTag from '../UI/icons/IconDeleteTag';
 import IconAddFile from '../UI/icons/IconAddFile';
 import { ModalContext } from '../../context';
 import { showError } from '../../store/reducers/notificationReducer';
-
-import stl from './fileForm.module.scss';
 import { showPopup } from '../../store/reducers/popupReducer';
 
-function FileForm() {
-  const { setModal } = useContext(ModalContext);
-  const { note } = useSelector((state: IMainState) => state.editNote);
+import stl from './fileForm.module.scss';
+
+
+function FileForm(): JSX.Element {
+  const { setModal } = useContext<IModalContext>(ModalContext);
+  const { note } = useTypedSelector((state) => state.editNote);
   const dispatch = useDispatch();
 
   const [saveFile, isLoadingSave, errSave] = useFetching<FormData>(
@@ -86,9 +90,9 @@ function FileForm() {
         {note.file && (
           <div
             onClick={() => {
-				console.log('click')
-				note.file && dispatch(showPopup(note.file))
-			}}
+              console.log('click');
+              note.file && dispatch(showPopup(note.file));
+            }}
             className={stl.image}
           >
             <img src={note.file.url} alt={note.file.name} />

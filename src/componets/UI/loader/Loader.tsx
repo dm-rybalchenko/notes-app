@@ -1,6 +1,7 @@
 import stl from './loader.module.scss';
 
-export default function Loader() {
+
+export default function Loader(): JSX.Element {
   return (
     <div className={stl.container}>
       <span className={stl.outer}>

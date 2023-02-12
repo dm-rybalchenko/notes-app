@@ -1,4 +1,4 @@
-export default function IconPin() {
+export default function IconPin(): JSX.Element {
   return (
     <svg
       width="13"

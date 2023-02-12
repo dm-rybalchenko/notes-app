@@ -2,19 +2,20 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import UserService from '../../../API/UserService';
-import useFetching from '../../../hooks/useFetching';
-import { setUser, setIsAuth } from '../../../store/reducers/authReducer';
-import { EmailReg } from '../../../utils/utils';
-import Input from '../input/Input';
-import ButtonBig from '../buttons/button-big/ButtonBig';
-import Loader from '../loader/Loader';
-import { showError } from '../../../store/reducers/notificationReducer';
+import { ILoginForm } from './loginForm.types';
+import UserService from '../../../../API/UserService';
+import useFetching from '../../../../hooks/useFetching';
+import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
+import { EmailReg } from '../../../../utils/utils';
+import Input from '../../input/Input';
+import ButtonBig from '../../buttons/button-big/ButtonBig';
+import Loader from '../../loader/Loader';
+import { showError } from '../../../../store/reducers/notificationReducer';
 
-import stl from './forms.module.scss';
+import stl from '../forms.module.scss';
 
 
-function LoginForm() {
+function LoginForm(): JSX.Element {
   const dispatch = useDispatch();
   const {
     register,

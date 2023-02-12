@@ -1,11 +1,13 @@
 import { useMemo } from 'react';
+import { INoteModel } from '../interfaces/apiModels.types';
+
 
 function usePaginationNotes(
   lazy: boolean,
   page: number,
   limit: number,
-  notes: INote[]
-): [INote[], number[]] {
+  notes: INoteModel[]
+): [INoteModel[], number[]] {
   const currentPage = useMemo(() => {
     if (limit === -1) {
       return notes;
@@ -14,11 +16,11 @@ function usePaginationNotes(
     let start = (page - 1) * limit;
     let end = start + limit > notes.length ? notes.length : start + limit;
 
-	if(lazy){
-		start = 0;
-	}
+    if (lazy) {
+      start = 0;
+    }
 
-	return notes.slice(start, end);
+    return notes.slice(start, end);
   }, [page, limit, notes]);
 
   const totalPages = useMemo(

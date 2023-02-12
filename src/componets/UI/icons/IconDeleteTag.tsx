@@ -1,4 +1,4 @@
-export default function IconDeleteTag() {
+export default function IconDeleteTag(): JSX.Element {
 
   return (
     <svg

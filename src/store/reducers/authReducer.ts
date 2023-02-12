@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUserModel } from '../../interfaces/apiModels.types';
+import { IAuth } from '../../interfaces/reducers.types';
 
 
 const initialState: IAuth = {
-  user: {} as IUser,
+  user: {} as IUserModel,
   isAuth: false,
 };
 
@@ -11,10 +13,10 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     setDefaultAuth(state) {
-      state.user = {} as IUser;
+      state.user = {} as IUserModel;
       state.isAuth = false;
     },
-    setUser(state, action: PayloadAction<IUser>) {
+    setUser(state, action: PayloadAction<IUserModel>) {
       state.user = action.payload;
     },
     setIsAuth(state, action: PayloadAction<boolean>) {

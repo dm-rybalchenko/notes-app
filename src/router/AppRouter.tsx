@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
 
+import { useTypedSelector } from '../hooks/useTypedSelector';
 import { publicRoutes, privateRoutes } from './index';
 
 
 function AppRouter() {
-  const auth = useSelector((state: IMainState) => state.auth);
+  const auth = useTypedSelector((state) => state.auth);
 
   return (
     <BrowserRouter>

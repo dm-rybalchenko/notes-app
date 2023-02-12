@@ -1,4 +1,4 @@
-export default function IconTrashBin() {
+export default function IconTrashBin(): JSX.Element {
   return (
     <svg
       width="14"

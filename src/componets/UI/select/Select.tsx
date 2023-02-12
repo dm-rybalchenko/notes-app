@@ -1,11 +1,12 @@
 import Select from 'react-select';
+import { IOption, ISelectProps } from './select.types';
 
 
 export default function CustomSelect({
   value,
   onChange,
   options,
-}: ISelectProps) {
+}: ISelectProps): JSX.Element {
   return (
     <Select<IOption>
       isSearchable={false}

@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { closePopup } from '../../store/reducers/popupReducer';
 import stl from './popup.module.scss';
 
-export default function Popup() {
-  const { popup } = useSelector((state: IMainState) => state.popup);
+
+export default function Popup(): JSX.Element {
+  const { popup } = useTypedSelector((state) => state.popup);
   const dispatch = useDispatch();
 
   const exitPopup = () => {

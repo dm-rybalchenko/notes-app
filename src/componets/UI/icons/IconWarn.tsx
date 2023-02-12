@@ -1,4 +1,4 @@
-export default function IconWarn() {
+export default function IconWarn(): JSX.Element {
   return (
     <svg
       width="20"

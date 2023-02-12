@@ -1,7 +1,10 @@
 import { useContext, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import NoteService from '../../API/NoteService';
 
+import { IFiltersProps, INote } from './filters.types';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { ILoadingContext } from '../../interfaces/context.types';
 import { LoadingContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
 import useTags from '../../hooks/useTags';
@@ -20,11 +23,13 @@ import Switcher from '../UI/switcher/Switcher';
 
 import stl from './filters.module.scss';
 
-function Filters({ favorites, setFavorites }: IFiltersProps) {
-  const { lazyLoading, setLazyLoading } = useContext(LoadingContext);
-  const { notes } = useSelector((state: IMainState) => state.notes);
-  const filter = useSelector((state: IMainState) => state.filter);
-  const { limit } = useSelector((state: IMainState) => state.pagination);
+
+function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
+  const { lazyLoading, setLazyLoading } =
+    useContext<ILoadingContext>(LoadingContext);
+
+  const { notes } = useTypedSelector((state) => state.notes);
+  const filter = useTypedSelector((state) => state.filter);
   const dispatch = useDispatch();
   const tags = useTags(notes);
 
@@ -45,7 +50,7 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
       .map((note) => ({
         ...note,
         body: note.body.replaceAll(tag, tag.slice(1)),
-        tags: note.tags.filter((noteTag) => noteTag !== tag),
+        tags: note.tags.filter((noteTag: string) => noteTag !== tag),
       }));
 
     editedNotes.forEach((note) => dispatch(updateNote(note)));
@@ -78,7 +83,9 @@ function Filters({ favorites, setFavorites }: IFiltersProps) {
         />
         <Select
           value={{ value: '10', name: 'По 10' }}
-          onChange={(value) => value && dispatch(setLimit(parseInt(value?.value)))}
+          onChange={(value) =>
+            value && dispatch(setLimit(parseInt(value?.value)))
+          }
           options={[
             { value: '-1', name: 'Выводить все' },
             { value: '5', name: 'По 5' },

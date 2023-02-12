@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import UserService from '../../../API/UserService';
-import useFetching from '../../../hooks/useFetching';
-import { setUser, setIsAuth } from '../../../store/reducers/authReducer';
-import { showError } from '../../../store/reducers/notificationReducer';
-import { EmailReg } from '../../../utils/utils';
-import ButtonBig from '../buttons/button-big/ButtonBig';
-import Input from '../input/Input';
-import Loader from '../loader/Loader';
 
-import stl from './forms.module.scss';
+import { IRegFormPorps, IRegForm } from './registrationForm.types';
+import UserService from '../../../../API/UserService';
+import useFetching from '../../../../hooks/useFetching';
+import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
+import { showError } from '../../../../store/reducers/notificationReducer';
+import { EmailReg } from '../../../../utils/utils';
+import ButtonBig from '../../buttons/button-big/ButtonBig';
+import Input from '../../input/Input';
+import Loader from '../../loader/Loader';
+
+import stl from '../forms.module.scss';
 
 
-function RegistrationForm({ setLoginPage }: IRegFormPorps) {
+function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
   const dispatch = useDispatch();
   const [fieldsErr, setFieldsErr] = useState<string[]>([
     'email',

@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { INoteModel } from '../../interfaces/apiModels.types';
+import { IEditNote } from '../../interfaces/reducers.types';
 import { createNewNote, wrapChosenTag, wrapTag } from '../../utils/utils';
+
 
 const initialState: IEditNote = {
   note: createNewNote(),
@@ -16,7 +19,7 @@ const editNoteSlice = createSlice({
       state.html = '';
       state.currentTags = [];
     },
-    setNote(state, action: PayloadAction<INote>) {
+    setNote(state, action: PayloadAction<INoteModel>) {
       state.note = action.payload;
     },
     setHtmlContent(state, action: PayloadAction<string>) {

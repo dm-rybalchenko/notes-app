@@ -1,4 +1,4 @@
-export default function IconDropDown() {
+export default function IconDropDown(): JSX.Element {
   return (
     <svg
       width="12"

@@ -1,9 +1,10 @@
 import $api from './api';
+import { IAuthModel } from '../interfaces/apiModels.types';
 
 
 export default class UserService {
-  static async login(email: string, password: string): Promise<AuthResponce> {
-    const response = await $api.post<AuthResponce>('/user/login', {
+  static async login(email: string, password: string): Promise<IAuthModel> {
+    const response = await $api.post<IAuthModel>('/user/login', {
       email,
       password,
     });
@@ -20,8 +21,8 @@ export default class UserService {
   static async registration(
     email: string,
     password: string
-  ): Promise<AuthResponce> {
-    const response = await $api.post<AuthResponce>('/user/registration', {
+  ): Promise<IAuthModel> {
+    const response = await $api.post<IAuthModel>('/user/registration', {
       email,
       password,
     });

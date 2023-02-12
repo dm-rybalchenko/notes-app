@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPagination } from '../../interfaces/reducers.types';
 
 
-const initialState = {
+const initialState: IPagination = {
   page: 1,
   limit: 10,
 };

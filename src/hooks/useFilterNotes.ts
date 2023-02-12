@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { INoteModel } from '../interfaces/apiModels.types';
+import { IFilter } from '../interfaces/reducers.types';
 
-function useFilterNotes(notes: INote[], filter: IFilter): INote[][] {
+
+function useFilterNotes(notes: INoteModel[], filter: IFilter): INoteModel[][] {
   let filteredNotes = useSortNotes(notes, filter.sort);
 
   filteredNotes = useFilterNotesByTags(filteredNotes, filter.tags);
@@ -11,7 +14,7 @@ function useFilterNotes(notes: INote[], filter: IFilter): INote[][] {
   return useSplitNotes(filteredNotes);
 }
 
-function useSplitNotes(notes: INote[]) {
+function useSplitNotes(notes: INoteModel[]) {
   return useMemo(() => {
     return [
       notes.filter((note) => !note.pinned),
@@ -21,7 +24,7 @@ function useSplitNotes(notes: INote[]) {
   }, [notes]);
 }
 
-function useSortNotes(notes: INote[], param: string): INote[] {
+function useSortNotes(notes: INoteModel[], param: string): INoteModel[] {
   return useMemo(() => {
     if (param === 'title') {
       return [...notes].sort((a, b) => a.title.localeCompare(b.title));
@@ -43,7 +46,10 @@ function useSortNotes(notes: INote[], param: string): INote[] {
   }, [param, notes]);
 }
 
-function useFilterNotesByTags(notes: INote[], filterTags: string[]): INote[] {
+function useFilterNotesByTags(
+  notes: INoteModel[],
+  filterTags: string[]
+): INoteModel[] {
   return useMemo(() => {
     if (!filterTags.length) {
       return notes;
@@ -65,7 +71,10 @@ function useFilterNotesByTags(notes: INote[], filterTags: string[]): INote[] {
   }, [filterTags, notes]);
 }
 
-function useFilterNotesBySearch(notes: INote[], searchString: string): INote[] {
+function useFilterNotesBySearch(
+  notes: INoteModel[],
+  searchString: string
+): INoteModel[] {
   return useMemo(() => {
     if (!searchString) {
       return notes;

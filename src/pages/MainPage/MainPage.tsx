@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import NoteService from '../../API/NoteService';
 import { LoadingContext, ModalContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
@@ -20,13 +21,14 @@ import { showError } from '../../store/reducers/notificationReducer';
 
 import stl from './mainPage.module.scss';
 
-function MainPage() {
+
+function MainPage(): JSX.Element {
   const { lazyLoading } = useContext(LoadingContext);
   const { modal } = useContext(ModalContext);
 
-  const { notes } = useSelector((state: IMainState) => state.notes);
-  const filter = useSelector((state: IMainState) => state.filter);
-  const { limit, page } = useSelector((state: IMainState) => state.pagination);
+  const { notes } = useTypedSelector((state) => state.notes);
+  const filter = useTypedSelector((state) => state.filter);
+  const { limit, page } = useTypedSelector((state) => state.pagination);
   const dispatch = useDispatch();
   const lastElement = useRef<HTMLDivElement>(null);
 
@@ -88,7 +90,7 @@ function MainPage() {
                     <>
                       <NoteList
                         notes={pinnedNotes}
-						counter
+                        counter
                         wrapper
                         title="Закрепленные"
                       />

@@ -1,4 +1,4 @@
-export default function IconBack() {
+export default function IconBack(): JSX.Element {
   return (
     <svg
       width="24"

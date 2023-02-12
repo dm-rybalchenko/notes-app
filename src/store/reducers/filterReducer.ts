@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IFilter } from '../../interfaces/reducers.types';
 
 
 const initialState: IFilter = {
@@ -36,5 +37,10 @@ const filterSlice = createSlice({
 });
 
 export default filterSlice.reducer;
-export const { setDefaultFilter, searchNotes, sortNotes, sortByTag, removeTagFromSort } =
-  filterSlice.actions;
+export const {
+  setDefaultFilter,
+  searchNotes,
+  sortNotes,
+  sortByTag,
+  removeTagFromSort,
+} = filterSlice.actions;

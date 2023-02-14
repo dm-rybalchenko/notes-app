@@ -6,7 +6,6 @@ import stl from './buttonBig.module.scss';
 function ButtonBig({
   children,
   modClass,
-  type,
   ...props
 }: IButtonBigProps): JSX.Element {
   const rootClasses = [stl.button];
@@ -16,7 +15,7 @@ function ButtonBig({
   }
 
   return (
-    <button {...props} type={type || 'button'} className={rootClasses.join(' ')}>
+    <button {...props} className={rootClasses.join(' ')}>
       {children}
     </button>
   );

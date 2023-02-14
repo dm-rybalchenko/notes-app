@@ -15,7 +15,7 @@ function ButtonSmall({
   }
 
   return (
-    <button {...props} type='button' className={rootClasses.join(' ')}>
+    <button {...props} className={rootClasses.join(' ')}>
       {children}
     </button>
   );

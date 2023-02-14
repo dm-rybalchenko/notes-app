@@ -1,14 +1,14 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .wrapper {
   position: fixed;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: rgba($color-secondary-400, 0.8);
 }
 
@@ -27,13 +27,13 @@
 
 .close {
   position: absolute;
-  display: block;
-  right: $base * 5;
   top: $base * 3;
+  right: $base * 5;
+  display: block;
   width: $base * 9;
   height: $base * 9;
-  background: transparent;
   cursor: pointer;
+  background: transparent;
 
   &::after,
   &::before {

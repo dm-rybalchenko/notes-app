@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import { ILoginForm } from './loginForm.types';
 import UserService from '../../../../API/UserService';
 import useFetching from '../../../../hooks/useFetching';
 import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
@@ -11,6 +10,8 @@ import Input from '../../input/Input';
 import ButtonBig from '../../buttons/button-big/ButtonBig';
 import Loader from '../../loader/Loader';
 import { showError } from '../../../../store/reducers/notificationReducer';
+
+import { ILoginForm } from './loginForm.types';
 
 import stl from '../forms.module.scss';
 
@@ -34,7 +35,7 @@ function LoginForm(): JSX.Element {
       localStorage.setItem('token', response.accessToken);
       dispatch(setUser(response.user));
       dispatch(setIsAuth(true));
-    }
+    },
   );
 
   const onLogin: SubmitHandler<ILoginForm> = (data) => {
@@ -43,6 +44,7 @@ function LoginForm(): JSX.Element {
 
   useEffect(() => {
     errLogin && dispatch(showError(`Ошибка входа: ${errLogin}`));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errLogin]);
 
   if (isLoadingLogin) {
@@ -53,7 +55,6 @@ function LoginForm(): JSX.Element {
     <div>
       <h2 className={stl.title}>Войти</h2>
       <form onSubmit={handleSubmit(onLogin)} className={stl.form} noValidate>
-        {/* {errLogin && <div className={stl.errors_box}>{errLogin}</div>} */}
         <Input
           register={register('email', {
             required: 'Нужно ввести ваш email',
@@ -62,13 +63,13 @@ function LoginForm(): JSX.Element {
               message: 'Нужно ввести валидный email',
             },
           })}
-          onFocus={() => clearErrors('email')}
+          onFocus={(): void => clearErrors('email')}
           placeholder="Email"
           type="email"
           modClass={errors.email ? stl.error : ''}
         />
         {errors.email && (
-          <div className={stl.errors_box}>{errors.email.message}</div>
+          <div className={stl['errors-box']}>{errors.email.message}</div>
         )}
         <Input
           register={register('password', {
@@ -82,16 +83,16 @@ function LoginForm(): JSX.Element {
               message: 'Пароль должен быть не более 32х символов',
             },
           })}
-          onFocus={() => clearErrors('password')}
+          onFocus={(): void => clearErrors('password')}
           placeholder="Пароль"
           type="password"
           modClass={errors.password ? stl.error : ''}
         />
         {errors.password && (
-          <div className={stl.errors_box}>{errors.password.message}</div>
+          <div className={stl['errors-box']}>{errors.password.message}</div>
         )}
         <ButtonBig modClass={stl.btn}>Войти</ButtonBig>
-        <button onClick={(e) => e.preventDefault()} className={stl.sub_btn}>
+        <button onClick={(e): void => e.preventDefault()} className={stl['sub-btn']}>
           Забыли пароль?
         </button>
       </form>

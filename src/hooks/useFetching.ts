@@ -8,10 +8,10 @@ const useFetching = <T>(
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  const fetching = async (...args: T[]) => {
+  const fetching = async (...args: T[]): Promise<void> => {
     try {
       setIsLoading(true);
-	  setError('');
+      setError('');
       await callback(...args);
     } catch (e) {
       if (e instanceof AxiosError && e.response) {

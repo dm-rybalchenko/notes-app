@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .container {
   display: flex;
@@ -9,28 +9,28 @@
 .outer {
   position: relative;
   display: inline-block;
-  height: $base * 11.5;
   width: $base * 11.5;
+  height: $base * 11.5;
   margin: 1em;
-  border-radius: 50%;
   overflow: hidden;
+  border-radius: 50%;
 
   &::after {
-    content: '';
     position: absolute;
     top: $base * 2.25;
     left: $base * 2.25;
     display: block;
-    height: $base * 7;
     width: $base * 7;
+    height: $base * 7;
+    content: '';
     background: $color-secondary-200;
     border-radius: 50%;
   }
 
   & > span {
     position: absolute;
-    height: 100%;
     width: 50%;
+    height: 100%;
     overflow: hidden;
   }
 }
@@ -45,33 +45,33 @@
 
 .anim {
   position: absolute;
-  left: 100%;
   top: 0;
-  height: 100%;
+  left: 100%;
   width: 100%;
-  border-radius: $base * 250;
+  height: 100%;
   background: $color-primary-600;
+  border-radius: $base * 250;
   opacity: 0.8;
-  animation: rotate-left 1.5s infinite;
   transform-origin: 0 50% 0;
+  animation: rotate-left 1.5s infinite;
 }
 
 .left .anim {
-  border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .right .anim {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
   left: -100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   transform-origin: 100% 50% 0;
 }
 
 .outer .anim {
-  animation-delay: 0s;
   animation-duration: 1.5s;
   animation-timing-function: linear;
+  animation-delay: 0s;
 }
 
 .outer .right .anim {
@@ -83,32 +83,41 @@
   0% {
     transform: rotate(-5deg);
   }
+
   25% {
     transform: rotate(180deg);
   }
+
   50% {
     transform: rotate(180deg);
   }
+
   75% {
     transform: rotate(360deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
+
 @keyframes rotate-left {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(180deg);
   }
+
   75% {
     transform: rotate(180deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

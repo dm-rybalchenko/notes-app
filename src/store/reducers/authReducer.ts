@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { IUserModel } from '../../interfaces/apiModels.types';
 import { IAuth } from '../../interfaces/reducers.types';
 
@@ -10,7 +11,7 @@ const initialState: IAuth = {
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: initialState,
+  initialState,
   reducers: {
     setDefaultAuth(state) {
       state.user = {} as IUserModel;

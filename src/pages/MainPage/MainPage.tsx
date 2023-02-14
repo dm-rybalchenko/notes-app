@@ -1,4 +1,6 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import {
+  useContext, useEffect, useRef, useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -38,7 +40,7 @@ function MainPage(): JSX.Element {
     lazyLoading,
     page,
     limit,
-    allNotes
+    allNotes,
   );
 
   const [fetchNotes, isLoading, noteError] = useFetching(async () => {
@@ -46,16 +48,18 @@ function MainPage(): JSX.Element {
     dispatch(addAllNotes(response));
   });
 
-  const setCurrentPage = (page: number) => {
+  const setCurrentPage = (page: number): void => {
     dispatch(setPage(page));
   };
 
   useEffect(() => {
     notes.length === 0 && fetchNotes();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     !lazyLoading && dispatch(setPage(1));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, filter.query, filter.tags, lazyLoading]);
 
   useObserver(
@@ -65,11 +69,12 @@ function MainPage(): JSX.Element {
     paginatedNotes.length,
     () => {
       dispatch(setPage(page + 1));
-    }
+    },
   );
 
   useEffect(() => {
     noteError && dispatch(showError(`Ошибка загрузки заметок: ${noteError}`));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noteError]);
 
   return (

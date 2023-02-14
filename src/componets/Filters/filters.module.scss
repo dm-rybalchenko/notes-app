@@ -1,11 +1,11 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .filters {
   display: flex;
   flex-wrap: wrap;
+  gap: $base * 4;
   align-items: center;
   margin-top: $base * 7.5;
-  gap: $base * 4;
 }
 
 .favorites {
@@ -16,8 +16,8 @@
   padding: $base * 2 $base * 3;
   font-size: $fz-xs;
   font-weight: $fw-semi-bold;
-  color: $color-secondary-700;
   line-height: 1.1;
+  color: $color-secondary-700;
   cursor: pointer;
   background: $color-secondary-100;
   border: 1px solid $color-primary-100;
@@ -46,9 +46,10 @@
 
 .active {
   font-weight: $fw-bold;
-  background: $color-danger-200;
   color: $color-secondary-100;
+  background: $color-danger-200;
 
+  /* stylelint-disable-next-line no-descending-specificity */
   & path {
     fill: $color-secondary-100;
     stroke: $color-secondary-100;

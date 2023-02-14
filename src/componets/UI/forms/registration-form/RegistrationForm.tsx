@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import { IRegFormPorps, IRegForm } from './registrationForm.types';
 import UserService from '../../../../API/UserService';
 import useFetching from '../../../../hooks/useFetching';
 import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
@@ -11,6 +10,8 @@ import { EmailReg } from '../../../../utils/utils';
 import ButtonBig from '../../buttons/button-big/ButtonBig';
 import Input from '../../input/Input';
 import Loader from '../../loader/Loader';
+
+import { IRegFormPorps, IRegForm } from './registrationForm.types';
 
 import stl from '../forms.module.scss';
 
@@ -53,6 +54,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
 
   useEffect(() => {
     errReg && dispatch(showError(`Ошибка регистрации: ${errReg}`));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errReg]);
 
   if (isLoadingReg) {
@@ -67,7 +69,6 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
         className={stl.form}
         noValidate
       >
-        {/* {errReg && <div className={stl.errors_box}>{errReg}</div>} */}
         <div className={!fieldsErr.includes('email') ? stl.success : ''}>
           <Input
             register={register('email', {
@@ -77,7 +78,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
                 message: 'Нужно ввести валидный email',
               },
             })}
-            onFocus={() => {
+            onFocus={(): void => {
               clearErrors('email');
               setFieldsErr([...fieldsErr, 'email']);
             }}
@@ -86,7 +87,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
             modClass={errors.email ? stl.error : ''}
           />
           {errors.email && (
-            <div className={stl.errors_box}>{errors.email.message}</div>
+            <div className={stl['errors-box']}>{errors.email.message}</div>
           )}
         </div>
         <div className={!fieldsErr.includes('password') ? stl.success : ''}>
@@ -102,7 +103,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
                 message: 'Пароль должен быть не более 32х символов',
               },
             })}
-            onFocus={() => {
+            onFocus={(): void => {
               clearErrors('password');
               setFieldsErr([...fieldsErr, 'password']);
             }}
@@ -124,7 +125,7 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
                 if (watch('password') !== val) return 'Пароли не совпадают';
               },
             })}
-            onFocus={() => {
+            onFocus={(): void => {
               clearErrors('confirmPassword');
               setFieldsErr([...fieldsErr, 'confirmPassword']);
             }}
@@ -134,10 +135,13 @@ function RegistrationForm({ setLoginPage }: IRegFormPorps): JSX.Element {
           />
         </div>
         {errors.confirmPassword && (
-          <div className={stl.errors_box}>{errors.confirmPassword.message}</div>
+          <div className={stl['errors-box']}>{errors.confirmPassword.message}</div>
         )}
         <ButtonBig modClass={stl.btn}>Зарегистрироваться</ButtonBig>
-        <button onClick={() => setLoginPage(true)} className={stl.sub_btn}>
+        <button
+          onClick={(): void => setLoginPage(true)}
+          className={stl['sub-btn']}
+        >
           У меня уже есть аккаунт
         </button>
       </form>

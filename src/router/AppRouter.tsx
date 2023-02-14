@@ -1,10 +1,12 @@
-import { BrowserRouter, Route, Navigate, Routes } from 'react-router-dom';
+import {
+  BrowserRouter, Route, Navigate, Routes,
+} from 'react-router-dom';
 
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { publicRoutes, privateRoutes } from './index';
 
 
-function AppRouter() {
+function AppRouter(): JSX.Element {
   const auth = useTypedSelector((state) => state.auth);
 
   return (

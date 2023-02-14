@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+
 import { INoteModel } from '../interfaces/apiModels.types';
 import { IFilter } from '../interfaces/reducers.types';
 
@@ -14,14 +15,12 @@ function useFilterNotes(notes: INoteModel[], filter: IFilter): INoteModel[][] {
   return useSplitNotes(filteredNotes);
 }
 
-function useSplitNotes(notes: INoteModel[]) {
-  return useMemo(() => {
-    return [
-      notes.filter((note) => !note.pinned),
-      notes.filter((note) => note.pinned),
-      notes.filter((note) => note.favorite),
-    ];
-  }, [notes]);
+function useSplitNotes(notes: INoteModel[]): INoteModel[][] {
+  return useMemo(() => [
+    notes.filter((note) => !note.pinned),
+    notes.filter((note) => note.pinned),
+    notes.filter((note) => note.favorite),
+  ], [notes]);
 }
 
 function useSortNotes(notes: INoteModel[], param: string): INoteModel[] {
@@ -31,24 +30,19 @@ function useSortNotes(notes: INoteModel[], param: string): INoteModel[] {
     }
 
     if (param === 'old') {
-      return [...notes].sort((a, b) =>
-        dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1
-      );
+      return [...notes].sort((a, b) => (dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1));
     }
 
     if (param === 'new') {
-      return [...notes].sort((a, b) =>
-        dayjs(a.date).isBefore(dayjs(b.date)) ? 1 : -1
-      );
-    } else {
-      return notes;
+      return [...notes].sort((a, b) => (dayjs(a.date).isBefore(dayjs(b.date)) ? 1 : -1));
     }
+    return notes;
   }, [param, notes]);
 }
 
 function useFilterNotesByTags(
   notes: INoteModel[],
-  filterTags: string[]
+  filterTags: string[],
 ): INoteModel[] {
   return useMemo(() => {
     if (!filterTags.length) {
@@ -73,18 +67,16 @@ function useFilterNotesByTags(
 
 function useFilterNotesBySearch(
   notes: INoteModel[],
-  searchString: string
+  searchString: string,
 ): INoteModel[] {
   return useMemo(() => {
     if (!searchString) {
       return notes;
     }
 
-    return notes.filter((note) =>
-      `${note.title} ${note.body}`
-        .toLowerCase()
-        .includes(searchString.toLowerCase())
-    );
+    return notes.filter((note) => `${note.title} ${note.body}`
+      .toLowerCase()
+      .includes(searchString.toLowerCase()));
   }, [searchString, notes]);
 }
 

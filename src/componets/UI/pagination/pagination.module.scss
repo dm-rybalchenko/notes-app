@@ -1,20 +1,20 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .pagination {
   display: flex;
-  justify-content: center;
   gap: $base * 3;
+  justify-content: center;
   padding-top: $base * 15;
 }
 
 .page {
-  padding: 0;
   display: flex;
   justify-content: center;
   width: $base * 8;
   height: $base * 8;
-  border-radius: 50%;
+  padding: 0;
   cursor: pointer;
+  border-radius: 50%;
 }
 
 .active {

@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .list {
   margin: $base * 7.5 0;
@@ -7,27 +7,27 @@
 .notes {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   gap: $base * 4;
+  justify-content: flex-start;
   margin-top: $base * 5;
 }
 
 .title {
   display: inline;
-  font-weight: $fw-bold;
   font-size: $fz-xxl;
+  font-weight: $fw-bold;
 }
 
 .wrapper {
   margin-left: $base * 4;
-  color: $color-secondary-400;
   font-size: $fz-xxs;
+  color: $color-secondary-400;
   cursor: pointer;
 }
 
 .counter {
   margin-left: $base * 2;
-  font-weight: $fw-semi-bold;
   font-size: $fz-xxl;
+  font-weight: $fw-semi-bold;
   color: $color-secondary-400;
 }

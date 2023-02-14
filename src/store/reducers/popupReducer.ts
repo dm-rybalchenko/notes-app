@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { IFileModel } from '../../interfaces/apiModels.types';
 import { IPopup } from '../../interfaces/reducers.types';
 

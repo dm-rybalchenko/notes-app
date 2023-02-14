@@ -1,11 +1,11 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  min-height: $base * 20;
+  justify-content: space-between;
   min-width: 100vw;
+  min-height: $base * 20;
   padding: 0 $base * 15;
 
   @media (max-width: $breakpoint-xs-max) {
@@ -20,30 +20,30 @@
 }
 
 .logo {
-  text-align: center;
   font-size: $fz-xs;
+  text-align: center;
 }
 
 .subtitle {
   margin-top: $base;
-  color: $color-secondary-400;
   font-size: $fz-small-footer;
   font-weight: $fw-semi-bold;
+  color: $color-secondary-400;
 }
 
 .develop {
   width: $base * 25;
-  text-align: right;
   font-size: $fz-xxxs;
   font-weight: $fw-semi-bold;
   line-height: 1.2;
+  text-align: right;
 
   @media (max-width: $breakpoint-xs-max) {
     text-align: left;
   }
 }
 
-.develop_title {
-  color: $color-secondary-400;
+.develop-title {
   font-size: $fz-small-footer;
+  color: $color-secondary-400;
 }

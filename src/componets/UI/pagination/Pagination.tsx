@@ -1,7 +1,8 @@
+
 import { IPaginationProps } from './pagination.types';
 
-import stl from './pagination.module.scss';
 import btnStl from '../buttons/button-small/buttonSmall.module.scss';
+import stl from './pagination.module.scss';
 
 
 function Pagination({
@@ -21,7 +22,7 @@ function Pagination({
 
         return (
           <div
-            onClick={() => changePage(page)}
+            onClick={(): void => changePage(page)}
             className={pageClasses.join(' ')}
             key={page}
           >

@@ -10,7 +10,7 @@ export interface IModal {
   };
   title: string;
   body: string;
-  callback: any;
+  callback: () => Promise<void> | void;
 }
 
 export interface IModalContext {

@@ -1,4 +1,5 @@
 import Select from 'react-select';
+
 import { IOption, ISelectProps } from './select.types';
 
 
@@ -12,8 +13,8 @@ export default function CustomSelect({
       isSearchable={false}
       defaultValue={value}
       options={options}
-      getOptionLabel={(option: IOption) => option.name}
-      getOptionValue={(option: IOption) => option.value}
+      getOptionLabel={(option: IOption): string => option.name}
+      getOptionValue={(option: IOption): string => option.value}
       onChange={onChange}
       classNamePrefix="custom-select"
     />

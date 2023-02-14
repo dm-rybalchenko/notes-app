@@ -7,18 +7,11 @@
 *,
 *::before,
 *::after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 :focus,
 :active {
-  outline: none;
-}
-
-a:focus,
-a:active {
   outline: none;
 }
 
@@ -36,9 +29,7 @@ body {
   font-size: 100%;
   font-size: 16px;
   line-height: 1;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 input,
@@ -73,6 +64,11 @@ a:link {
   text-decoration: none;
 }
 
+a:focus,
+a:active {
+  outline: none;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -99,18 +95,20 @@ table {
   border-collapse: inherit;
 }
 
-:focus::-webkit-input-placeholder {
+/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+:focus::input-placeholder {
   color: transparent;
 }
 
-:focus::-moz-placeholder {
+:focus::placeholder {
   color: transparent;
 }
 
-:focus:-moz-placeholder {
+:focus:placeholder {
   color: transparent;
 }
 
-:focus:-ms-input-placeholder {
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:focus:input-placeholder {
   color: transparent;
 }

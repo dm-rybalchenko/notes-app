@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { IHeaderPorps } from './header.types';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import {
   searchNotes,
@@ -22,6 +21,8 @@ import Input from '../UI/input/Input';
 import IconLogout from '../UI/icons/IconLogout';
 import Loader from '../UI/loader/Loader';
 import IconLogo from '../UI/icons/IconLogo';
+
+import { IHeaderPorps } from './header.types';
 
 import stl from './header.module.scss';
 
@@ -45,10 +46,12 @@ function Header({ children, main }: IHeaderPorps): JSX.Element {
     if (auth.isAuth && !auth.user.isActivated) {
       dispatch(showWarning(`Подтвердите ваш email: ${auth.user.email}`));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     errLogout && dispatch(showError(`Ошибка выхода из аккаунта: ${errLogout}`));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errLogout]);
 
   return (
@@ -65,7 +68,9 @@ function Header({ children, main }: IHeaderPorps): JSX.Element {
           {isLoadingLogout && <Loader />}
           <div className={stl.search}>
             <Input
-              onChange={(e) => dispatch(searchNotes(e.target.value))}
+              onChange={(e): void => {
+                dispatch(searchNotes(e.target.value));
+              }}
               value={filter.query}
               type="search"
               placeholder="Поиск по заметкам..."

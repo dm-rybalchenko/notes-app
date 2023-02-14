@@ -2,8 +2,6 @@ import { useContext, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { useDispatch } from 'react-redux';
 
-import { INote } from './fileForm.types';
-import { IModalContext } from '../../interfaces/context.types';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import FileService from '../../API/FileService';
 import useFetching from '../../hooks/useFetching';
@@ -14,6 +12,9 @@ import IconAddFile from '../UI/icons/IconAddFile';
 import { ModalContext } from '../../context';
 import { showError } from '../../store/reducers/notificationReducer';
 import { showPopup } from '../../store/reducers/popupReducer';
+
+import { IModalContext } from '../../interfaces/context.types';
+import { INote } from './fileForm.types';
 
 import stl from './fileForm.module.scss';
 
@@ -33,22 +34,22 @@ function FileForm(): JSX.Element {
       }
 
       dispatch(setNote({ ...note, file: response }));
-    }
+    },
   );
 
   const [removeFile, isLoadingRemove, errRemove] = useFetching<INote>(
     async (note) => {
       if (note?.file) {
-        let newNote = { ...note };
+        const newNote = { ...note };
         delete newNote.file;
         dispatch(setNote(newNote));
 
         await FileService.delete(note.file.id);
       }
-    }
+    },
   );
 
-  const onDrop = (files: File[]) => {
+  const onDrop = (files: File[]): void => {
     const file = files[0];
     const formData = new FormData();
     formData.append('file', file);
@@ -69,7 +70,7 @@ function FileForm(): JSX.Element {
     rootClasses.push(stl.error);
   }
 
-  const handleRemove = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleRemove = (e: React.MouseEvent<HTMLSpanElement>): void => {
     e.stopPropagation();
     setModal({
       coords: { x: e.pageX, y: e.pageY },
@@ -82,6 +83,7 @@ function FileForm(): JSX.Element {
   useEffect(() => {
     errSave && dispatch(showError(`Ошибка сохранения файла: ${errSave}`));
     errRemove && dispatch(showError(`Ошибка удаления файла: ${errRemove}`));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errSave, errRemove]);
 
   return (
@@ -89,8 +91,7 @@ function FileForm(): JSX.Element {
       <div className={stl.container}>
         {note.file && (
           <div
-            onClick={() => {
-              console.log('click');
+            onClick={(): void => {
               note.file && dispatch(showPopup(note.file));
             }}
             className={stl.image}

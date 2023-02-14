@@ -1,7 +1,9 @@
 import { useDispatch } from 'react-redux';
+
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
 import { clearWarning } from '../../../store/reducers/notificationReducer';
 import IconWarn from '../icons/IconWarn';
+
 import stl from './notifications.module.scss';
 
 
@@ -15,7 +17,12 @@ export default function Warning(): JSX.Element {
         <IconWarn />
         {warning}
       </div>
-      <button onClick={() => dispatch(clearWarning())} className={stl.close}>
+      <button
+        onClick={(): void => {
+          dispatch(clearWarning());
+        }}
+        className={stl.close}
+      >
         Понятно
       </button>
     </div>

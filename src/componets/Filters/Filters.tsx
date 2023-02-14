@@ -1,10 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import NoteService from '../../API/NoteService';
 
-import { IFiltersProps, INote } from './filters.types';
+import NoteService from '../../API/NoteService';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { ILoadingContext } from '../../interfaces/context.types';
 import { LoadingContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
 import useTags from '../../hooks/useTags';
@@ -21,6 +19,9 @@ import IconFavorites from '../UI/icons/IconFavorites';
 import Select from '../UI/select/Select';
 import Switcher from '../UI/switcher/Switcher';
 
+import { ILoadingContext } from '../../interfaces/context.types';
+import { IFiltersProps, INote } from './filters.types';
+
 import stl from './filters.module.scss';
 
 
@@ -33,6 +34,7 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
   const dispatch = useDispatch();
   const tags = useTags(notes);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [removeTags, isLoading, error] = useFetching<INote[]>(async (notes) => {
     notes.forEach(async (note) => {
       await NoteService.update(note);
@@ -44,8 +46,8 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
     rootClasses.push(stl.active);
   }
 
-  const deleteTag = (tag: string) => {
-    let editedNotes = notes
+  const deleteTag = (tag: string): void => {
+    const editedNotes = notes
       .filter((note) => note.tags.includes(tag))
       .map((note) => ({
         ...note,
@@ -60,13 +62,14 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
 
   useEffect(() => {
     error && dispatch(showError(`Ошибка обновления заметок: ${error}`));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   return (
     <div>
       <div className={stl.filters}>
         <button
-          onClick={() => setFavorites(!favorites)}
+          onClick={(): void => setFavorites(!favorites)}
           className={rootClasses.join(' ')}
         >
           <IconFavorites />
@@ -74,7 +77,9 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
         </button>
         <Select
           value={{ value: 'new', name: 'По дате изменения' }}
-          onChange={(value) => value && dispatch(sortNotes(value?.value))}
+          onChange={(value): void => {
+            value && dispatch(sortNotes(value?.value));
+          }}
           options={[
             { value: 'new', name: 'По дате изменения' },
             { value: 'title', name: 'По заголовку' },
@@ -83,9 +88,9 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
         />
         <Select
           value={{ value: '10', name: 'По 10' }}
-          onChange={(value) =>
-            value && dispatch(setLimit(parseInt(value?.value)))
-          }
+          onChange={(value): void => {
+            value && dispatch(setLimit(parseInt(value?.value)));
+          }}
           options={[
             { value: '-1', name: 'Выводить все' },
             { value: '5', name: 'По 5' },
@@ -96,14 +101,16 @@ function Filters({ favorites, setFavorites }: IFiltersProps): JSX.Element {
         <div className={stl.lazy}>
           <Switcher
             checked={!lazyLoading}
-            onChange={() => setLazyLoading(!lazyLoading)}
+            onChange={(): void => setLazyLoading(!lazyLoading)}
           />
           Страницы
         </div>
       </div>
       <div className={stl.tags}>
         <TagList
-          choose={(tag: string) => dispatch(sortByTag(tag))}
+          choose={(tag: string): void => {
+            dispatch(sortByTag(tag));
+          }}
           remove={deleteTag}
           tags={tags}
           current={filter.tags}

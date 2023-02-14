@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { INote } from './editNote.types';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { prepareNote } from '../../utils/utils';
 import TagList from '../../componets/TagList/TagList';
@@ -24,6 +23,8 @@ import IconBack from '../../componets/UI/icons/IconBack';
 import { showError } from '../../store/reducers/notificationReducer';
 import Loader from '../../componets/UI/loader/Loader';
 import Popup from '../../componets/Popup/Popup';
+
+import { INote } from './editNote.types';
 
 import stl from './editNote.module.scss';
 
@@ -51,7 +52,7 @@ function EditNote(): JSX.Element {
     }
   );
 
-  const handleExit = async () => {
+  const handleExit = async (): Promise<void> => {
     if (!note.title && !note.body && !note.file) {
       router('/notes');
       return;
@@ -69,10 +70,14 @@ function EditNote(): JSX.Element {
     if (!note.id && note.file) {
       saveNote(note);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [note.file]);
 
   useEffect(() => {
-    error && dispatch(showError(`Ошибка сохранения заметки: ${error}`));
+    if (error) {
+      dispatch(showError(`Ошибка сохранения заметки: ${error}`));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   return (
@@ -83,7 +88,7 @@ function EditNote(): JSX.Element {
           <span>Все заметки</span>
         </Link>
         {isLoading && <Loader />}
-        <Button onClick={handleExit} modClass={stl.save_btn}>
+        <Button onClick={handleExit} modClass={stl['save-btn']}>
           Сохранить
         </Button>
       </header>
@@ -94,8 +99,12 @@ function EditNote(): JSX.Element {
             <FileForm />
           </div>
           <TagList
-            choose={(tag) => dispatch(highlightTag(tag))}
-            remove={(tag) => dispatch(removeTag(tag))}
+            choose={(tag): void => {
+              dispatch(highlightTag(tag));
+            }}
+            remove={(tag): void => {
+              dispatch(removeTag(tag));
+            }}
             current={currentTags}
             tags={note.tags}
             modClass={stl.tags}

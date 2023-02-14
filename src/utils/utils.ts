@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+
 import { INoteModel } from '../interfaces/apiModels.types';
 
 
@@ -17,11 +18,11 @@ export function createNewNote(): INoteModel {
 }
 
 export function prepareNote(note: INoteModel): INoteModel {
-  let preparedNote = { ...note, date: dayjs().format() };
+  const preparedNote = { ...note, date: dayjs().format() };
 
   if (!note.title && note.body) {
     preparedNote.title =
-      note.body.length < 25 ? note.body : note.body.slice(0, 24) + '...';
+      note.body.length < 25 ? note.body : `${note.body.slice(0, 24)}...`;
   }
   if (!note.title && !note.body) {
     preparedNote.title = 'Заголовок';
@@ -32,12 +33,15 @@ export function prepareNote(note: INoteModel): INoteModel {
 
 const mounths = ['янв', 'февр', 'апр', 'авг', 'сент', 'окт', 'нояб', 'дек'];
 
-export function prepareDate(date: string) {
+export function prepareDate(date: string): string {
   let formatDate = '';
   if (date) {
     formatDate = dayjs(date)
       .format('D MM YYYY в HH:mm')
-      .replace(/\s\d+\s/gm, (str: string) => ` ${mounths[parseInt(str) - 1]} `);
+      .replace(
+        /\s\d+\s/gm,
+        (str: string) => ` ${mounths[parseInt(str, 10) - 1]} `
+      );
   } else {
     formatDate = 'unknown';
   }
@@ -56,8 +60,8 @@ export function tagController(str: string): { tag: string; content: string } {
     .replaceAll('&nbsp;', ' ')
     .replace(/(^|<div>)(#)/gm, '$1 $2')
     .replace(newLineReg, '$1 $2')
-    .replace(tagReg, (str: string) => {
-      let newTag = str.slice(1, -1);
+    .replace(tagReg, (string: string) => {
+      const newTag = string.slice(1, -1);
       tag = newTag;
 
       return ` ${wrapTag(newTag)}&nbsp;`;
@@ -78,7 +82,10 @@ export function wrapChosenTag(tag: string): string {
   return `<span class="chosen">${tag}</span>`;
 }
 
-export function getModalPosition(coords?: { x: number; y: number }) {
+export function getModalPosition(coords?: { x: number; y: number }): {
+  x: number;
+  y: number;
+} | null {
   if (!coords) {
     return null;
   }

@@ -1,17 +1,17 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .modal {
   position: absolute;
+  z-index: 110;
   display: flex;
   flex-direction: column;
-  z-index: 110;
   width: $base * 82.5;
   min-height: $base * 42.5;
   padding: $base * 8 $base * 8.5 $base * 5;
   text-align: center;
   background: $color-secondary-100;
-  box-shadow: $base * 0.5 $base * 5 $base * 10 rgba($color-secondary-700, 0.16);
   border-radius: $base * 3.5;
+  box-shadow: $base * 0.5 $base * 5 $base * 10 rgba($color-secondary-700, 0.16);
 }
 
 .title {
@@ -28,8 +28,8 @@
 
 .btns {
   display: flex;
-  justify-content: center;
   gap: $base * 2.5;
+  justify-content: center;
   margin-top: $base * 6;
 }
 

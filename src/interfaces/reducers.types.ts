@@ -1,5 +1,6 @@
 import { IFileModel, INoteModel, IUserModel } from './apiModels.types';
 
+
 export interface IAuth {
   user: IUserModel;
   isAuth: boolean;
@@ -34,7 +35,3 @@ export interface IPagination {
 export interface IPopup {
   popup: null | IFileModel;
 }
-
-
-
-

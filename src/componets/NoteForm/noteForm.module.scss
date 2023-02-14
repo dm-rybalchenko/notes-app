@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .title {
   flex: 0 1 $base * 225;
@@ -6,11 +6,12 @@
   font-weight: $fw-bold;
 
   input {
-    color: $color-secondary-700;
-    font-weight: $fw-bold;
     width: 100%;
-    &:focus::placeholder,
-    &::placeholder {
+    font-weight: $fw-bold;
+    color: $color-secondary-700;
+
+    &::placeholder,
+    &:focus::placeholder {
       color: $color-secondary-700;
     }
   }

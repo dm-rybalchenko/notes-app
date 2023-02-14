@@ -1,5 +1,4 @@
 export default function IconDeleteTag(): JSX.Element {
-
   return (
     <svg
       width="18"

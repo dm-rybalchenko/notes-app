@@ -1,4 +1,14 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
+
+.active {
+  font-weight: $fw-bold;
+  color: $color-secondary-100;
+  background-color: $color-primary-600;
+
+  path {
+    fill: $color-primary-500;
+  }
+}
 
 .button {
   display: flex;
@@ -6,8 +16,8 @@
   height: $base * 8;
   padding: $base * 2 $base * 3.5 $base * 2 $base * 4;
   font-size: $fz-xs;
-  line-height: 1.4;
   font-weight: $fw-semi-bold;
+  line-height: 1.4;
   color: $color-secondary-400;
   cursor: pointer;
   background-color: $color-secondary-100;
@@ -24,15 +34,5 @@
   @media (max-width: $breakpoint-xs-max) {
     padding: $base $base * 2 $base $base * 2;
     font-size: $fz-xs;
-  }
-}
-
-.active {
-  color: $color-secondary-100;
-  font-weight: $fw-bold;
-  background-color: $color-primary-600;
-
-  path {
-    fill: $color-primary-500;
   }
 }

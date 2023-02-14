@@ -6,4 +6,4 @@ export interface IFiltersProps {
   setFavorites: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface INote extends INoteModel {}
+export type INote = INoteModel;

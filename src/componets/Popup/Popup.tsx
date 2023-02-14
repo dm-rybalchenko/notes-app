@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { closePopup } from '../../store/reducers/popupReducer';
+
 import stl from './popup.module.scss';
 
 
@@ -10,7 +11,7 @@ export default function Popup(): JSX.Element {
   const { popup } = useTypedSelector((state) => state.popup);
   const dispatch = useDispatch();
 
-  const exitPopup = () => {
+  const exitPopup = (): void => {
     document.body.classList.remove('block');
     dispatch(closePopup());
   };
@@ -21,8 +22,8 @@ export default function Popup(): JSX.Element {
 
   return (
     <div onClick={exitPopup} className={stl.wrapper}>
-      <div onClick={(e) => e.stopPropagation()} className={stl.container}>
-        <button onClick={exitPopup} className={stl.close}></button>
+      <div onClick={(e): void => e.stopPropagation()} className={stl.container}>
+        <button onClick={exitPopup} className={stl.close} />
         <img src={popup?.url} alt={popup?.name} />
       </div>
     </div>

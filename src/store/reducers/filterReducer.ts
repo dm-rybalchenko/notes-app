@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
 import { IFilter } from '../../interfaces/reducers.types';
 
 

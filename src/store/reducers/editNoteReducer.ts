@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { createNewNote, wrapChosenTag, wrapTag } from '../../utils/utils';
+
 import { INoteModel } from '../../interfaces/apiModels.types';
 import { IEditNote } from '../../interfaces/reducers.types';
-import { createNewNote, wrapChosenTag, wrapTag } from '../../utils/utils';
 
 
 const initialState: IEditNote = {

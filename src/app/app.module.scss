@@ -1,11 +1,11 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
   width: 100vw;
+  min-height: 100vh;
   overflow: hidden;
   font-family: 'Inter', sans-serif;
   font-size: $fz-l;

@@ -1,4 +1,5 @@
 import $api from './api';
+
 import { IAuthModel } from '../interfaces/apiModels.types';
 
 
@@ -20,7 +21,7 @@ export default class UserService {
 
   static async registration(
     email: string,
-    password: string
+    password: string,
   ): Promise<IAuthModel> {
     const response = await $api.post<IAuthModel>('/user/registration', {
       email,

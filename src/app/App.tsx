@@ -2,8 +2,6 @@ import axios from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { IAuthModel } from '../interfaces/apiModels.types';
-import { IModal } from '../interfaces/context.types';
 import { API_URL } from '../API/api';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import AppRouter from '../router/AppRouter';
@@ -14,6 +12,9 @@ import { setIsAuth, setUser } from '../store/reducers/authReducer';
 import Warning from '../componets/UI/notifications/Warning';
 import Error from '../componets/UI/notifications/Error';
 
+import { IModal } from '../interfaces/context.types';
+import { IAuthModel } from '../interfaces/apiModels.types';
+
 import stl from './app.module.scss';
 
 
@@ -23,6 +24,7 @@ function App(): JSX.Element {
   const { error, warning } = useTypedSelector((state) => state.notification);
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [checkAuth, isLoadingCheck, errCheck] = useFetching(async () => {
     const response = await axios.get<IAuthModel>(`${API_URL}/user/refresh`, {
       withCredentials: true,
@@ -35,18 +37,19 @@ function App(): JSX.Element {
 
   const LoadingContextValue = useMemo(
     () => ({ lazyLoading, setLazyLoading }),
-    [lazyLoading, setLazyLoading]
+    [lazyLoading, setLazyLoading],
   );
 
   const ModalContextValue = useMemo(
     () => ({ modal, setModal }),
-    [modal, setModal]
+    [modal, setModal],
   );
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
       checkAuth();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoadingCheck) {
@@ -70,7 +73,7 @@ function App(): JSX.Element {
           style={{
             width: window.innerWidth - document.documentElement.clientWidth,
           }}
-        ></div>
+        />
       )}
     </>
   );

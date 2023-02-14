@@ -1,7 +1,10 @@
 import { useEffect, useContext } from 'react';
+
 import { ModalContext } from '../../context';
-import { IModalContext } from '../../interfaces/context.types';
 import { getModalPosition } from '../../utils/utils';
+
+import { IModalContext } from '../../interfaces/context.types';
+
 import stl from './modal.module.scss';
 
 
@@ -9,7 +12,7 @@ function Modal(): JSX.Element {
   const { setModal, modal } = useContext<IModalContext>(ModalContext);
   const appearCoords = getModalPosition(modal?.coords);
 
-  const exitModal = () => {
+  const exitModal = (): void => {
     document.body.classList.remove('block');
     setModal(null);
   };
@@ -17,11 +20,12 @@ function Modal(): JSX.Element {
   useEffect(() => {
     document.body.classList.add('block');
     document.addEventListener('click', exitModal, { once: true });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e): void => e.stopPropagation()}
       style={{ top: appearCoords?.y, left: appearCoords?.x }}
       className={stl.modal}
     >
@@ -32,7 +36,7 @@ function Modal(): JSX.Element {
           Отменить
         </button>
         <button
-          onClick={() => {
+          onClick={(): void => {
             modal?.callback();
             exitModal();
           }}

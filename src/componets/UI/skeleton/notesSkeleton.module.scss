@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .list {
   display: flex;
@@ -33,8 +33,8 @@
 }
 
 .line {
-  margin-top: $base * 7.5;
   width: 100%;
   height: 1px;
+  margin-top: $base * 7.5;
   background-color: $color-skeleton-line;
 }

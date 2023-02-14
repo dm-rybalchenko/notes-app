@@ -6,16 +6,16 @@ export default function NotesSkeleton(): JSX.Element {
 
   return (
     <div>
-      <div className={stl.title}></div>
+      <div className={stl.title} />
       <div className={stl.list}>
-        <div className={stl.note}></div>
-        <div className={stl.note}></div>
+        <div className={stl.note} />
+        <div className={stl.note} />
       </div>
       <hr className={stl.line} />
-      <div className={stl.title}></div>
+      <div className={stl.title} />
       <div className={stl.list}>
         {list.map((i) => (
-          <div key={i} className={stl.note}></div>
+          <div key={i} className={stl.note} />
         ))}
       </div>
     </div>

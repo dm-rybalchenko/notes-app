@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+
 import notesSlice from './reducers/notesReducer';
 import filterSlice from './reducers/filterReducer';
 import paginationSlice from './reducers/paginationReducer';
@@ -15,9 +16,11 @@ const rootReducer = combineReducers({
   auth: authSlice,
   editNote: editNoteSlice,
   notification: notificationSlice,
-  popup: popupSlice
+  popup: popupSlice,
 });
 
-export const store = configureStore({
+const store = configureStore({
   reducer: rootReducer,
 });
+
+export default store;

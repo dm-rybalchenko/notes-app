@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .note {
   display: flex;
@@ -8,9 +8,9 @@
   min-width: $base * 87.5;
   min-height: $base * 40;
   padding: $base * 4.5 $base * 13 $base * 4 $base * 5;
+  cursor: pointer;
   background-color: $color-secondary-100;
   border-radius: $base * 2.5;
-  cursor: pointer;
 
   &:hover {
     box-shadow: $base * 0.5 $base * 2 $base * 11 rgba($color-secondary-700, 0.2);
@@ -22,10 +22,10 @@
 }
 
 .title {
-  font-size: $fz-l;
-  white-space: nowrap;
   overflow: hidden;
+  font-size: $fz-l;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .btns {
@@ -52,15 +52,15 @@
   margin-right: $base * 4;
 
   &::after {
-    display: block;
     position: absolute;
     right: -$base * 2;
     bottom: 50%;
+    display: block;
     width: $base;
     height: $base;
     content: '';
-    border-radius: 50%;
     background-color: $color-secondary-400;
+    border-radius: 50%;
     transform: translate(50%, 50%);
   }
 }
@@ -74,8 +74,23 @@
     }
 
     [class='unpin'] {
-      stroke: $color-primary-600;
       fill: $color-primary-600;
+      stroke: $color-primary-600;
+    }
+  }
+}
+
+.in-favorites {
+  color: $color-secondary-700;
+
+  & path {
+    fill: $color-danger-200;
+    stroke: $color-danger-200;
+  }
+
+  &:hover {
+    path {
+      stroke: $color-danger-200;
     }
   }
 }
@@ -86,21 +101,6 @@
 
     path {
       stroke: $color-primary-600;
-    }
-  }
-}
-
-.in_favorites {
-  color: $color-secondary-700;
-
-  & path {
-    stroke: $color-danger-200;
-    fill: $color-danger-200;
-  }
-
-  &:hover {
-    path {
-      stroke: $color-danger-200;
     }
   }
 }
@@ -128,22 +128,22 @@
   position: relative;
   max-height: $base * 13;
   margin: $base * 1.5 0;
-  line-height: 1.2;
   overflow: hidden;
+  line-height: 1.2;
   background: linear-gradient(
     180deg,
     $color-secondary-500 0%,
     rgba($color-secondary-500, 0.29) 100%
   );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* stylelint-disable-next-line property-no-unknown */
   text-fill-color: transparent;
 }
 
 .date {
-  color: rgba($color-secondary-400, 0.8);
   font-size: $fz-xxxs;
   font-weight: $fw-medium;
+  color: rgba($color-secondary-400, 0.8);
   letter-spacing: 0.02em;
 }

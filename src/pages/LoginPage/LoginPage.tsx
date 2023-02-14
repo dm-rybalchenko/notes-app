@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from '../../componets/Header/Header';
 import RegistrationForm from '../../componets/UI/forms/registration-form/RegistrationForm';
 import LoginForm from '../../componets/UI/forms/login-form/LoginForm';
+
 import stl from './loginPage.module.scss';
 
 
@@ -14,14 +15,14 @@ function LoginPage(): JSX.Element {
       <Header>
         <div className={stl.nav}>
           <button
-            onClick={() => setLoginPage(true)}
+            onClick={(): void => setLoginPage(true)}
             className={loginPage ? stl.active : ''}
           >
             Вход
           </button>
           &nbsp;/&nbsp;
           <button
-            onClick={() => setLoginPage(false)}
+            onClick={(): void => setLoginPage(false)}
             className={!loginPage ? stl.active : ''}
           >
             Регистрация

@@ -1,4 +1,5 @@
 import { IButtonSmallProps } from './buttonSmall.types';
+
 import stl from './buttonSmall.module.scss';
 
 
@@ -14,7 +15,7 @@ function ButtonSmall({
   }
 
   return (
-    <button {...props} className={rootClasses.join(' ')}>
+    <button {...props} type='button' className={rootClasses.join(' ')}>
       {children}
     </button>
   );

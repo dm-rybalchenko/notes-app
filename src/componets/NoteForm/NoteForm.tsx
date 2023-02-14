@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { INote } from './noteForm.types';
 import NoteService from '../../API/NoteService';
 import {
   addTag,
@@ -12,6 +11,8 @@ import {
   setNote,
 } from '../../store/reducers/editNoteReducer';
 import { tagController } from '../../utils/utils';
+
+import { INote } from './noteForm.types';
 
 import stl from './noteForm.module.scss';
 
@@ -26,18 +27,19 @@ function NoteForm(): JSX.Element {
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (e: ContentEditableEvent) => {
+  const handleChange = (e: ContentEditableEvent): void => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     dispatch(setNote({ ...note, body: contentRef.current!.innerText }));
 
-    let newContent = tagController(e.target.value);
+    const newContent = tagController(e.target.value);
 
     newContent.tag && dispatch(addTag(newContent.tag));
     dispatch(setHtmlContent(newContent.content));
   };
 
-  const setFocus = (title: string) => {
+  const setFocus = (title: string): void => {
     if (title) {
-      let content = contentRef.current;
+      const content = contentRef.current;
       content?.focus();
 
       const range = document.createRange();
@@ -53,7 +55,7 @@ function NoteForm(): JSX.Element {
   };
 
   useEffect(() => {
-    async function fetchNote() {
+    async function fetchNote(): Promise<void> {
       setFocus(note.title);
 
       if (params.id) {
@@ -79,6 +81,7 @@ function NoteForm(): JSX.Element {
     }
 
     fetchNote();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -86,9 +89,9 @@ function NoteForm(): JSX.Element {
       <div className={stl.title}>
         <input
           value={note.title}
-          onChange={(e) =>
-            dispatch(setNote({ ...note, title: e.target.value }))
-          }
+          onChange={(e): void => {
+            dispatch(setNote({ ...note, title: e.target.value }));
+          }}
           type="text"
           ref={titleRef}
           placeholder="Введите заголовок..."

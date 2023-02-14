@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .nav {
   display: flex;
@@ -15,8 +15,8 @@
 
 .container {
   position: relative;
-  margin: $base * 50 auto;
   width: $base * 195;
+  margin: $base * 50 auto;
   text-align: center;
 
   @media (max-width: $breakpoint-md-max) {
@@ -43,8 +43,8 @@
   font-weight: $fw-bold;
   color: $color-secondary-400;
   letter-spacing: -0.05em;
-  opacity: 0.12;
   pointer-events: none;
+  opacity: 0.12;
 
   @media (max-width: $breakpoint-md-max) {
     font-size: $base * 70;
@@ -62,10 +62,10 @@
 .title {
   position: relative;
   margin-top: $base * 38;
-  text-align: center;
   font-size: $fz-big-title;
   font-weight: $fw-bold;
   color: $color-secondary-700;
+  text-align: center;
 
   @media (max-width: $breakpoint-md-max) {
     margin-top: $base * 28;

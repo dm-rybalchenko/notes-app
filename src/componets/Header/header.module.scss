@@ -1,14 +1,14 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  gap: $base * 3;
-  flex-wrap: wrap;
   z-index: 100;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $base * 3;
+  align-items: center;
   min-width: 100vw;
   min-height: $base * 20;
   padding: $base * 3 $base * 15;
@@ -31,7 +31,7 @@
     height: $base * 4.5;
     margin-right: $base * 1;
     content: '';
-    background: url('../UI/icons/scss/add-circle.svg') 0 0/100% 100%;
+    background: url('../UI/icons/scss/add-circle.svg') 0 0 / 100% 100%;
   }
 }
 
@@ -73,8 +73,8 @@
 }
 
 .search {
-  flex-grow: 1;
   display: flex;
+  flex-grow: 1;
   justify-content: flex-end;
   padding-left: $base * 25;
 
@@ -87,8 +87,8 @@
   }
 
   input::placeholder {
-    color: $color-secondary-400;
     font-weight: $fw-semi-bold;
+    color: $color-secondary-400;
     -webkit-text-fill-color: $color-secondary-400;
   }
 

@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .container {
   position: fixed;
@@ -8,13 +8,13 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 $base * 40;
   min-width: 100vw;
   min-height: $base * 20;
-  background: $color-danger-50;
+  padding: 0 $base * 40;
   font-size: $fz-xs;
-  text-align: center;
   line-height: 1.4;
+  text-align: center;
+  background: $color-danger-50;
   animation: appear 1s;
 
   svg {
@@ -50,6 +50,7 @@
   0% {
     top: -100%;
   }
+
   100% {
     top: 0;
   }

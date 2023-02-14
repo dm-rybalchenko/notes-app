@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss",
+    "stylelint-config-recess-order"
+  ],
+  "rules": {
+    "indentation": null,
+    "declaration-colon-newline-after": null,
+    "alpha-value-notation": "number",
+    "font-family-name-quotes": null,
+    "import-notation": null,
+    "color-function-notation": "legacy"
+  }
+}

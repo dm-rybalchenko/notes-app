@@ -1,14 +1,14 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .header {
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: $base * 20;
+  justify-content: space-between;
   min-width: 100vw;
+  height: $base * 20;
   padding: 0 $base * 15;
   background: rgba($color-secondary-100, 0.7);
   border-bottom: 1px solid $color-primary-100;
@@ -61,7 +61,7 @@
   margin-top: $base * 15;
 }
 
-.save_btn {
+.save-btn {
   width: $base * 34;
 
   @media (max-width: $breakpoint-xs-max) {

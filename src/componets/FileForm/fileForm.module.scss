@@ -1,4 +1,4 @@
-@import 'src/style/variables.scss';
+@import 'src/style/variables';
 
 .container {
   display: flex;
@@ -14,10 +14,10 @@
   flex-shrink: 0;
   width: $base * 69.5;
   height: $base * 52;
-  border-radius: $base * 5;
-  outline: $base * 0.5 solid rgba($color-primary-600, 0.3);
   overflow: hidden;
   cursor: pointer;
+  border-radius: $base * 5;
+  outline: $base * 0.5 solid rgba($color-primary-600, 0.3);
 
   img {
     width: 100%;
@@ -30,11 +30,50 @@
   }
 }
 
+.error {
+  color: $color-danger-200;
+  border: $base * 0.5 solid $color-danger-200;
+  opacity: 1;
+
+  path {
+    fill: $color-danger-200;
+  }
+}
+
+.uploader {
+  display: block;
+  width: $base * 69.5;
+  height: $base * 53;
+  font-size: $fz-xs;
+  font-weight: $fw-medium;
+  line-height: 1.4;
+  color: $color-primary-600;
+  text-align: center;
+  cursor: pointer;
+  background: $color-secondary-100;
+  border: $base * 0.5 solid $color-primary-600;
+  border-radius: $base * 5;
+  opacity: 0.3;
+
+  svg {
+    margin: $base * 11 0 $base * 2.5;
+  }
+
+  path {
+    fill: $color-primary-600;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
 .delete {
   position: absolute;
-  display: block;
   top: $base * 3.5;
   right: $base * 3.5;
+  display: block;
   width: $base * 7;
   height: $base * 7;
   cursor: pointer;
@@ -62,52 +101,13 @@
 
 .input {
   position: absolute;
-  z-index: -1;
   top: $base * 5;
   left: $base * 5;
+  z-index: -1;
   width: $base * 30;
   font-size: $base;
 }
 
-.uploader {
-  display: block;
-  width: $base * 69.5;
-  height: $base * 53;
-  text-align: center;
-  font-size: $fz-xs;
-  font-weight: $fw-medium;
-  color: $color-primary-600;
-  line-height: 1.4;
-  background: $color-secondary-100;
-  border: $base * 0.5 solid $color-primary-600;
-  border-radius: $base * 5;
-  cursor: pointer;
-  opacity: 0.3;
-
-  svg {
-    margin: $base * 11 0 $base * 2.5;
-  }
-
-  path {
-    fill: $color-primary-600;
-  }
-
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
-}
-
 .drop {
   opacity: 1;
-}
-
-.error {
-  color: $color-danger-200;
-  border: $base * 0.5 solid $color-danger-200;
-  opacity: 1;
-
-  path {
-    fill: $color-danger-200;
-  }
 }

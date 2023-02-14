@@ -1,4 +1,4 @@
 import { INoteModel } from '../../interfaces/apiModels.types';
 
 
-export type INote = INoteModel;
+export interface INote extends INoteModel {}

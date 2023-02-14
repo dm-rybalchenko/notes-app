@@ -5,4 +5,4 @@ export interface INotePorps {
   note: INoteModel;
 }
 
-export type INote = INoteModel;
+export interface INote extends INoteModel {}

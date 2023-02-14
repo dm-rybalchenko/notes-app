@@ -29,6 +29,7 @@
     "react/react-in-jsx-scope": "off",
     "import/newline-after-import": ["warn", { "count": 2 }],
 	"no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 0 }],
+	"eol-last": ["warn", "always"],
 	"semi": "off",
     "@typescript-eslint/explicit-function-return-type": ["warn"],
     "@typescript-eslint/semi": ["warn"],

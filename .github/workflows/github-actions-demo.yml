@@ -1,5 +1,5 @@
 name: GitHub Actions Note App
-run-name: ${{ github.actor }}'s code is testing
+run-name: ${{ github.event.head_commit.message }}
 on:
   push:
     branches:

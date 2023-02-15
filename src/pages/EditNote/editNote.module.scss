@@ -14,8 +14,13 @@
   border-bottom: 1px solid $color-primary-100;
   backdrop-filter: blur($base * 12.5);
 
-  @media (max-width: $breakpoint-xs-max) {
-    padding: 0 $base * 7.5;
+  @media (max-width: $breakpoint-md-max) {
+    padding: 0 $base * 10;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+	height: $base * 15;
+    padding: 0 $base * 4;
   }
 }
 
@@ -48,17 +53,21 @@
   padding: $base * 40 $base * 15 $base * 10;
   background-color: $color-secondary-100;
 
-  @media (max-width: $breakpoint-sm-max) {
-    padding: $base * 40 $base * 7.5 $base * 7.5;
+  @media (max-width: $breakpoint-md-max) {
+    padding: $base * 30 $base * 8 $base * 10;
   }
 
-  @media (max-width: $breakpoint-xs-max) {
-    padding: $base * 40 $base * 2.5 $base * 7.5;
+  @media (max-width: $breakpoint-sm-max) {
+    padding: $base * 25 $base * 4 $base * 10;
   }
 }
 
 .file {
   margin-top: $base * 15;
+
+  @media (max-width: $breakpoint-sm-max) {
+    margin-top: $base * 9;
+  }
 }
 
 .save-btn {
@@ -74,5 +83,9 @@
 
   button {
     border: 1px solid $color-primary-200;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    margin-top: $base * 5;
   }
 }

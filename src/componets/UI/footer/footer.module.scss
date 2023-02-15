@@ -4,11 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 100vw;
   min-height: $base * 20;
-  padding: 0 $base * 15;
+  padding: 0 $base * 11;
 
-  @media (max-width: $breakpoint-xs-max) {
+  @media (max-width: $breakpoint-sm-max) {
     flex-direction: column;
     gap: $base * 6;
     padding-bottom: $base * 2;
@@ -38,8 +37,8 @@
   line-height: 1.2;
   text-align: right;
 
-  @media (max-width: $breakpoint-xs-max) {
-    text-align: left;
+  @media (max-width: $breakpoint-sm-max) {
+    text-align: center;
   }
 }
 

@@ -18,6 +18,9 @@
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: $base * 120;
   min-height: $base * 96;
   margin: $base * 44 auto;
@@ -26,11 +29,12 @@
   border-radius: $base * 2.5;
 
   @media (max-width: $breakpoint-sm-max) {
-    width: $base * 100;
+    width: $base * 94;
+	margin: $base * 30 auto;
   }
 
   @media (max-width: $breakpoint-xs-max) {
     width: auto;
-    margin: $base * 44 $base * 3;
+    margin: $base * 24 $base * 3;
   }
 }

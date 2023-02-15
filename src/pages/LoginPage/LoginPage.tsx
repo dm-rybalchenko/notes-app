@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import Header from '../../componets/Header/Header';
-import RegistrationForm from '../../componets/UI/forms/registration-form/RegistrationForm';
-import LoginForm from '../../componets/UI/forms/login-form/LoginForm';
+import Header from '../../componets/UI/header/Header';
+import RegistrationForm from '../../componets/Forms/RegistrationForm/RegistrationForm';
+import LoginForm from '../../componets/Forms/LoginForm/LoginForm';
 
 import stl from './loginPage.module.scss';
 

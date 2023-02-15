@@ -22,7 +22,7 @@
   background: transparent;
   border: 1px solid $color-secondary-400;
   border-radius: $base * 5;
-  transition: $transition;
+  transition: $transition-short;
 }
 
 .label .switcher::before {
@@ -35,7 +35,7 @@
   content: '';
   background: $color-secondary-400;
   border-radius: 50%;
-  transition: $transition;
+  transition: $transition-short;
 }
 
 .label input[type='checkbox'] {

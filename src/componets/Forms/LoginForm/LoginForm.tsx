@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import UserService from '../../../../API/UserService';
-import useFetching from '../../../../hooks/useFetching';
-import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
-import { EmailReg } from '../../../../utils/utils';
-import Input from '../../input/Input';
-import ButtonBig from '../../buttons/button-big/ButtonBig';
-import Loader from '../../loader/Loader';
-import { showError } from '../../../../store/reducers/notificationReducer';
+import UserService from '../../../API/UserService';
+import useFetching from '../../../hooks/useFetching';
+import { setUser, setIsAuth } from '../../../store/reducers/authReducer';
+import { EmailReg } from '../../../utils/utils';
+import Input from '../../UI/input/Input';
+import ButtonBig from '../../UI/buttons/button-big/ButtonBig';
+import Loader from '../../UI/loader/Loader';
+import { showError } from '../../../store/reducers/notificationReducer';
 
 import { ILoginForm } from './loginForm.types';
 

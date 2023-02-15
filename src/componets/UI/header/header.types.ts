@@ -1,4 +1,4 @@
 export interface IHeaderPorps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   main?: boolean;
 }

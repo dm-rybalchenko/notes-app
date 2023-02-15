@@ -7,17 +7,37 @@
   justify-content: space-between;
   min-width: $base * 87.5;
   min-height: $base * 40;
-  padding: $base * 4.5 $base * 13 $base * 4 $base * 5;
+  padding: $base * 4.5 $base * 12 $base * 4 $base * 5;
   cursor: pointer;
   background-color: $color-secondary-100;
+  border: 1px solid $color-primary-200;
   border-radius: $base * 2.5;
 
   &:hover {
-    box-shadow: $base * 0.5 $base * 2 $base * 11 rgba($color-secondary-700, 0.2);
+    box-shadow: $base * 0.5 $base * 2 $base * 11 $color-shadow-note;
 
     [class^='note_title'] {
       color: $color-primary-600;
     }
+  }
+
+  @media (max-width: $breakpoint-xlg-max) {
+    flex: 0 0 49%;
+  }
+
+  @media (max-width: $breakpoint-md-max) {
+    flex: 0 0 99%;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    flex: 0 0 47%;
+    min-width: $base * 34;
+	min-height: $base * 35;
+    padding: $base * 3 0 $base * 2;
+  }
+
+  @media (max-width: $breakpoint-xs-max) {
+    flex: 0 0 99%;
   }
 }
 
@@ -26,6 +46,37 @@
   font-size: $fz-l;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (max-width: $breakpoint-sm-max) {
+	padding: 0 $base * 4;
+    font-size: $fz-m;
+  }
+}
+
+.content {
+  position: relative;
+  max-height: $base * 13;
+  margin: $base * 1.5 0;
+  overflow: hidden;
+  line-height: 1.2;
+  background: linear-gradient(
+    180deg,
+    $color-secondary-500 0%,
+    rgba($color-secondary-500, 0.29) 100%
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* stylelint-disable-next-line property-no-unknown */
+  text-fill-color: transparent;
+
+  svg {
+    margin-right: $base;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+	max-height: $base * 10;
+	padding: 0 $base * 4;
+  }
 }
 
 .btns {
@@ -42,6 +93,17 @@
 
     svg {
       margin-right: $base;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    justify-content: space-evenly;
+    height: $base * 5;
+	padding: $base * 1.5 $base * 4 0;
+    border-top: 1px solid $color-primary-200;
+
+    span {
+      display: none;
     }
   }
 }
@@ -62,6 +124,10 @@
     background-color: $color-secondary-400;
     border-radius: 50%;
     transform: translate(50%, 50%);
+
+    @media (max-width: $breakpoint-sm-max) {
+      display: none;
+    }
   }
 }
 
@@ -122,23 +188,10 @@
   font-size: $fz-xs;
   font-weight: $fw-medium;
   color: $color-secondary-400;
-}
 
-.content {
-  position: relative;
-  max-height: $base * 13;
-  margin: $base * 1.5 0;
-  overflow: hidden;
-  line-height: 1.2;
-  background: linear-gradient(
-    180deg,
-    $color-secondary-500 0%,
-    rgba($color-secondary-500, 0.29) 100%
-  );
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  /* stylelint-disable-next-line property-no-unknown */
-  text-fill-color: transparent;
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xxs;
+  }
 }
 
 .date {
@@ -146,4 +199,9 @@
   font-weight: $fw-medium;
   color: rgba($color-secondary-400, 0.8);
   letter-spacing: 0.02em;
+
+  @media (max-width: $breakpoint-sm-max) {
+	padding: 0 $base * 4;
+    font-size: $fz-small-footer;
+  }
 }

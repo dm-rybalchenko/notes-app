@@ -58,6 +58,9 @@ Fullstack-приложение для заметок. Создано в кома
 Страница входа и валидация полей
 ![Screenshot-app-notes-login](/docs/screenshots/Screenshot-login.jpg)
 
+Поп-ап с картинкой и мобильная версия (Закрепленные заметки свернуты)
+![Screenshot-mobile-and-popup](/docs/screenshots/Screenshot-mobile-and-popup.jpg)
+
 
 *Реализованы версии для ПК и мобильных устройств.*
 

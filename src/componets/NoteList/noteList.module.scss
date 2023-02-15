@@ -16,6 +16,10 @@
   display: inline;
   font-size: $fz-xxl;
   font-weight: $fw-bold;
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xl;
+  }
 }
 
 .wrapper {
@@ -28,6 +32,10 @@
 .counter {
   margin-left: $base * 2;
   font-size: $fz-xxl;
-  font-weight: $fw-semi-bold;
+  font-weight: $fw-medium;
   color: $color-secondary-400;
+
+  @media (max-width: $breakpoint-sm-max) {
+    font-size: $fz-xl;
+  }
 }

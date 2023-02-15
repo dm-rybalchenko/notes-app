@@ -1,8 +1,8 @@
 export default function IconLogo(): JSX.Element {
   return (
     <svg
-      width="160"
-      height="36"
+      width="149"
+      height="34"
       viewBox="0 0 160 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

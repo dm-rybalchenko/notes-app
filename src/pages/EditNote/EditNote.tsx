@@ -21,7 +21,6 @@ import Modal from '../../componets/Modal/Modal';
 import { ModalContext } from '../../context';
 import IconBack from '../../componets/UI/icons/IconBack';
 import { showError } from '../../store/reducers/notificationReducer';
-import Loader from '../../componets/UI/loader/Loader';
 import Popup from '../../componets/Popup/Popup';
 
 import { INote } from './editNote.types';
@@ -67,7 +66,7 @@ function EditNote(): JSX.Element {
   };
 
   useEffect(() => {
-    if (!note.id && note.file) {
+    if (note.file) {
       saveNote(note);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,9 +86,8 @@ function EditNote(): JSX.Element {
           <IconBack />
           <span>Все заметки</span>
         </Link>
-        {isLoading && <Loader />}
         <Button onClick={handleExit} modClass={stl['save-btn']}>
-          Сохранить
+		{isLoading ? 'Сохраняется...' : 'Сохранить'}
         </Button>
       </header>
       <main className={stl.edit}>

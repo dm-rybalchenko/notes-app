@@ -12,6 +12,7 @@ import IconFavorites from '../UI/icons/IconFavorites';
 import IconPin from '../UI/icons/IconPin';
 import IconTrashBin from '../UI/icons/IconTrashBin';
 import IconUnpin from '../UI/icons/IconUnpin';
+import IconPreviewImg from '../UI/icons/IconPreviewImg';
 
 import { IModalContext } from '../../interfaces/context.types';
 import { INote, INotePorps } from './note.types';
@@ -30,7 +31,7 @@ function Note({ note }: INotePorps): JSX.Element {
         dispatch(removeNote(note.id));
         await NoteService.delete(note.id);
       }
-    },
+    }
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,13 +39,13 @@ function Note({ note }: INotePorps): JSX.Element {
     async (note: INote) => {
       dispatch(updateNote(note));
       await NoteService.update(note);
-    },
+    }
   );
 
   const editDate = useCallback(
     (date: string) => prepareDate(date),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [note.date],
+    [note.date]
   );
 
   const rootClasses = [stl.favorites];
@@ -72,9 +73,9 @@ function Note({ note }: INotePorps): JSX.Element {
 
   useEffect(() => {
     errRemove && dispatch(showError(`Ошибка удаления заметки: ${errRemove}`));
-    errSave
-      && dispatch(showError(`Ошибка сохранения изменений заметки: ${errSave}`));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    errSave &&
+      dispatch(showError(`Ошибка сохранения изменений заметки: ${errSave}`));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errRemove, errSave]);
 
   return (
@@ -85,40 +86,34 @@ function Note({ note }: INotePorps): JSX.Element {
     >
       <div className={stl.title}>{note.title}</div>
       <div className={stl.body}>
-        <div className={stl.content}>{note.body}</div>
+        <div className={stl.content}>
+          {note.file ? <IconPreviewImg /> : ''}
+          {note.body}
+        </div>
       </div>
-      <div className={stl.date}>
-        Изменено
-        {editDate(note.date)}
-      </div>
+      <div className={stl.date}>Изменено {editDate(note.date)}</div>
       <div onClick={(e): void => e.stopPropagation()} className={stl.btns}>
         <button
           onClick={(): void => toggleFavorites(note)}
           className={rootClasses.join(' ')}
         >
-          <IconFavorites />
-          {' '}
-          {note.favorite ? 'В избранном' : 'В избранное'}
+          <IconFavorites />{' '}
+          <span>{note.favorite ? 'В избранном' : 'В избранное'}</span>
         </button>
         <button onClick={(): void => togglePinned(note)} className={stl.pin}>
           {note.pinned ? (
             <>
-              <IconUnpin />
-              {' '}
-              Открепить
+              <IconUnpin /> <span>Открепить</span>
             </>
           ) : (
             <>
-              <IconPin />
-              {' '}
-              Закрепить
+              <IconPin /> <span>Закрепить</span>
             </>
           )}
         </button>
         <button onClick={handleRemove} className={stl.remove}>
-          <IconTrashBin />
-          {' '}
-          {isLoadingRemove ? 'Удаляется...' : 'Удалить'}
+          <IconTrashBin />{' '}
+          <span>{isLoadingRemove ? 'Удаляется...' : 'Удалить'}</span>
         </button>
       </div>
     </div>

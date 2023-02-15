@@ -1,10 +1,8 @@
-import {
-  useContext, useEffect, useRef, useState,
-} from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useTypedSelector } from '../../hooks/useTypedSelector';
 import NoteService from '../../API/NoteService';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { LoadingContext, ModalContext } from '../../context';
 import useFetching from '../../hooks/useFetching';
 import useFilterNotes from '../../hooks/useFilterNotes';
@@ -12,14 +10,16 @@ import useObserver from '../../hooks/useObserver';
 import usePaginationNotes from '../../hooks/usePaginationNotes';
 import { addAllNotes } from '../../store/reducers/notesReducer';
 import { setPage } from '../../store/reducers/paginationReducer';
-import NotesSkeleton from '../../componets/UI/skeleton/NotesSkeleton';
-import { Pagination } from '../../componets/UI/pagination/Pagination';
-import Header from '../../componets/Header/Header';
+import { showError } from '../../store/reducers/notificationReducer';
+import Header from '../../componets/UI/header/Header';
+import Account from '../../componets/Account/Account';
+import Search from '../../componets/Search/Search';
 import Filters from '../../componets/Filters/Filters';
-import Footer from '../../componets/UI/footer/Footer';
 import NoteList from '../../componets/NoteList/NoteList';
 import Modal from '../../componets/Modal/Modal';
-import { showError } from '../../store/reducers/notificationReducer';
+import Pagination from '../../componets/UI/pagination/Pagination';
+import NotesSkeleton from '../../componets/UI/skeleton/NotesSkeleton';
+import Footer from '../../componets/UI/footer/Footer';
 
 import stl from './mainPage.module.scss';
 
@@ -40,11 +40,14 @@ function MainPage(): JSX.Element {
     lazyLoading,
     page,
     limit,
-    allNotes,
+    allNotes
   );
 
   const [fetchNotes, isLoading, noteError] = useFetching(async () => {
     const response = await NoteService.getAll();
+
+    // For demonstration skeleton only
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     dispatch(addAllNotes(response));
   });
 
@@ -54,12 +57,12 @@ function MainPage(): JSX.Element {
 
   useEffect(() => {
     notes.length === 0 && fetchNotes();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     !lazyLoading && dispatch(setPage(1));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, filter.query, filter.tags, lazyLoading]);
 
   useObserver(
@@ -69,17 +72,22 @@ function MainPage(): JSX.Element {
     paginatedNotes.length,
     () => {
       dispatch(setPage(page + 1));
-    },
+    }
   );
 
   useEffect(() => {
     noteError && dispatch(showError(`Ошибка загрузки заметок: ${noteError}`));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noteError]);
 
   return (
     <>
-      <Header main />
+      <Header main>
+        <>
+          <Account />
+          <Search />
+        </>
+      </Header>
       <main className={stl.main}>
         <Filters favorites={showFavorites} setFavorites={setShowFavorites} />
         <div>

@@ -12,24 +12,30 @@
   height: $base * 6;
   margin-top: $base * 7.5;
   background: linear-gradient(
-    270deg,
-    $color-skeleton-start 0%,
-    $color-skeleton-end 50%
+    110deg,
+    $color-skeleton-end 0%,
+    $color-skeleton-center 20%,
+    $color-skeleton-end 45%
   );
+  background-size: 200% 100%;
   border-radius: $base * 8;
   opacity: 0.2;
+  animation: shine $transition-long linear infinite;
 }
 
 .note {
   width: $base * 87.5;
   height: $base * 40;
   background: linear-gradient(
-    270deg,
-    $color-skeleton-start 0%,
-    $color-skeleton-end 50%
+    110deg,
+    $color-skeleton-end 0%,
+    $color-skeleton-center 20%,
+    $color-skeleton-end 45%
   );
+  background-size: 200% 100%;
   border-radius: $base * 2.5;
   opacity: 0.2;
+  animation: shine $transition-long linear infinite;
 }
 
 .line {
@@ -37,4 +43,14 @@
   height: 1px;
   margin-top: $base * 7.5;
   background-color: $color-skeleton-line;
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: 0%;
+  }
+
+  100% {
+    background-position-x: -200%;
+  }
 }

@@ -1,0 +1,105 @@
+/* stylelint-disable scss/no-global-function-names */
+@import 'src/style/variables';
+
+.search {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  margin-left: $base * 25;
+
+  input {
+    transition: $transition-short;
+  }
+
+  input:focus {
+    width: 100%;
+  }
+
+  input::placeholder {
+    font-weight: $fw-semi-bold;
+    color: $color-secondary-400;
+    -webkit-text-fill-color: $color-secondary-400;
+  }
+
+  input:focus::placeholder {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (max-width: $breakpoint-xlg-max) {
+    @include appear;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 110;
+    display: none;
+    gap: $base * 3;
+    align-items: center;
+    justify-content: center;
+    min-width: 100%;
+    height: $base * 20;
+    padding: 0 $base * 15;
+    margin-left: 0;
+    background: $color-secondary-100;
+
+    input {
+      flex-grow: 1;
+      width: 100%;
+    }
+
+    @media (max-width: $breakpoint-md-max) {
+      padding: 0 $base * 10;
+    }
+
+    @media (max-width: $breakpoint-sm-max) {
+		height: $base * 15;
+      padding: 0 $base * 5;
+    }
+
+    @media (max-width: $breakpoint-xs-max) {
+      padding: 0 $base * 4;
+    }
+  }
+}
+
+.search-btn {
+  display: none;
+  margin: 0 $base * 4.5 0 auto;
+
+  &:hover {
+    path {
+      fill: $color-primary-600;
+    }
+  }
+
+  @media (max-width: $breakpoint-xlg-max) {
+    display: block;
+  }
+}
+
+.search-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: $base * 30;
+  height: $base * 8;
+  font-size: $fz-xs;
+  color: $color-secondary-700;
+  cursor: pointer;
+  border: 1px solid $color-primary-100;
+  border-radius: $base * 2.5;
+
+  &:hover {
+    color: lighten($color-secondary-700, 20%);
+    border: 1px solid darken($color-primary-100, 30%);
+  }
+
+  @media (max-width: $breakpoint-xlg-max) {
+    display: flex;
+  }
+}
+
+.active {
+  display: flex;
+}

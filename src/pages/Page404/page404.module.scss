@@ -20,7 +20,8 @@
   text-align: center;
 
   @media (max-width: $breakpoint-md-max) {
-    width: $base * 150;
+    width: $base * 135;
+    margin: $base * 34 auto;
   }
 
   @media (max-width: $breakpoint-sm-max) {
@@ -29,7 +30,7 @@
 
   @media (max-width: $breakpoint-xs-max) {
     width: $base * 78;
-    margin: $base * 34 auto;
+    margin: $base * 24 auto;
   }
 }
 
@@ -55,7 +56,7 @@
   }
 
   @media (max-width: $breakpoint-xs-max) {
-    font-size: $base * 30;
+    font-size: $base * 40;
   }
 }
 
@@ -78,7 +79,7 @@
   }
 
   @media (max-width: $breakpoint-xs-max) {
-    margin-top: $base * 32;
+    margin-top: $base * 12;
     font-size: $fz-m;
   }
 }

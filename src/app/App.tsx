@@ -53,7 +53,7 @@ function App(): JSX.Element {
   }, []);
 
   if (isLoadingCheck) {
-    return <Loader />;
+    return <Loader gray />;
   }
 
   return (

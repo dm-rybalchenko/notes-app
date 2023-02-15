@@ -23,7 +23,7 @@
     width: $base * 7;
     height: $base * 7;
     content: '';
-    background: $color-secondary-200;
+    background: $color-secondary-100;
     border-radius: 50%;
   }
 
@@ -32,6 +32,12 @@
     width: 50%;
     height: 100%;
     overflow: hidden;
+  }
+}
+
+.gray {
+  &::after {
+    background: $color-secondary-200;
   }
 }
 

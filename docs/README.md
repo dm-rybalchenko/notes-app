@@ -60,3 +60,5 @@ Pop-up with a picture and mobile version (Pinned notes are collapsed)
 ![Screenshot-mobile-and-popup](/docs/screenshots/Screenshot-mobile-and-popup.jpg)
 
 *PC and mobile versions have been implemented.*
+
+[For developers](https://github.com/dm-rybalchenko/notes-app/tree/develop/docs/for-developers.md)

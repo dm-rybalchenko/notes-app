@@ -32,7 +32,7 @@
   @media (max-width: $breakpoint-sm-max) {
     flex: 0 0 47%;
     min-width: $base * 34;
-	min-height: $base * 35;
+    min-height: $base * 35;
     padding: $base * 3 0 $base * 2;
   }
 
@@ -48,7 +48,7 @@
   white-space: nowrap;
 
   @media (max-width: $breakpoint-sm-max) {
-	padding: 0 $base * 4;
+    padding: 0 $base * 4;
     font-size: $fz-m;
   }
 }
@@ -70,12 +70,14 @@
   text-fill-color: transparent;
 
   svg {
+    display: inline;
     margin-right: $base;
+    vertical-align: text-top;
   }
 
   @media (max-width: $breakpoint-sm-max) {
-	max-height: $base * 10;
-	padding: 0 $base * 4;
+    max-height: $base * 10;
+    padding: 0 $base * 4;
   }
 }
 
@@ -99,7 +101,7 @@
   @media (max-width: $breakpoint-sm-max) {
     justify-content: space-evenly;
     height: $base * 5;
-	padding: $base * 1.5 $base * 4 0;
+    padding: $base * 1.5 $base * 4 0;
     border-top: 1px solid $color-primary-200;
 
     span {
@@ -146,10 +148,21 @@
   }
 }
 
+.favorites {
+  &:hover {
+	color: $color-primary-600;
+
+	path {
+	  stroke: $color-primary-600;
+	}
+  }
+}
+
 .in-favorites {
   color: $color-secondary-700;
 
-  & path {
+  /* stylelint-disable-next-line no-descending-specificity */
+  path {
     fill: $color-danger-200;
     stroke: $color-danger-200;
   }
@@ -157,16 +170,6 @@
   &:hover {
     path {
       stroke: $color-danger-200;
-    }
-  }
-}
-
-.favorites {
-  &:hover {
-    color: $color-primary-600;
-
-    path {
-      stroke: $color-primary-600;
     }
   }
 }
@@ -201,7 +204,7 @@
   letter-spacing: 0.02em;
 
   @media (max-width: $breakpoint-sm-max) {
-	padding: 0 $base * 4;
+    padding: 0 $base * 4;
     font-size: $fz-small-footer;
   }
 }

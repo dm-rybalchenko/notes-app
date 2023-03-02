@@ -8,7 +8,7 @@ import stl from './loginPage.module.scss';
 
 
 function LoginPage(): JSX.Element {
-  const [loginPage, setLoginPage] = useState<boolean>(false);
+  const [loginPage, setLoginPage] = useState<boolean>(true);
 
   return (
     <>

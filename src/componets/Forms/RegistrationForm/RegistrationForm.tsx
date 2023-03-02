@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
-import UserService from '../../../../API/UserService';
-import useFetching from '../../../../hooks/useFetching';
-import { setUser, setIsAuth } from '../../../../store/reducers/authReducer';
-import { showError } from '../../../../store/reducers/notificationReducer';
-import { EmailReg } from '../../../../utils/utils';
-import ButtonBig from '../../buttons/button-big/ButtonBig';
-import Input from '../../input/Input';
-import Loader from '../../loader/Loader';
+import UserService from '../../../API/UserService';
+import useFetching from '../../../hooks/useFetching';
+import { setUser, setIsAuth } from '../../../store/reducers/authReducer';
+import { showError } from '../../../store/reducers/notificationReducer';
+import { EmailReg } from '../../../utils/utils';
+import ButtonBig from '../../UI/buttons/button-big/ButtonBig';
+import Input from '../../UI/input/Input';
+import Loader from '../../UI/loader/Loader';
 
 import { IRegFormPorps, IRegForm } from './registrationForm.types';
 

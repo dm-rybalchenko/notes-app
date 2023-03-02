@@ -3,10 +3,6 @@
 .container {
   display: flex;
   gap: $base * 7.5;
-
-  @media (max-width: $breakpoint-sm-max) {
-    flex-direction: column;
-  }
 }
 
 .image {
@@ -28,6 +24,16 @@
   &:hover {
     outline: $base * 0.5 solid $color-primary-600;
   }
+
+  @media (max-width: $breakpoint-md-max) {
+    width: $base * 51;
+    height: $base * 39;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    width: $base * 32.5;
+    height: $base * 24.5;
+  }
 }
 
 .error {
@@ -41,7 +47,10 @@
 }
 
 .uploader {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: $base * 69.5;
   height: $base * 53;
   font-size: $fz-xs;
@@ -56,7 +65,7 @@
   opacity: 0.3;
 
   svg {
-    margin: $base * 11 0 $base * 2.5;
+    margin-bottom: $base * 2.5;
   }
 
   path {
@@ -66,6 +75,30 @@
   &:hover,
   &:focus {
     opacity: 1;
+  }
+
+  @media (max-width: $breakpoint-md-max) {
+    width: $base * 51;
+    height: $base * 39;
+    font-size: $fz-xxs;
+
+    svg {
+      width: $base * 14;
+      height: $base * 14;
+      margin-bottom: $base * 2;
+    }
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    width: $base * 32.5;
+    height: $base * 24.5;
+    font-size: $fz-xxxs;
+
+    svg {
+      width: $base * 9;
+      height: $base * 9;
+      margin-bottom: $base * 1.5;
+    }
   }
 }
 
@@ -92,6 +125,11 @@
     path {
       fill: $color-danger-200;
     }
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    top: $base * 2;
+    right: $base * 2;
   }
 }
 

@@ -22,8 +22,8 @@ export default function Popup(): JSX.Element {
 
   return (
     <div onClick={exitPopup} className={stl.wrapper}>
+      <button onClick={exitPopup} className={stl.close} />
       <div onClick={(e): void => e.stopPropagation()} className={stl.container}>
-        <button onClick={exitPopup} className={stl.close} />
         <img src={popup?.url} alt={popup?.name} />
       </div>
     </div>

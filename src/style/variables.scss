@@ -9,6 +9,20 @@
   }
 }
 
+@mixin appear {
+  animation: show-from-top $transition-long;
+  
+  @keyframes show-from-top {
+    0% {
+      top: -100%;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+}
+
 // === / MIXINS ===
 
 // ===  FUNCTIONS ===
@@ -25,14 +39,14 @@
 // === / FUNCTIONS ===
 
 // === VARIABLES ===
-$breakpoint-sm-min: 500px;
+$breakpoint-sm-min: 400px;
 $breakpoint-xs-max: $breakpoint-sm-min - 1px;
-$breakpoint-md-min: 650px;
+$breakpoint-md-min: 550px;
 $breakpoint-sm-max: $breakpoint-md-min - 1px;
-$breakpoint-lg-min: 850px;
+$breakpoint-lg-min: 885px;
 $breakpoint-md-max: $breakpoint-lg-min - 1px;
-$breakpoint-xl-min: 1180px;
-$breakpoint-lg-max: $breakpoint-xl-min - 1px;
+$breakpoint-lg-min: 1200px;
+$breakpoint-xlg-max: $breakpoint-lg-min - 1px;
 
 // common base
 $base: rem(4px);
@@ -57,7 +71,8 @@ $fz-small-footer: rem(7px);
 $fz-big-title: rem(40px);
 
 // common transition
-$transition: 0.2s;
+$transition-short: 0.2s;
+$transition-long: 1s;
 
 // Primary color
 $color-primary-100: #e9ecf0;
@@ -80,7 +95,7 @@ $color-secondary-600: #5e5e5e;
 $color-secondary-700: #1c273d;
 
 // Skeleton
-$color-skeleton-start: #e6ecf2;
+$color-skeleton-center: #e6ecf2;
 $color-skeleton-end: #bac5d2;
 $color-skeleton-line: #d6e5f3;
 
@@ -90,5 +105,6 @@ $color-danger-100: #fff3f3;
 $color-danger-200: #ff3232;
 $color-danger-300: #e71414;
 $color-success: #2ab651;
+$color-shadow-note: rgba(104, 119, 149, 0.1);
 
 // === / VARIABLES ===

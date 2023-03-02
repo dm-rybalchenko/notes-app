@@ -34,7 +34,7 @@ function FileForm(): JSX.Element {
       }
 
       dispatch(setNote({ ...note, file: response }));
-    },
+    }
   );
 
   const [removeFile, isLoadingRemove, errRemove] = useFetching<INote>(
@@ -46,7 +46,7 @@ function FileForm(): JSX.Element {
 
         await FileService.delete(note.file.id);
       }
-    },
+    }
   );
 
   const onDrop = (files: File[]): void => {
@@ -74,8 +74,8 @@ function FileForm(): JSX.Element {
     e.stopPropagation();
     setModal({
       coords: { x: e.pageX, y: e.pageY },
-      body: `«${note.file?.name}»`,
-      title: 'Удалить файл?',
+      body: '',
+      title: 'Удалить изображение?',
       callback: () => removeFile(note),
     });
   };
@@ -83,7 +83,7 @@ function FileForm(): JSX.Element {
   useEffect(() => {
     errSave && dispatch(showError(`Ошибка сохранения файла: ${errSave}`));
     errRemove && dispatch(showError(`Ошибка удаления файла: ${errRemove}`));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errSave, errRemove]);
 
   return (
@@ -103,18 +103,23 @@ function FileForm(): JSX.Element {
           </div>
         )}
         <div {...getRootProps({ className: rootClasses.join(' ') })}>
-          <input {...getInputProps()} />
-          <IconAddFile />
-          {errSave ? (
-            <p>Ошибка загрузки файла, попробуйте ещё раз</p>
-          ) : isDragAccept ? (
-            <p>Отпустите файл</p>
+          {isLoadingSave || isLoadingRemove ? (
+            <Loader />
           ) : (
-            <p>Добавить файл</p>
+            <>
+              <input {...getInputProps()} />
+              <IconAddFile />
+              {errSave ? (
+                <p>Ошибка загрузки файла, попробуйте ещё раз</p>
+              ) : isDragAccept ? (
+                <p>Отпустите файл</p>
+              ) : (
+                <p>Добавить файл</p>
+              )}
+              <p>JPG, JPEG, PNG, GIF</p>
+            </>
           )}
-          <p>JPG, JPEG, PNG, GIF</p>
         </div>
-        {(isLoadingSave || isLoadingRemove) && <Loader />}
       </div>
     </div>
   );

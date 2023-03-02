@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import Header from '../../componets/Header/Header';
+import Header from '../../componets/UI/header/Header';
 import ButtonBig from '../../componets/UI/buttons/button-big/ButtonBig';
 
 import stl from './page404.module.scss';

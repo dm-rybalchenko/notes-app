@@ -1,6 +1,9 @@
+/* stylelint-disable scss/no-global-function-names */
 @import 'src/style/variables';
 
 .container {
+  @include appear;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -10,32 +13,51 @@
   justify-content: center;
   min-width: 100vw;
   min-height: $base * 20;
-  padding: 0 $base * 40;
+  padding: 0 $base * 42;
   font-size: $fz-xs;
   line-height: 1.4;
   text-align: center;
   background: $color-danger-50;
-  animation: appear 1s;
 
   svg {
     margin-right: $base * 1.5;
     transform: translateY(20%);
   }
+
+  @media (max-width: $breakpoint-md-max) {
+    padding: 0 $base * 42 0 $base * 10;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    min-height: $base * 15;
+    padding: 0 $base * 30 0 $base * 4;
+  }
 }
 
 .close {
   position: absolute;
-  top: $base * 6;
+  top: 50%;
   right: $base * 10;
   display: flex;
   align-items: center;
   justify-content: center;
   width: $base * 30;
   height: $base * 8;
-  color: black;
+  color: $color-secondary-700;
   cursor: pointer;
   border: 1px solid $color-secondary-300;
   border-radius: $base * 2.5;
+  transform: translateY(-50%);
+
+  &:hover {
+    color: lighten($color-secondary-700, 20%);
+    border: 1px solid darken($color-secondary-300, 30%);
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    right: $base * 4;
+    width: $base * 22;
+  }
 }
 
 .error {
@@ -43,15 +65,5 @@
 
   path {
     fill: $color-danger-200;
-  }
-}
-
-@keyframes appear {
-  0% {
-    top: -100%;
-  }
-
-  100% {
-    top: 0;
   }
 }
